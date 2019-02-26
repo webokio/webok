@@ -3,7 +3,7 @@ import { AppModule } from './app.module'
 
 export const start = async () => {
   const app = await NestFactory.create(AppModule)
-  await app.listen(4100)
+  await app.listen(process.env.PORT || 4100)
 }
 
 if (require.main === module) {
