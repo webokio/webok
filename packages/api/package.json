@@ -9,7 +9,8 @@
     "format": "webok-dev format",
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
-    "publish:prepare": "npm run clean && npm run build"
+    "publish:prepare": "npm run clean && npm run build",
+    "dev": "node lib/main.js"
   },
   "publishConfig": {
     "access": "public"
