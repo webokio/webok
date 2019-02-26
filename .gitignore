@@ -164,3 +164,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode
+
+packages/**/package-lock.json
+packages/**/lib
+
+tools/**/package-lock.json
+tools/**/lib
