@@ -1,0 +1,12 @@
+{
+  "database": { 
+    "type": "postgres",
+    "host": "postgres",
+    "port": 5432,
+    "database": "webok",
+    "username": "webok_dev_user",
+    "password": "webok_dev_secret",
+    "migrations": ["lib/migrations/*.js"],
+    "cli": { "migrationsDir": "migrations" }
+  }
+}

@@ -1,3 +1,8 @@
 {
-  "extends": "./node_modules/@webok/dev/tslint.json"
+  "extends": "./node_modules/@webok/dev/tslint.json",
+  "linterOptions": {
+    "exclude": [
+      "migrations/*.ts"
+    ]
+  }
 }

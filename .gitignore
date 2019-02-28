@@ -170,3 +170,6 @@ packages/**/lib
 
 tools/**/package-lock.json
 tools/**/lib
+
+packages/**/config/*
+!packages/**/config/default.json

@@ -4,8 +4,7 @@
     "outDir": "lib"
   },
   "include": [
-    "src/**/*",
-    "migrations/**/*"
+    "src/**/*"
   ],
   "exclude": []
 }

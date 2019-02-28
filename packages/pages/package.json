@@ -1,0 +1,30 @@
+{
+  "name": "@webok/pages",
+  "version": "0.0.0",
+  "repository": "https://github.com/webokio/webok/tree/master/packages/pages",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "webok-dev clean",
+    "build": "webok-dev build",
+    "format": "webok-dev format",
+    "postformat": "npm run tslint",
+    "tslint": "webok-dev tslint",
+    "publish:prepare": "npm run clean && npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@nestjs/swagger": "^2.5.1",
+    "@nestjs/typeorm": "^5.3.0",
+    "class-validator": "^0.9.1",
+    "pg": "^7.8.1",
+    "shortid": "^2.2.14",
+    "typeorm": "^0.2.14",
+    "typescript-optional": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/shortid": "^0.0.29",
+    "@webok/dev": "^0.0.0"
+  }
+}
