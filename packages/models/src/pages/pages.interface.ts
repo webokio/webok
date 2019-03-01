@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 class Page {
-  @PrimaryColumn()
-  readonly id: string
+  @PrimaryGeneratedColumn()
+  id?: number
 
   @Column()
   name: string
@@ -14,8 +14,7 @@ class Page {
   @Column({ default: () => 'now()' })
   createdAt?: string
 
-  constructor (id: string, name: string, url: string) {
-    this.id = id
+  constructor (name: string, url: string) {
     this.name = name
     this.url = url
   }
@@ -44,9 +43,9 @@ class UpdatePageData {
 }
 
 class ParamsWithId {
-  readonly id: string
+  readonly id: number
 
-  constructor (id: string) {
+  constructor (id: number) {
     this.id = id
   }
 }

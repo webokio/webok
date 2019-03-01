@@ -14,17 +14,16 @@ class PageService {
     return this.pages.find()
   }
 
-  async get (id: string): Promise<Optional<Page>> {
+  async get (id: number): Promise<Optional<Page>> {
     const page = await this.pages.findOne({ id })
     return Optional.ofNullable(page)
   }
 
   async create (data: CreatePageData): Promise<Page> {
-    const page = { id: shortid.generate(), ...data }
-    return this.pages.save(page)
+    return this.pages.save(data)
   }
 
-  async update (id: string, data: UpdatePageData): Promise<Optional<Page>> {
+  async update (id: number, data: UpdatePageData): Promise<Optional<Page>> {
     const optionalPage = await this.get(id)
     if (optionalPage.isPresent()) {
       await this.pages.update({ id }, data)
@@ -33,7 +32,7 @@ class PageService {
     return optionalPage
   }
 
-  async remove (id: string): Promise<Optional<Page>> {
+  async remove (id: number): Promise<Optional<Page>> {
     const optionalPage = await this.get(id)
     if (optionalPage.isPresent()) {
       await this.pages.remove(optionalPage.get())
