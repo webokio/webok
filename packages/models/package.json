@@ -10,15 +10,14 @@
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
     "publish:prepare": "npm run clean && npm run build",
-    "dev:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -n",
-    "dev:migrate": "ts-node ./node_modules/.bin/typeorm migration:run",
-    "dev:rollback": "ts-node ./node_modules/.bin/typeorm migration:revert"
+    "dev:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -f src/ormconfig -n",
+    "dev:migrate": "ts-node ./node_modules/.bin/typeorm migration:run -f src/ormconfig",
+    "dev:rollback": "ts-node ./node_modules/.bin/typeorm migration:revert -f src/ormconfig"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/typeorm": "^5.3.0",
     "pg": "^7.8.1",
     "shortid": "^2.2.14",
     "typeorm": "^0.2.14",
