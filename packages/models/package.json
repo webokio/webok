@@ -1,0 +1,32 @@
+{
+  "name": "@webok/models",
+  "version": "0.0.0",
+  "repository": "https://github.com/webokio/webok/tree/master/packages/models",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "webok-dev clean",
+    "build": "webok-dev build",
+    "format": "webok-dev format migrations/*",
+    "postformat": "npm run tslint",
+    "tslint": "webok-dev tslint",
+    "publish:prepare": "npm run clean && npm run build",
+    "dev:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -n",
+    "dev:migrate": "ts-node ./node_modules/.bin/typeorm migration:run",
+    "dev:rollback": "ts-node ./node_modules/.bin/typeorm migration:revert"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@nestjs/typeorm": "^5.3.0",
+    "pg": "^7.8.1",
+    "shortid": "^2.2.14",
+    "typeorm": "^0.2.14",
+    "typescript-optional": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/shortid": "^0.0.29",
+    "@webok/dev": "^0.0.0",
+    "ts-node": "^8.0.2"
+  }
+}
