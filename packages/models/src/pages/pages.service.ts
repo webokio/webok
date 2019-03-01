@@ -1,4 +1,3 @@
-import shortid from 'shortid'
 import { Optional } from 'typescript-optional'
 import { Page, CreatePageData, UpdatePageData } from './pages.interface'
 import { InjectRepository } from '@nestjs/typeorm'
