@@ -1,7 +1,10 @@
 {
   "extends": "./node_modules/@webok/dev/tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib"
+    "outDir": "lib",
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node"
   },
   "include": [
     "src/**/*",

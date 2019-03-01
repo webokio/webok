@@ -1,5 +1,5 @@
 <template>
-  <h1>Welcome to {{ this.appName }}!</h1>
+  <h1 class="blue">Welcome to {{ appName }}!</h1>
 </template>
 
 <script lang="ts">
@@ -10,3 +10,9 @@ export default class HomePage extends Vue {
   appName: string = 'WebOK'
 }
 </script>
+
+<style lang="scss" scoped>
+.blue {
+  color: blue;
+}
+</style>

@@ -18,7 +18,10 @@
     "vue-property-decorator": "^7.3.0"
   },
   "devDependencies": {
+    "@types/sass": "^1.16.0",
     "@webok/dev": "^0.0.0",
-    "nuxt-ts": "^2.4.5"
+    "nuxt-ts": "^2.4.5",
+    "sass": "^1.17.2",
+    "sass-loader": "^7.1.0"
   }
 }
