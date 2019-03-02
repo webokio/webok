@@ -1,10 +1,9 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, NotFoundException } from '@nestjs/common'
+import { Controller, Get, Post, Patch, Delete, Param, Body, NotFoundException } from '@nestjs/common'
 import { PageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
-import { ParamsWithId } from '../common/params'
 
 @Controller('pages')
 export class PageController {
-  constructor (protected readonly pageService: PageService) {}
+  constructor (private readonly pageService: PageService) {}
 
   @Get()
   find (): Promise<Page[]> {
@@ -12,7 +11,7 @@ export class PageController {
   }
 
   @Get(':id')
-  async get (@Param() { id }: ParamsWithId): Promise<Page> {
+  async get (@Param('id') id: number): Promise<Page> {
     const page = await this.pageService.get(id)
     return page.orElseThrow(() => new NotFoundException())
   }
@@ -23,13 +22,13 @@ export class PageController {
   }
 
   @Patch(':id')
-  async update (@Param() { id }: ParamsWithId, @Body() data: UpdatePageData): Promise<Page> {
+  async update (@Param('id') id: number, @Body() data: UpdatePageData): Promise<Page> {
     const page = await this.pageService.update(id, data)
     return page.orElseThrow(() => new NotFoundException())
   }
 
   @Delete(':id')
-  async remove (@Param() { id }: ParamsWithId) {
+  async remove (@Param('id') id: number): Promise<void> {
     await this.pageService.remove(id)
   }
 }

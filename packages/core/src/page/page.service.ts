@@ -1,6 +1,5 @@
-import { Repository } from 'typeorm'
-import { InjectRepository } from '@nestjs/typeorm'
-import { Optional } from 'typescript-optional'
+import { Repository, InjectRepository } from '../common/service'
+import { Optional } from '../common/optional'
 import { Page } from './page.entity'
 
 export interface CreatePageData {
@@ -28,15 +27,15 @@ export class PageService {
     return Optional.ofNullable(page)
   }
 
-  async create (data: CreatePageData): Promise<Page> {
-    return this.pageRepository.save(data)
+  async create ({ name, url }: CreatePageData): Promise<Page> {
+    return this.pageRepository.save(new Page(name, url))
   }
 
   async update (id: number, data: UpdatePageData): Promise<Optional<Page>> {
     const optionalPage = await this.get(id)
     if (optionalPage.isPresent()) {
-      await this.pageRepository.update({ id }, data)
-      return Optional.ofNonNull(Object.assign(optionalPage.get(), data))
+      const page = await this.pageRepository.save({ ...optionalPage.get(), ...data })
+      return Optional.ofNonNull(page)
     }
     return optionalPage
   }
