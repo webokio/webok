@@ -1,14 +1,25 @@
+import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger'
 import { Repository, InjectRepository } from '../common/service'
 import { Optional } from '../common/optional'
 import { Page } from './page.entity'
 
-export interface CreatePageData {
+export class CreatePageData {
+  @ApiModelProperty()
   readonly name: string
+
+  @ApiModelProperty()
   readonly url: string
+  constructor (name: string, url: string) {
+    this.name = name
+    this.url = url
+  }
 }
 
-export interface UpdatePageData {
+export class UpdatePageData {
+  @ApiModelPropertyOptional()
   readonly name?: string
+
+  @ApiModelPropertyOptional()
   readonly url?: string
 }
 
