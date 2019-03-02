@@ -30,6 +30,7 @@
     "npm-which": "^3.0.1",
     "package-json": "^6.0.0",
     "prettier": "^1.16.4",
+    "progress": "^2.0.3",
     "rimraf": "^2.6.3",
     "table": "^5.2.3",
     "tslint": "^5.13.1",
@@ -41,6 +42,7 @@
     "@types/cross-spawn": "^6.0.0",
     "@types/node": "^11.10.4",
     "@types/package-json": "^5.0.0",
+    "@types/progress": "^2.0.3",
     "@types/table": "^4.0.5"
   }
 }

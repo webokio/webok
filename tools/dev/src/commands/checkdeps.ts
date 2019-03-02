@@ -2,6 +2,7 @@ import path from 'path'
 import packageJson from 'package-json'
 import { table } from 'table'
 import { findPackages, isPackage } from '../find-packages'
+import Progress from 'progress'
 
 // `lerna outdated` may be available later, see https://github.com/lerna/lerna/issues/1334, so this is just a temporary solution.
 
@@ -61,6 +62,7 @@ const findDependencies = (
 }
 
 const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> => {
+  const progress = new Progress('checking [:bar] :percent', { total: dependencyInfos.length })
   const report: string[][] = [['Package', 'Defined Version', 'In Range Version', 'Latest Version', 'Dependents']]
   for (const dependencyInfo of dependencyInfos) {
     for (const versionInfo of dependencyInfo.versionInfos) {
@@ -85,6 +87,7 @@ const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> =
         ])
       }
     }
+    progress.tick()
   }
   console.log(table(report))
 }
