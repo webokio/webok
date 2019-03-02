@@ -1,0 +1,31 @@
+{
+  "name": "@webok/core",
+  "version": "0.0.0",
+  "repository": "https://github.com/webokio/webok/tree/master/packages/core",
+  "scripts": {
+    "clean": "webok-dev clean",
+    "build": "webok-dev build",
+    "format": "webok-dev format migrations/**/*.ts",
+    "postformat": "npm run tslint",
+    "tslint": "webok-dev tslint",
+    "publish:prepare": "npm run clean && npm run build",
+    "migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -f src/typeorm.config -n",
+    "migration:run": "ts-node ./node_modules/.bin/typeorm migration:run -f src/typeorm.config",
+    "migration:revert": "ts-node ./node_modules/.bin/typeorm migration:revert -f src/typeorm.config"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@nestjs/typeorm": "^5.3.0",
+    "luxon": "^1.11.3",
+    "pg": "^7.8.1",
+    "typeorm": "^0.2.14",
+    "typescript-optional": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/luxon": "^1.11.1",
+    "@webok/dev": "^0.0.0",
+    "ts-node": "^8.0.2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "./node_modules/@webok/dev/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "lib"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": []
+}
