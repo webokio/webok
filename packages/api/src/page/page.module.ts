@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Page, PageService } from '@webok/models'
-import { PagesController } from './pages.controller'
+import { Page, PageService } from '@webok/core/lib/page'
+import { PageController } from './page.controller'
 
 const PageServiceProvider = {
   provide: PageService,
@@ -10,9 +10,7 @@ const PageServiceProvider = {
 
 @Module({
   imports: [TypeOrmModule.forFeature([Page])],
-  controllers: [PagesController],
+  controllers: [PageController],
   providers: [PageServiceProvider],
 })
-class PagesModule {}
-
-export { PagesModule }
+export class PageModule {}

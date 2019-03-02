@@ -1,7 +1,7 @@
 {
-  "name": "@webok/models",
+  "name": "@webok/core",
   "version": "0.0.0",
-  "repository": "https://github.com/webokio/webok/tree/master/packages/models",
+  "repository": "https://github.com/webokio/webok/tree/master/packages/core",
   "main": "lib/index.js",
   "scripts": {
     "clean": "webok-dev clean",
@@ -10,19 +10,21 @@
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
     "publish:prepare": "npm run clean && npm run build",
-    "dev:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -f src/ormconfig -n",
-    "dev:migrate": "ts-node ./node_modules/.bin/typeorm migration:run -f src/ormconfig",
-    "dev:rollback": "ts-node ./node_modules/.bin/typeorm migration:revert -f src/ormconfig"
+    "dev:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -f src/typeorm.config -n",
+    "dev:migrate": "ts-node ./node_modules/.bin/typeorm migration:run -f src/typeorm.config",
+    "dev:rollback": "ts-node ./node_modules/.bin/typeorm migration:revert -f src/typeorm.config"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
+    "luxon": "^1.11.3",
     "pg": "^7.8.1",
     "typeorm": "^0.2.14",
     "typescript-optional": "^2.0.1"
   },
   "devDependencies": {
+    "@types/luxon": "^1.11.1",
     "@webok/dev": "^0.0.0",
     "ts-node": "^8.0.2"
   }

@@ -1,13 +1,13 @@
-import { Page } from './'
+import path from 'path'
 
-export = {
+export const TypeOrmConfig = {
   type: 'postgres',
   host: 'postgres',
   port: 5432,
   database: 'webok',
   username: 'webok_dev_user',
   password: 'webok_dev_secret',
-  migrations: ['migrations/*.ts'],
+  migrations: [path.join(__dirname, '../migrations/*.ts')],
   cli: { migrationsDir: 'migrations' },
-  entities: [Page],
+  entities: [path.join(__dirname, '/**/*.entity.ts')],
 }

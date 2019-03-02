@@ -1,13 +1,14 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param, NotFoundException } from '@nestjs/common'
-import { PageService, Page, CreatePageData, UpdatePageData, ParamsWithId } from '@webok/models'
+import { PageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
+import { ParamsWithId } from '../common/controller'
 
 @Controller('pages')
-class PagesController {
+export class PageController {
   constructor (protected readonly pageService: PageService) {}
 
   @Get()
-  findAll (): Promise<Page[]> {
-    return this.pageService.findAll()
+  find (): Promise<Page[]> {
+    return this.pageService.find()
   }
 
   @Get(':id')
@@ -32,5 +33,3 @@ class PagesController {
     await this.pageService.remove(id)
   }
 }
-
-export { PagesController }
