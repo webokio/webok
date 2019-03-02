@@ -61,7 +61,8 @@ const findDependencies = (
     })
 }
 
-const checkOutdated = async (dependencyInfos: DependencyInfo[], progress: Progress): Promise<void> => {
+const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> => {
+  const progress = new Progress('checking [:bar] :percent', { total: dependencyInfos.length })
   const report: string[][] = [['Package', 'Defined Version', 'In Range Version', 'Latest Version', 'Dependents']]
   for (const dependencyInfo of dependencyInfos) {
     for (const versionInfo of dependencyInfo.versionInfos) {
@@ -102,7 +103,6 @@ export const checkdeps = async (argv: string[]): Promise<number> => {
   packages.forEach((pkgPath) => findDependencies(dependencyInfos, internalPackage, pkgPath))
   const dependencyInfosToCheck = dependencyInfos.filter((dependencyInfo) => !internalPackage[dependencyInfo.name])
   dependencyInfosToCheck.sort((a, b) => a.name.localeCompare(b.name))
-  const progressBar = new Progress('checking [:bar] :percent :etas', { total: dependencyInfosToCheck.length })
-  await checkOutdated(dependencyInfosToCheck, progressBar)
+  await checkOutdated(dependencyInfosToCheck)
   return 0
 }
