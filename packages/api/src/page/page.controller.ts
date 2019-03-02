@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param, NotFoundException } from '@nestjs/common'
 import { PageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
-import { ParamsWithId } from '../common/controller'
+import { ParamsWithId } from '../common/params'
 
 @Controller('pages')
 export class PageController {
