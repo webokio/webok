@@ -5,13 +5,13 @@
   "scripts": {
     "clean": "webok-dev clean",
     "build": "webok-dev build",
-    "format": "webok-dev format migrations/*",
+    "format": "webok-dev format migrations/**/*.ts",
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
     "publish:prepare": "npm run clean && npm run build",
-    "dev:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -f src/typeorm.config -n",
-    "dev:migrate": "ts-node ./node_modules/.bin/typeorm migration:run -f src/typeorm.config",
-    "dev:rollback": "ts-node ./node_modules/.bin/typeorm migration:revert -f src/typeorm.config"
+    "migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -f src/typeorm.config -n",
+    "migration:run": "ts-node ./node_modules/.bin/typeorm migration:run -f src/typeorm.config",
+    "migration:revert": "ts-node ./node_modules/.bin/typeorm migration:revert -f src/typeorm.config"
   },
   "publishConfig": {
     "access": "public"
