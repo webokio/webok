@@ -2,6 +2,7 @@ import path from 'path'
 import packageJson from 'package-json'
 import { table } from 'table'
 import { findPackages, isPackage } from '../find-packages'
+import Progress from 'progress'
 
 // `lerna outdated` may be available later, see https://github.com/lerna/lerna/issues/1334, so this is just a temporary solution.
 
@@ -60,7 +61,7 @@ const findDependencies = (
     })
 }
 
-const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> => {
+const checkOutdated = async (dependencyInfos: DependencyInfo[], progress: Progress): Promise<void> => {
   const report: string[][] = [['Package', 'Defined Version', 'In Range Version', 'Latest Version', 'Dependents']]
   for (const dependencyInfo of dependencyInfos) {
     for (const versionInfo of dependencyInfo.versionInfos) {
@@ -85,6 +86,7 @@ const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> =
         ])
       }
     }
+    progress.tick()
   }
   console.log(table(report))
 }
@@ -100,6 +102,7 @@ export const checkdeps = async (argv: string[]): Promise<number> => {
   packages.forEach((pkgPath) => findDependencies(dependencyInfos, internalPackage, pkgPath))
   const dependencyInfosToCheck = dependencyInfos.filter((dependencyInfo) => !internalPackage[dependencyInfo.name])
   dependencyInfosToCheck.sort((a, b) => a.name.localeCompare(b.name))
-  await checkOutdated(dependencyInfosToCheck)
+  const progressBar = new Progress('checking [:bar] :percent :etas', { total: dependencyInfosToCheck.length })
+  await checkOutdated(dependencyInfosToCheck, progressBar)
   return 0
 }
