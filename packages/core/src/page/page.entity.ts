@@ -4,20 +4,20 @@ import { now } from '../common/datetime'
 
 @Entity()
 export class Page {
-  @ApiModelProperty()
   @PrimaryGeneratedColumn()
+  @ApiModelProperty()
   id!: number
 
-  @ApiModelProperty()
   @Column()
+  @ApiModelProperty()
   name: string
 
-  @ApiModelProperty()
   @Column()
+  @ApiModelProperty()
   url: string
 
-  @ApiModelProperty()
   @Column()
+  @ApiModelProperty()
   createdAt: string = now()
 
   constructor (name: string, url: string) {

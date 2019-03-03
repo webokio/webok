@@ -8,16 +8,15 @@ import { AppModule } from './app.module'
 const configureDocs = (app: INestApplication) => {
   const { version } = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
   const options = new DocumentBuilder()
-    .setTitle('Webok')
+    .setTitle('WebOK')
     .setVersion(version)
-    .addTag('Webok')
     .build()
   const document = SwaggerModule.createDocument(app, options)
-  SwaggerModule.setup('docs', app, document)
+  SwaggerModule.setup('explorer', app, document)
 }
 
 export const start = async () => {
-  const app = await NestFactory.create(AppModule)
+  const app: INestApplication = await NestFactory.create(AppModule)
   configureDocs(app)
   await app.listen(process.env.PORT || 4100)
 }
