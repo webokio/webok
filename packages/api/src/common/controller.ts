@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger'
-import { IsNumberString } from 'class-validator'
+import { IsNumberString } from '@webok/core/lib/common/validator'
 
 export class ParamsWithId {
   @ApiModelProperty()

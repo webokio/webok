@@ -1,5 +1,5 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger'
-import { IsString, IsUrl, IsOptional } from 'class-validator'
+import { IsString, IsUrl, IsOptional } from '../common/validator'
 import { Repository, InjectRepository } from '../common/service'
 import { Optional } from '../common/optional'
 import { Page } from './page.entity'
