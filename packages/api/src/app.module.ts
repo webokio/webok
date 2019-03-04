@@ -6,10 +6,8 @@ import { PageModule } from './page'
 @Module({
   imports: [TypeOrmModule.forRoot(TypeOrmConfig), PageModule],
 })
-class AppModule {}
+export class AppModule {}
 
-const configureCommon = (app: INestApplication) => {
+export const configureCommon = (app: INestApplication) => {
   app.useGlobalPipes(new ValidationPipe())
 }
-
-export { AppModule, configureCommon }

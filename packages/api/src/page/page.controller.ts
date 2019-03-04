@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Patch, Delete, Param, Body, NotFoundException } from '@nestjs/common'
 import { ApiUseTags, ApiOkResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiBadRequestResponse } from '@nestjs/swagger'
-import { PageService, Page, CreatePageData, UpdatePageData, ParamsWithId } from '@webok/core/lib/page'
+import { PageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
+import { ParamsWithId } from '../common/controller'
 
 @Controller('pages')
 @ApiUseTags('Pages')
@@ -17,7 +18,7 @@ export class PageController {
   @ApiOkResponse({ type: Page })
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
-  async get (@Param() id: ParamsWithId): Promise<Page> {
+  async get (@Param() { id }: ParamsWithId): Promise<Page> {
     const page = await this.pageService.get(id)
     return page.orElseThrow(() => new NotFoundException())
   }
@@ -33,7 +34,7 @@ export class PageController {
   @ApiOkResponse({ type: Page })
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
-  async update (@Param() id: ParamsWithId, @Body() data: UpdatePageData): Promise<Page> {
+  async update (@Param() { id }: ParamsWithId, @Body() data: UpdatePageData): Promise<Page> {
     const page = await this.pageService.update(id, data)
     return page.orElseThrow(() => new NotFoundException())
   }
@@ -41,7 +42,7 @@ export class PageController {
   @Delete(':id')
   @ApiOkResponse({})
   @ApiBadRequestResponse({})
-  async remove (@Param() id: ParamsWithId): Promise<void> {
+  async remove (@Param() { id }: ParamsWithId): Promise<void> {
     await this.pageService.remove(id)
   }
 }
