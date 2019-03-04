@@ -45,11 +45,17 @@ export class PageService {
 
   async update (id: number, data: UpdatePageData): Promise<Optional<Page>> {
     const optionalPage = await this.get(id)
-    if (optionalPage.isPresent()) {
-      const page = await this.pageRepository.save({ ...optionalPage.get(), ...data })
-      return Optional.ofNonNull(page)
+    if (optionalPage.isEmpty) {
+      return optionalPage
     }
-    return optionalPage
+    const page = optionalPage.get()
+    if (typeof data.name !== 'undefined') {
+      page.name = data.name
+    }
+    if (typeof data.url !== 'undefined') {
+      page.url = data.url
+    }
+    return Optional.ofNonNull(await this.pageRepository.save(page))
   }
 
   async remove (id: number): Promise<Optional<Page>> {
