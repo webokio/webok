@@ -10,7 +10,7 @@
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
     "publish:prepare": "npm run clean && npm run build",
-    "dev": "node lib/main.js"
+    "dev": "NODE_CONFIG_DIR=../../config node lib/main.js"
   },
   "publishConfig": {
     "access": "public"

@@ -22,7 +22,7 @@ export class CreatePageData {
 export class UpdatePageData {
   @ApiModelPropertyOptional()
   @IsOptional()
-  @IsString() 
+  @IsString()
   readonly name?: string
 
   @ApiModelPropertyOptional()
