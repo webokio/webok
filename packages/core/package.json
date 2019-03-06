@@ -19,6 +19,8 @@
   "dependencies": {
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/typeorm": "^5.3.0",
+    "bcrypt": "^3.0.4",
+    "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "luxon": "^1.11.3",
     "pg": "^7.8.1",
@@ -26,6 +28,7 @@
     "typescript-optional": "^2.0.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/luxon": "^1.11.1",
     "@webok/dev": "^0.0.0",
     "ts-node": "^8.0.2"

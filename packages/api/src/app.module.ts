@@ -2,9 +2,10 @@ import { Module, INestApplication, ValidationPipe } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import TypeOrmConfig from '@webok/core/lib/typeorm.config'
 import { PageModule } from './page'
+import { UserModule } from './user'
 
 @Module({
-  imports: [TypeOrmModule.forRoot(TypeOrmConfig), PageModule],
+  imports: [TypeOrmModule.forRoot(TypeOrmConfig), PageModule, UserModule],
 })
 export class AppModule {}
 
