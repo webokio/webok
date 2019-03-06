@@ -13,6 +13,8 @@
     "watch": "node ./scripts/dev watch build",
     "prewatch": "npm run build",
     "check:deps": "node ./scripts/dev checkdeps",
+    "services:start": "node ./scripts/services start",
+    "services:stop": "node ./scripts/services stop",
     "publish:try": "node ./scripts/dev run publish:prepare && lerna version --no-push",
     "publish:now": "node ./scripts/dev run publish:prepare && lerna publish"
   },
