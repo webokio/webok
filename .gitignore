@@ -171,6 +171,7 @@ packages/**/lib
 tools/**/package-lock.json
 tools/**/lib
 
+# Only store default and test configs
 /config/*
 !/config/default.*
 !/config/test.*

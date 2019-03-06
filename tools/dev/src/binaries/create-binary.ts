@@ -6,6 +6,7 @@ const which = whichFactory(process.cwd())
 
 export const createBinary = (command: string) => {
   const binary = createBinaryWithOptions(command)
+  // Run binary with no extra options
   return (...argv: string[]): Promise<number> => binary(argv)
 }
 
