@@ -13,11 +13,13 @@
     "watch": "node ./scripts/dev watch build",
     "prewatch": "npm run build",
     "check:deps": "node ./scripts/dev checkdeps",
-    "start:services": "docker-compose up -d",
+    "services:start": "node ./scripts/services start",
+    "services:stop": "node ./scripts/services stop",
     "publish:try": "node ./scripts/dev run publish:prepare && lerna version --no-push",
     "publish:now": "node ./scripts/dev run publish:prepare && lerna publish"
   },
   "devDependencies": {
+    "config": "^3.0.1",
     "lerna": "^3.13.1"
   }
 }
