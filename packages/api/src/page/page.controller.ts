@@ -1,5 +1,11 @@
 import { Controller, Get, Post, Patch, Delete, Param, Body, NotFoundException } from '@nestjs/common'
-import { ApiUseTags, ApiOkResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiBadRequestResponse } from '@nestjs/swagger'
+import {
+  ApiUseTags,
+  ApiOkResponse,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiBadRequestResponse,
+} from '@nestjs/swagger'
 import { PageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
 import { ParamsWithId } from '../common/controller'
 

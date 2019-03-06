@@ -5,9 +5,9 @@ const TypeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: 'localhost',
   port: 5432,
-  database: 'webok_dev',
-  username: 'webok_dev_user',
-  password: 'webok_dev_secret',
+  database: 'webok',
+  username: 'webok_user',
+  password: 'webok_secret',
   entities: [path.join(__dirname, '**/*.entity{.ts,.js}')],
   // Migrations
   migrationsTableName: 'typeorm_migrations',

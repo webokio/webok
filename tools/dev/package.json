@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@types/chokidar": "^1.7.5",
+    "@types/config": "^0.0.34",
     "@types/cross-spawn": "^6.0.0",
     "@types/node": "^11.10.4",
     "@types/package-json": "^5.0.0",
