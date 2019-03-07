@@ -1,8 +1,8 @@
-import { ApiModelProperty } from '@nestjs/swagger'
-import { Exclude } from 'class-transformer'
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Exclude } from 'class-transformer'
+import { ApiModelProperty } from '@nestjs/swagger'
 
-@Entity()
+@Entity({ name: 'app_user' })
 export class User {
   @PrimaryGeneratedColumn()
   @ApiModelProperty()
@@ -17,7 +17,7 @@ export class User {
   email: string
 
   @Column()
-  @Exclude()
+  @Exclude() // exclude passwordHash in controller response
   @ApiModelProperty()
   passwordHash: string
 

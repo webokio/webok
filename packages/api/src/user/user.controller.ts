@@ -3,8 +3,8 @@ import { ApiUseTags, ApiCreatedResponse, ApiBadRequestResponse } from '@nestjs/s
 import { UserService, User, CreateUserData } from '@webok/core/lib/user'
 
 @Controller('users')
-@ApiUseTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
+@ApiUseTags('Users')
 export class UserController {
   constructor (private readonly userService: UserService) {}
 

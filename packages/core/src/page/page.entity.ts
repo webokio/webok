@@ -1,5 +1,5 @@
-import { ApiModelProperty } from '@nestjs/swagger'
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { ApiModelProperty } from '@nestjs/swagger'
 import { now } from '../common/datetime'
 
 @Entity()
