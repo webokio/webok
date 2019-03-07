@@ -5,7 +5,7 @@ import { PageModule } from './page'
 import { UserModule } from './user'
 
 @Module({
-  imports: [TypeOrmModule.forRoot(TypeOrmConfig), PageModule, UserModule],
+  imports: [TypeOrmModule.forRoot(TypeOrmConfig), UserModule, PageModule],
 })
 export class AppModule {}
 
