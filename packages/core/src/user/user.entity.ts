@@ -18,7 +18,6 @@ export class User {
 
   @Column()
   @Exclude() // exclude passwordHash in controller response
-  @ApiModelProperty()
   passwordHash: string
 
   constructor (name: string, email: string, passwordHash: string) {
