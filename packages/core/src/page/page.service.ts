@@ -1,12 +1,15 @@
-import { Repository, InjectRepository } from '../common/service'
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
 import { Optional } from '../common/optional'
 import { Page } from './page.entity'
+import { PageRepository } from './page.repository'
 import { CreatePageData, UpdatePageData } from './page.data'
 
+@Injectable()
 export class PageService {
   constructor (
-    @InjectRepository(Page)
-    private readonly pageRepository: Repository<Page>,
+    @InjectRepository(PageRepository)
+    private readonly pageRepository: PageRepository,
   ) {}
 
   async find (): Promise<Page[]> {

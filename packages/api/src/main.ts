@@ -3,9 +3,10 @@ import path from 'path'
 import { NestFactory } from '@nestjs/core'
 import { INestApplication } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import { AppModule, configureCommon } from './app.module'
+import { AppModule } from './app.module'
+import { configureFeatures } from './common/features'
 
-const configureDocs = (app: INestApplication) => {
+const configureDocs = async (app: INestApplication): Promise<void> => {
   const { version } = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
   const options = new DocumentBuilder()
     .setTitle('WebOK')
@@ -17,8 +18,8 @@ const configureDocs = (app: INestApplication) => {
 
 export const start = async () => {
   const app: INestApplication = await NestFactory.create(AppModule)
-  configureCommon(app)
-  configureDocs(app)
+  await configureFeatures(app)
+  await configureDocs(app)
   await app.listen(process.env.PORT || 4100)
 }
 
