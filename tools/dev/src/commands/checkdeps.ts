@@ -62,9 +62,10 @@ const findDependencies = (
 }
 
 const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> => {
-  const progress = new Progress('checking [:bar] :percent', { total: dependencyInfos.length })
+  const progress = new Progress(`[:bar] :percent - checking ':dependency'`, { total: dependencyInfos.length })
   const report: string[][] = [['Package', 'Defined Version', 'In Range Version', 'Latest Version', 'Dependents']]
   for (const dependencyInfo of dependencyInfos) {
+    progress.tick(0, { dependency: dependencyInfo.name })
     for (const versionInfo of dependencyInfo.versionInfos) {
       const latestMetadata = await packageJson(dependencyInfo.name)
       if (!latestMetadata.version) {

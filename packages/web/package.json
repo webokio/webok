@@ -15,7 +15,7 @@
     "access": "public"
   },
   "dependencies": {
-    "vue-property-decorator": "^7.3.0"
+    "vue-property-decorator": "^8.0.0"
   },
   "devDependencies": {
     "@types/sass": "^1.16.0",
