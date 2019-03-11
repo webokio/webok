@@ -39,11 +39,10 @@ export class PageService implements IPageService {
     return Optional.ofNonNull(await this.pageRepository.save(page))
   }
 
-  async remove (id: number): Promise<Optional<Page>> {
+  async remove (id: number): Promise<void> {
     const optionalPage = await this.get(id)
     if (optionalPage.isPresent()) {
       await this.pageRepository.remove(optionalPage.get())
     }
-    return optionalPage
   }
 }
