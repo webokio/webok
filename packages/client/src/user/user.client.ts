@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios'
 import { IUserService, User, CreateUserData } from '@webok/core/lib/user'
+import { create } from '../common/base.client'
 
 export class UserClient implements IUserService {
   private readonly httpClient: AxiosInstance
@@ -8,7 +9,7 @@ export class UserClient implements IUserService {
     this.httpClient = createHttpClient('users')
   }
 
-  async create (data: CreateUserData): Promise<User> {
-    return (await this.httpClient.post<User>('/', data)).data
+  create (data: CreateUserData): Promise<User> {
+    return create(this.httpClient, data)
   }
 }
