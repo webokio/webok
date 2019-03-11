@@ -20,5 +20,9 @@ export interface WithRemove {
   remove (id: number): Promise<void>
 }
 
-export interface IBaseService<T, CD = T, UD = T> extends WithFind<T>, WithGet<T>,
-  WithCreate<T, CD>, WithUpdate<T, UD>, WithRemove {}
+export interface IBaseService<T, CD = T, UD = T>
+  extends WithFind<T>,
+    WithGet<T>,
+    WithCreate<T, CD>,
+    WithUpdate<T, UD>,
+    WithRemove {}
