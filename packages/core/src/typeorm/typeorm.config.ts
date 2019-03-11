@@ -16,7 +16,7 @@ const TypeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   ...config.get<DatabaseConfig>('database'),
   namingStrategy: new SnakeNamingStrategy(),
-  entities: [path.join(__dirname, '**/*.entity{.ts,.js}')],
+  entities: [path.join(__dirname, '../**/*.entity{.ts,.js}')],
   // Migrations
   migrationsTableName: 'typeorm_migrations',
   migrations: ['migrations/*.ts'],

@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core'
 import { INestApplication } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { AppModule } from './app.module'
-import { configureFeatures } from './common/features'
+import { configureFeatures } from './features'
 
 const configureDocs = async (app: INestApplication): Promise<void> => {
   const { version } = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))

@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { User } from './user.entity'
+import { IUserService, User, CreateUserData } from '@webok/core/lib/user'
 import { UserRepository } from './user.repository'
-import { CreateUserData } from './user.data'
 import { hashPassword } from './password.helper'
 
 @Injectable()
-export class UserService {
+export class UserService implements IUserService {
   constructor (
     @InjectRepository(UserRepository)
     private readonly userRepository: UserRepository,

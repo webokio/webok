@@ -1,12 +1,12 @@
-import { Controller, Post, Body, ClassSerializerInterceptor, UseInterceptors } from '@nestjs/common'
+import { Controller, Inject, Post, Body, ClassSerializerInterceptor, UseInterceptors } from '@nestjs/common'
 import { ApiUseTags, ApiCreatedResponse, ApiBadRequestResponse } from '@nestjs/swagger'
-import { UserService, User, CreateUserData } from '@webok/core/lib/user'
+import { IUserService, User, CreateUserData } from '@webok/core/lib/user'
 
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)
 @ApiUseTags('Users')
 export class UserController {
-  constructor (private readonly userService: UserService) {}
+  constructor (@Inject('IUserService') private readonly userService: IUserService) {}
 
   @Post()
   @ApiCreatedResponse({ type: User })

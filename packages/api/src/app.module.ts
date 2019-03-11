@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { TypeOrmRootModule } from './common/typeorm'
+import { TypeOrmRootModule } from './typeorm'
 import { UserModule } from './user'
 import { PageModule } from './page'
 

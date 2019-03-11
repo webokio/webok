@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body, NotFoundException } from '@nestjs/common'
+import { Controller, Inject, Get, Post, Patch, Delete, Param, Body, NotFoundException } from '@nestjs/common'
 import {
   ApiUseTags,
   ApiOkResponse,
@@ -6,13 +6,13 @@ import {
   ApiNotFoundResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger'
-import { PageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
-import { ParamsWithId } from '../common/controller'
+import { IPageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
+import { ParamsWithId } from '../common/params.data'
 
 @Controller('pages')
 @ApiUseTags('Pages')
 export class PageController {
-  constructor (private readonly pageService: PageService) {}
+  constructor (@Inject('IPageService') private readonly pageService: IPageService) {}
 
   @Get()
   @ApiOkResponse({ type: [Page] })
