@@ -1,8 +1,10 @@
 import path from 'path'
 import fs from 'fs'
 import chokidar from 'chokidar'
-import spawn from 'cross-spawn'
 import { findPackages } from '../find-packages'
+import { createBinaryWithOptions } from '../binaries'
+
+const npm = createBinaryWithOptions('npm')
 
 const shouldWatch = (pkgPath: string, scriptName: string): boolean => {
   if (!fs.existsSync(path.join(pkgPath, 'src'))) {
@@ -23,9 +25,10 @@ export const watch = async (argv: string[]): Promise<number> => {
   })
   console.log()
   const watcher = chokidar.watch(packages.map((pkgPath) => path.join(pkgPath, 'src')))
-  watcher.on('change', (filePath) => {
+  watcher.on('change', async (filePath) => {
     const pkgPath = filePath.split('src')[0]
-    spawn('npm', ['run', 'build'], { cwd: pkgPath, stdio: ['pipe', process.stdout, process.stderr] })
+    await npm(['run', scriptName], { cwd: pkgPath })
+    console.log('Done')
   })
   watcher.on('error', console.error)
   return 0
