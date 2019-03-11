@@ -9,9 +9,9 @@
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
     "publish:prepare": "npm run clean && npm run build",
-    "migration:generate": "NODE_CONFIG_DIR=../../config ts-node ./node_modules/.bin/typeorm migration:generate -f src/typeorm.config -n",
-    "migration:run": "NODE_CONFIG_DIR=../../config ts-node ./node_modules/.bin/typeorm migration:run -f src/typeorm.config",
-    "migration:revert": "NODE_CONFIG_DIR=../../config ts-node ./node_modules/.bin/typeorm migration:revert -f src/typeorm.config"
+    "migration:generate": "NODE_CONFIG_DIR=../../config ts-node ./node_modules/.bin/typeorm migration:generate -f src/typeorm/typeorm.config -n",
+    "migration:run": "NODE_CONFIG_DIR=../../config ts-node ./node_modules/.bin/typeorm migration:run -f src/typeorm/typeorm.config",
+    "migration:revert": "NODE_CONFIG_DIR=../../config ts-node ./node_modules/.bin/typeorm migration:revert -f src/typeorm/typeorm.config"
   },
   "publishConfig": {
     "access": "public"
@@ -19,7 +19,6 @@
   "dependencies": {
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/typeorm": "^5.3.0",
-    "bcrypt": "^3.0.4",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "config": "^3.0.1",
@@ -29,7 +28,6 @@
     "typescript-optional": "^2.0.1"
   },
   "devDependencies": {
-    "@types/bcrypt": "^3.0.0",
     "@types/config": "^0.0.34",
     "@types/luxon": "^1.11.1",
     "@webok/dev": "^0.0.0",

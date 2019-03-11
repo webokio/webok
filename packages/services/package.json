@@ -1,32 +1,27 @@
 {
-  "name": "@webok/api",
+  "name": "@webok/services",
   "version": "0.0.0",
-  "repository": "https://github.com/webokio/webok/tree/master/packages/api",
-  "main": "lib/main.js",
+  "repository": "https://github.com/webokio/webok/tree/master/packages/services",
   "scripts": {
     "clean": "webok-dev clean",
     "build": "webok-dev build",
     "format": "webok-dev format",
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
-    "publish:prepare": "npm run clean && npm run build",
-    "dev": "NODE_CONFIG_DIR=../../config node lib/main.js"
+    "publish:prepare": "npm run clean && npm run build"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "@nestjs/common": "^5.7.4",
-    "@nestjs/core": "^5.7.4",
-    "@nestjs/swagger": "^2.5.1",
     "@nestjs/typeorm": "^5.3.0",
     "@webok/core": "^0.0.0",
-    "@webok/services": "^0.0.0",
-    "class-transformer": "^0.2.0",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.4.0"
+    "bcrypt": "^3.0.4",
+    "typeorm": "^0.2.14"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@webok/dev": "^0.0.0"
   }
 }
