@@ -1,0 +1,25 @@
+{
+  "name": "@webok/client",
+  "version": "0.0.0",
+  "repository": "https://github.com/webokio/webok/tree/master/packages/client",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "webok-dev clean",
+    "build": "webok-dev build",
+    "format": "webok-dev format",
+    "postformat": "npm run tslint",
+    "tslint": "webok-dev tslint",
+    "publish:prepare": "npm run clean && npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@webok/core": "^0.0.0",
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@webok/dev": "^0.0.0"
+  }
+}
