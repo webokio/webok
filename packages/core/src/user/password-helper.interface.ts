@@ -1,3 +1,3 @@
 export interface IPasswordHelper {
-  hashPassword(password: string): Promise<string>
+  hashPassword (password: string): Promise<string>
 }

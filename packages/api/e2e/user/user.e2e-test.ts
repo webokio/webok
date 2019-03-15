@@ -1,4 +1,3 @@
-import { IPasswordHelper } from '@webok/core/lib/user'
 import { UserRepository } from '@webok/services/lib/user'
 import { UserClient } from '@webok/client/lib/user'
 import { ApiTester } from '../common/api-tester'
@@ -25,7 +24,7 @@ describe('User', () => {
   })
 
   describe('create()', () => {
-  it('should return a new user', async () => {
+    it('should return a new user', async () => {
       const user = await userClient.create({ name: 'user1', email: 'user1@mail.com', password: 'password1' })
       expect(passwordHelperMock.hashPassword.mock.calls).toEqual([['password1']])
       expect(user).toBeDefined()
