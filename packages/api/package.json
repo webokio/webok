@@ -5,10 +5,11 @@
   "main": "lib/main.js",
   "scripts": {
     "clean": "webok-dev clean",
-    "build": "webok-dev build",
-    "format": "webok-dev format",
+    "build": "webok-dev build --project tsconfig.build.json",
+    "format": "webok-dev format e2e/**/*.ts",
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
+    "e2e": "NODE_CONFIG_DIR=../../config jest --config jest.e2e-config.js --coverage",
     "publish:prepare": "npm run clean && npm run build",
     "dev": "NODE_CONFIG_DIR=../../config node lib/main.js"
   },
@@ -27,6 +28,11 @@
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
-    "@webok/dev": "^0.0.0"
+    "@nestjs/testing": "^5.7.4",
+    "@types/jest": "^24.0.11",
+    "@webok/client": "^0.0.0",
+    "@webok/dev": "^0.0.0",
+    "jest": "^24.5.0",
+    "ts-jest": "^24.0.0"
   }
 }
