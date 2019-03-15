@@ -6,4 +6,5 @@ module.exports = {
   },
   testRegex: '^.+\\.e2e-test.ts$',
   moduleFileExtensions: ['ts', 'js', 'json'],
+  clearMocks: true,
 }

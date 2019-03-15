@@ -62,13 +62,8 @@ describe('Page', () => {
   })
 
   describe('create()', () => {
-    let page: Page
-
-    beforeEach(async () => {
-      page = await pageClient.create({ name: 'site1', url: 'https://site1.com' })
-    })
-
-    it('should return a new page', () => {
+    it('should return a new page', async () => {
+      const page = await pageClient.create({ name: 'site1', url: 'https://site1.com' })
       expect(page).toBeDefined()
       expect(page.id).toBeDefined()
       expect(page.name).toBe('site1')

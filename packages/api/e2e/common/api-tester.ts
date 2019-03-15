@@ -5,6 +5,7 @@ import { Optional } from '@webok/core/lib/common/optional'
 import { ApiClient } from '@webok/client'
 import { AppModule } from '../../src/app.module'
 import { configureFeatures } from '../../src/features'
+import { passwordHelperToInject } from './password-helper.mock'
 
 export class ApiTester {
   constructor (readonly module: TestingModule, readonly apiClient: ApiClient, private readonly app: INestApplication) {}
@@ -12,7 +13,11 @@ export class ApiTester {
   static async create (): Promise<ApiTester> {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile()
+    })
+      // Mock PasswordHelper to reduce time to hash/verify password
+      .overrideProvider('IPasswordHelper')
+      .useValue(passwordHelperToInject)
+      .compile()
     const app: INestApplication = module.createNestApplication()
     await configureFeatures(app)
     await app.init()
