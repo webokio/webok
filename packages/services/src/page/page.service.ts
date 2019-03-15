@@ -26,7 +26,7 @@ export class PageService implements IPageService {
 
   async update (id: number, data: UpdatePageData): Promise<Optional<Page>> {
     const optionalPage = await this.get(id)
-    if (optionalPage.isEmpty) {
+    if (optionalPage.isEmpty()) {
       return optionalPage
     }
     const page = optionalPage.get()

@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common'
-import { TypeOrmRootModule } from './typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import TypeOrmConfig from '@webok/core/lib/typeorm/typeorm.config'
 import { UserModule } from './user'
 import { PageModule } from './page'
 
 @Module({
-  imports: [TypeOrmRootModule, UserModule, PageModule],
+  imports: [TypeOrmModule.forRoot(TypeOrmConfig), UserModule, PageModule],
 })
 export class AppModule {}

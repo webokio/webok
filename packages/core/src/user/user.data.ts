@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger'
-import { IsString, IsEmail } from '../common/validator'
+import { IsString, IsEmail, MinLength } from '../common/validator'
 
 export class CreateUserData {
   @ApiModelProperty()
@@ -11,6 +11,8 @@ export class CreateUserData {
   readonly email: string
 
   @ApiModelProperty()
+  @IsString()
+  @MinLength(5)
   readonly password: string
 
   constructor (name: string, email: string, password: string) {
