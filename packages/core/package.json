@@ -24,7 +24,7 @@
     "config": "^3.0.1",
     "luxon": "^1.11.4",
     "pg": "^7.8.2",
-    "typeorm": "^0.2.14",
+    "typeorm": "^0.2.15",
     "typescript-optional": "^2.0.1"
   },
   "devDependencies": {
