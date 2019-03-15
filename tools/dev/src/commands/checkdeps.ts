@@ -1,5 +1,5 @@
 import path from 'path'
-import packageJson from 'package-json'
+import getLatestVersion from 'latest-version'
 import { table } from 'table'
 import { findPackages, isPackage } from '../find-packages'
 import Progress from 'progress'
@@ -67,23 +67,17 @@ const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> =
   for (const dependencyInfo of dependencyInfos) {
     progress.tick(0, { dependency: dependencyInfo.name })
     for (const versionInfo of dependencyInfo.versionInfos) {
-      const latestMetadata = await packageJson(dependencyInfo.name)
-      if (!latestMetadata.version) {
-        throw new Error(`Latest version not found: ${dependencyInfo.name}`)
-      }
-      const inRangeMetadata = await packageJson(dependencyInfo.name, { version: versionInfo.version })
-      if (!inRangeMetadata.version) {
-        throw new Error(`In range version not found: ${dependencyInfo.name}@${versionInfo.version}`)
-      }
-      const canUpdateInRange = versionInfo.version.indexOf(inRangeMetadata.version) === -1
-      const canUpdateLatest = inRangeMetadata.version !== latestMetadata.version
+      const latestVersion = await getLatestVersion(dependencyInfo.name)
+      const inRangeVersion = await getLatestVersion(dependencyInfo.name, { version: versionInfo.version })
+      const canUpdateInRange = versionInfo.version.indexOf(inRangeVersion) === -1
+      const canUpdateLatest = inRangeVersion !== latestVersion
       const shouldReport = canUpdateInRange || canUpdateLatest
       if (shouldReport) {
         report.push([
           dependencyInfo.name,
           versionInfo.version,
-          `${inRangeMetadata.version} ${canUpdateInRange ? '*' : ''}`,
-          `${latestMetadata.version} ${canUpdateLatest ? '*' : ''}`,
+          `${inRangeVersion} ${canUpdateInRange ? '*' : ''}`,
+          `${latestVersion} ${canUpdateLatest ? '*' : ''}`,
           versionInfo.dependents.join('\n'),
         ])
       }
