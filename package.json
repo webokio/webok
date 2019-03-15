@@ -14,6 +14,9 @@
     "prewatch": "npm run build",
     "check:deps": "node ./scripts/dev checkdeps",
     "services": "node ./scripts/services",
+    "e2e": "node ./scripts/dev run e2e --stream",
+    "pree2e": "npm run build && NODE_ENV=test node ./scripts/services start && NODE_ENV=test node ./scripts/dev run migration:run",
+    "poste2e": "NODE_ENV=test node ./scripts/services stop -v",
     "publish:try": "node ./scripts/dev run publish:prepare && lerna version --no-push",
     "publish:now": "node ./scripts/dev run publish:prepare && lerna publish"
   },
