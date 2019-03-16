@@ -1,5 +1,5 @@
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import { CreateElement } from 'vue'
 
 @Component({})
