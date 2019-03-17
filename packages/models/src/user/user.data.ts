@@ -1,7 +1,8 @@
 import { ApiModelProperty } from '@nestjs/swagger'
+import { ICreateUserData } from '@webok/core/lib/user'
 import { IsString, IsEmail, MinLength } from '../common/validator'
 
-export class CreateUserData {
+export class CreateUserData implements ICreateUserData {
   @ApiModelProperty()
   @IsString()
   readonly name: string

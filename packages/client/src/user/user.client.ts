@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { IUserService, User, CreateUserData } from '@webok/core/lib/user'
+import { IUserService, IUser, ICreateUserData } from '@webok/core/lib/user'
 import { create } from '../common/base.client'
 
 export class UserClient implements IUserService {
@@ -9,7 +9,7 @@ export class UserClient implements IUserService {
     this.httpClient = createHttpClient('users')
   }
 
-  create (data: CreateUserData): Promise<User> {
+  create (data: ICreateUserData): Promise<IUser> {
     return create(this.httpClient, data)
   }
 }

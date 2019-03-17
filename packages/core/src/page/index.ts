@@ -1,3 +1,1 @@
-export * from './page.entity'
-export * from './page.data'
-export * from './page-service.interface'
+export * from './page.interface'
