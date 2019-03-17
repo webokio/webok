@@ -2,10 +2,15 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { CreateElement } from 'vue'
 import { IPage } from '@webok/core/lib/page'
+import ExternalLink from '../common/external-link.vue'
 
-@Component({})
+@Component({
+  components: {
+    ExternalLink,
+  },
+})
 export default class PageDetails extends Vue {
-  @Prop(Object) readonly page !: IPage
+  @Prop({ type: Object, required: true }) readonly page !: IPage
 
   render (h: CreateElement) {
     return (
@@ -16,7 +21,7 @@ export default class PageDetails extends Vue {
         </div>
         <div class='mb-2'>
           <strong>Url</strong>
-          <div>{this.page.url}</div>
+          <div><external-link to={this.page.url}/></div>
         </div>
         <div class='mb-2'>
           <strong>Created at</strong>

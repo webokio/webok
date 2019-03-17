@@ -13,12 +13,6 @@ export default class HomeRoute extends Vue {
     }
   }
 
-  head (): MetaInfo {
-    return {
-      title: 'Home',
-    }
-  }
-
   render (h: CreateElement) {
     return (
       <div class='ma-3'>
