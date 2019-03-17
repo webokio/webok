@@ -1,7 +1,8 @@
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger'
+import { ICreatePageData, IUpdatePageData } from '@webok/core/lib/page'
 import { IsString, IsUrl, IsOptional } from '../common/validator'
 
-export class CreatePageData {
+export class CreatePageData implements ICreatePageData {
   @ApiModelProperty()
   @IsString()
   readonly name: string
@@ -16,7 +17,7 @@ export class CreatePageData {
   }
 }
 
-export class UpdatePageData {
+export class UpdatePageData implements IUpdatePageData {
   @ApiModelPropertyOptional()
   @IsOptional()
   @IsString()

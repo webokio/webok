@@ -1,6 +1,7 @@
 import { Controller, Inject, Post, Body, ClassSerializerInterceptor, UseInterceptors } from '@nestjs/common'
 import { ApiUseTags, ApiCreatedResponse, ApiBadRequestResponse } from '@nestjs/swagger'
-import { IUserService, User, CreateUserData } from '@webok/core/lib/user'
+import { IUserService, IUser } from '@webok/core/lib/user'
+import { User, CreateUserData } from '@webok/models/lib/user'
 
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -11,7 +12,9 @@ export class UserController {
   @Post()
   @ApiCreatedResponse({ type: User })
   @ApiBadRequestResponse({})
-  create (@Body() data: CreateUserData): Promise<User> {
-    return this.userService.create(data)
+  async create (@Body() data: CreateUserData): Promise<User> {
+    const user: IUser = await this.userService.create(data)
+    // Need to cast because IUser does not have passwordHash
+    return user as User
   }
 }
