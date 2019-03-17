@@ -4,8 +4,8 @@ import { CreateElement } from 'vue'
 import { MetaInfo } from 'vue-meta'
 
 @Component({})
-export default class HomePage extends Vue {
-  appName: string = 'WebOK'
+export default class HomeRoute extends Vue {
+  private readonly appName: string = 'WebOK'
 
   head (): MetaInfo {
     return {
