@@ -1,4 +1,6 @@
-import { WithCreate } from '../common/base-service.interface'
-import { CreateAuthData } from './auth.data'
+import { LoginData } from './auth.data'
+import { Auth } from './auth.entity'
 
-export interface IAuthService extends WithCreate<String, CreateAuthData> {}
+export interface IAuthService {
+  login (data: LoginData): Promise<Auth>
+}

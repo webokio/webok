@@ -1,7 +1,7 @@
 export class AuthPayload {
-  id: number
+  userId: number
 
-  constructor (id: number) {
-    this.id = id
+  constructor (userId: number) {
+    this.userId = userId
   }
 }

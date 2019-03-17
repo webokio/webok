@@ -7,8 +7,6 @@ exports.database = {
 }
 
 exports.auth = {
-  secretOrPrivateKey: 'webok_secret',
-  signOptions: {
-    expiresIn: '2w',
-  },
+  secretKey: 'webok_auth_secret',
+  expiresIn: '2w',
 }
