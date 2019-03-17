@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Page } from '@webok/core/lib/page'
-import { PageRepository, PageService } from '@webok/services/lib/page'
+import { Page, PageRepository } from '@webok/models/lib/page'
+import { PageService } from '@webok/services/lib/page'
 import { PageController } from './page.controller'
 
 @Module({

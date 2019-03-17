@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { User } from '@webok/core/lib/user'
-import { UserRepository, UserService, PasswordHelper } from '@webok/services/lib/user'
+import { User, UserRepository } from '@webok/models/lib/user'
+import { UserService, PasswordHelper } from '@webok/services/lib/user'
 import { UserController } from './user.controller'
 
 @Module({

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { IUserService, IPasswordHelper, User, CreateUserData } from '@webok/core/lib/user'
-import { UserRepository } from './user.repository'
+import { IUserService, IPasswordHelper } from '@webok/core/lib/user'
+import { User, UserRepository, CreateUserData } from '@webok/models/lib/user'
 
 @Injectable()
 export class UserService implements IUserService {
