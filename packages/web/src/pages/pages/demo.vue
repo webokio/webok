@@ -22,7 +22,8 @@ export default class PagesDemoRoute extends Vue {
   render (h: CreateElement) {
     return (
       <div class='ma-3'>
-        <h1 class='display-3'>Pages demo</h1>
+        <div class='display-3'>Pages demo</div>
+        <div class='display-1'>Page details</div>
         <page-details page={this.page}/>
       </div>
     )

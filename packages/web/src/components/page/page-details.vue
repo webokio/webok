@@ -2,11 +2,15 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { CreateElement } from 'vue'
 import { IPage } from '@webok/core/lib/page'
+import FieldSection from '../common/field-section.vue'
+import FieldLabel from '../common/field-label.vue'
 import ExternalLink from '../common/external-link.vue'
 import Datetime from '../common/datetime.vue'
 
 @Component({
   components: {
+    FieldSection,
+    FieldLabel,
     ExternalLink,
     Datetime,
   },
@@ -17,18 +21,18 @@ export default class PageDetails extends Vue {
   render (h: CreateElement) {
     return (
       <div>
-        <div class='mb-2'>
-          <strong>Name</strong>
+        <field-section>
+          <field-label>Name</field-label>
           <div>{this.page.name}</div>
-        </div>
-        <div class='mb-2'>
-          <strong>Url</strong>
+        </field-section>
+        <field-section>
+          <field-label>Url</field-label>
           <div><external-link to={this.page.url}/></div>
-        </div>
-        <div class='mb-2'>
-          <strong>Created at</strong>
+        </field-section>
+        <field-section>
+          <field-label>Created at</field-label>
           <div><datetime value={this.page.createdAt}/></div>
-        </div>
+        </field-section>
       </div>
     )
   }
