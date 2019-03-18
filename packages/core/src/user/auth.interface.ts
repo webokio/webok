@@ -4,7 +4,7 @@ export interface ILoginData {
 }
 
 export interface ILoginResult {
-  readonly token: string
+  readonly accessToken: string
 }
 
 export interface IAuthService {

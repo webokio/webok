@@ -20,13 +20,13 @@ export class LoginData implements ILoginData {
 
 export class LoginResult implements ILoginResult {
   @ApiModelProperty()
-  readonly token: string
+  readonly accessToken: string
 
-  constructor (token: string) {
-    this.token = token
+  constructor (accessToken: string) {
+    this.accessToken = accessToken
   }
 }
 
-export interface IAuthPayload {
+export interface AuthPayload {
   readonly userId: number
 }
