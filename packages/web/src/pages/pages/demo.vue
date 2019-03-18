@@ -11,7 +11,7 @@ import PageDetails from '../../components/page/page-details.vue'
   },
 })
 export default class PagesDemoRoute extends Vue {
-  private readonly page: IPage = { id: 1, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-11T11:07:48.969Z' }
+  private readonly page: IPage = { id: 1, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-18T12:03:15.013Z' }
 
   head (): MetaInfo {
     return {

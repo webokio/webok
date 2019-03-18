@@ -4,8 +4,8 @@ import { CreateElement } from 'vue'
 
 @Component({})
 export default class ExternalLink extends Vue {
-  @Prop({ type: String, required: true }) readonly to !: string
-  @Prop(String) readonly label !: string
+  @Prop({ type: String, required: true }) readonly to!: string
+  @Prop(String) readonly label!: string
 
   render (h: CreateElement) {
     return (
