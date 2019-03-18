@@ -6,7 +6,8 @@ import {
   ApiNotFoundResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger'
-import { IPageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
+import { IPageService } from '@webok/core/lib/page'
+import { Page, CreatePageData, UpdatePageData } from '@webok/models/lib/page'
 import { ParamsWithId } from '../common/params.data'
 
 @Controller('pages')

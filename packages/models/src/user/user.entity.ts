@@ -1,9 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import { ApiModelProperty } from '@nestjs/swagger'
+import { IUser } from '@webok/core/lib/user'
 
 @Entity({ name: 'app_user' })
-export class User {
+export class User implements IUser {
   @PrimaryGeneratedColumn()
   @ApiModelProperty()
   id!: number

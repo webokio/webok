@@ -1,5 +1,4 @@
-import { Page } from '@webok/core/lib/page'
-import { PageRepository } from '@webok/services/lib/page'
+import { Page, PageRepository } from '@webok/models/lib/page'
 import { PageClient } from '@webok/client/lib/page'
 import { ApiTester } from '../common/api-tester'
 

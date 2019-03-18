@@ -1,21 +1,27 @@
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import { CreateElement } from 'vue'
+import { MetaInfo } from 'vue-meta'
 
 @Component({})
 export default class HomePage extends Vue {
   appName: string = 'WebOK'
 
+  head (): MetaInfo {
+    return {
+      title: 'Home',
+    }
+  }
+
   render (h: CreateElement) {
     return (
-      <h1 class='blue'>Welcome to {this.appName}!</h1>
+      <div class='ma-3'>
+        <h1 class='display-3'>Welcome to {this.appName}!</h1>
+        <v-btn color='primary'>Primary</v-btn>
+        <v-btn color='secondary'>Secondary</v-btn>
+        <v-btn color='accent'>Accent</v-btn>
+      </div>
     )
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.blue {
-  color: blue;
-}
-</style>

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Optional } from '@webok/core/lib/common/optional'
-import { IPageService, Page, CreatePageData, UpdatePageData } from '@webok/core/lib/page'
-import { PageRepository } from './page.repository'
+import { IPageService } from '@webok/core/lib/page'
+import { Page, PageRepository, CreatePageData, UpdatePageData } from '@webok/models/lib/page'
 
 @Injectable()
 export class PageService implements IPageService {
