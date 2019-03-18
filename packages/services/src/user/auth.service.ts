@@ -25,9 +25,7 @@ export class AuthService implements IAuthService {
     if (!isValidPassword) {
       throw new Error('Invalid password')
     }
-    const payload: AuthPayload = { userId: user.id }
-    return {
-      token: this.jwtService.sign(payload),
-    }
+    const payload = new AuthPayload(user.id)
+    return new LoginResult(this.jwtService.sign(payload))
   }
 }
