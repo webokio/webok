@@ -12,10 +12,13 @@ export default class ExternalLink extends Vue {
       <a
         href={this.to}
         class='link'
-        target='_blank'><v-icon
-        color='primary'
-        small
-      >fas fa-external-link-alt fa-fw</v-icon> {this.label || this.to}</a>
+        target='_blank'
+      >
+        <v-icon
+          color='primary'
+          small
+        >fas fa-external-link-alt fa-fw</v-icon> {this.label || this.to}
+      </a>
     )
   }
 }

@@ -6,7 +6,7 @@ import { CreateElement } from 'vue'
 export default class FieldSection extends Vue {
   render (h: CreateElement) {
     return (
-      <div class='mb-2'>
+      <div class='my-2'>
         {this.$slots.default}
       </div>
     )

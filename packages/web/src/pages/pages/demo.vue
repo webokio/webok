@@ -4,10 +4,12 @@ import { CreateElement } from 'vue'
 import { MetaInfo } from 'vue-meta'
 import { IPage } from '@webok/core/lib/page'
 import PageDetails from '../../components/page/page-details.vue'
+import PageEditForm from '../../components/page/page-edit-form.vue'
 
 @Component({
   components: {
     PageDetails,
+    PageEditForm,
   },
 })
 export default class PagesDemoRoute extends Vue {
@@ -15,16 +17,26 @@ export default class PagesDemoRoute extends Vue {
 
   head (): MetaInfo {
     return {
-      title: 'Pages demo',
+      title: 'Pages Demo',
     }
   }
 
   render (h: CreateElement) {
     return (
       <div class='ma-3'>
-        <div class='display-3'>Pages demo</div>
-        <div class='display-1'>Page details</div>
-        <page-details page={this.page}/>
+        <div class='display-3'>Pages Demo</div>
+        <div class='mb-4'>
+          <div class='display-1'>/show/:pageId</div>
+          <page-details page={this.page}/>
+        </div>
+        <div class='mb-4'>
+          <div class='display-1'>/create</div>
+          <page-edit-form/>
+        </div>
+        <div class='mb-4'>
+          <div class='display-1'>/edit/:pageId</div>
+          <page-edit-form pageToEdit={this.page}/>
+        </div>
       </div>
     )
   }

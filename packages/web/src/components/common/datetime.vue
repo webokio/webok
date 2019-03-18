@@ -18,6 +18,7 @@ export default class Datetime extends Vue {
       // Use no-ssr because server does not know client timezone
       <no-ssr>
         <time datetime={this.value}>{this.formattedValue}</time>
+        <span slot='placeholder'>&nbsp;</span>
       </no-ssr>
     )
   }
