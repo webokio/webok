@@ -13,7 +13,8 @@ export class AuthController {
   @ApiResponse({ status: 401 })
   async login (@Body() data: LoginData): Promise<LoginResult> {
     try {
-      return this.authService.login(data)
+      const result: LoginResult = await this.authService.login(data)
+      return result
     } catch (err) {
       throw new UnauthorizedException('Invalid email or password')
     }

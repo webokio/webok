@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { JwtService } from '@nestjs/jwt'
 import { IAuthService, IPasswordHelper } from '@webok/core/lib/user'
 import { Optional } from '@webok/core/lib/common/optional'
-import { UserRepository, User, LoginData, LoginResult, AuthPayload } from '@webok/models/lib/user'
+import { UserRepository, User, LoginData, LoginResult, IAuthPayload } from '@webok/models/lib/user'
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -25,7 +25,7 @@ export class AuthService implements IAuthService {
     if (!isValidPassword) {
       throw new Error('Invalid password')
     }
-    const payload = new AuthPayload(user.id)
+    const payload: IAuthPayload = { userId: user.id }
     return new LoginResult(this.jwtService.sign(payload))
   }
 }

@@ -27,10 +27,6 @@ export class LoginResult implements ILoginResult {
   }
 }
 
-export class AuthPayload {
+export interface IAuthPayload {
   readonly userId: number
-
-  constructor (userId: number) {
-    this.userId = userId
-  }
 }
