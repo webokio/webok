@@ -1,5 +1,5 @@
 import { Controller, Inject, Post, Body, UnauthorizedException } from '@nestjs/common'
-import { ApiUseTags, ApiResponse, ApiOkResponse } from '@nestjs/swagger'
+import { ApiUseTags, ApiResponse, ApiCreatedResponse } from '@nestjs/swagger'
 import { IAuthService } from '@webok/core/lib/user'
 import { LoginData, LoginResult } from '@webok/models/lib/user'
 
@@ -9,7 +9,7 @@ export class AuthController {
   constructor (@Inject('IAuthService') private readonly authService: IAuthService) {}
 
   @Post('login')
-  @ApiOkResponse({ type: LoginResult })
+  @ApiCreatedResponse({ type: LoginResult })
   @ApiResponse({ status: 401 })
   async login (@Body() data: LoginData): Promise<LoginResult> {
     try {
