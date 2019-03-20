@@ -14,12 +14,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/common": "^6.0.0",
-    "@nestjs/jwt": "^0.3.0",
+    "@nestjs/common": "^6.0.1",
+    "@nestjs/jwt": "^6.0.0",
     "@nestjs/typeorm": "^6.0.0",
     "@webok/core": "^0.0.0",
     "@webok/models": "^0.0.0",
-    "bcrypt": "^3.0.4"
+    "bcrypt": "^3.0.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
