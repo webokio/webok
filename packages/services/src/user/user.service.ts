@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { IUserService, IPasswordHelper } from '@webok/core/lib/user'
+import { IPasswordHelper } from '@webok/core/lib/auth'
+import { IUserService } from '@webok/core/lib/user'
 import { User, UserRepository, CreateUserData } from '@webok/models/lib/user'
 
 @Injectable()
@@ -15,6 +16,6 @@ export class UserService implements IUserService {
   async create ({ name, email, password }: CreateUserData): Promise<User> {
     // TODO: check email uniqueness
     const passwordHash = await this.passwordHelper.hashPassword(password)
-    return this.userRepository.save(new User(name, email, passwordHash))
+    return this.userRepository.save(new User({ name, email, passwordHash }))
   }
 }

@@ -21,7 +21,7 @@ export class PageService implements IPageService {
   }
 
   async create ({ name, url }: CreatePageData): Promise<Page> {
-    return this.pageRepository.save(new Page(name, url))
+    return this.pageRepository.save(new Page({ name, url }))
   }
 
   async update (id: number, data: UpdatePageData): Promise<Optional<Page>> {

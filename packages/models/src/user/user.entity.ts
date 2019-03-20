@@ -11,19 +11,22 @@ export class User implements IUser {
 
   @Column()
   @ApiModelProperty()
-  name: string
+  name!: string
 
   @Column({ unique: true })
   @ApiModelProperty()
-  email: string
+  email!: string
 
   @Column()
   @Exclude() // exclude passwordHash in controller response
-  passwordHash: string
+  passwordHash!: string
 
-  constructor (name: string, email: string, passwordHash: string) {
-    this.name = name
-    this.email = email
-    this.passwordHash = passwordHash
+  constructor (data?: { name: string; email: string; passwordHash: string }) {
+    if (data) {
+      const { name, email, passwordHash } = data
+      this.name = name
+      this.email = email
+      this.passwordHash = passwordHash
+    }
   }
 }

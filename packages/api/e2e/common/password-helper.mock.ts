@@ -1,4 +1,4 @@
-import { IPasswordHelper } from '@webok/core/lib/user'
+import { IPasswordHelper } from '@webok/core/lib/auth'
 
 // Do not set type IPasswordHelper here so that we can use this object to verify mock
 export const passwordHelperMock = {

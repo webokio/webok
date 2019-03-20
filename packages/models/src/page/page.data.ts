@@ -5,16 +5,11 @@ import { IsString, IsUrl, IsOptional } from '../common/validator'
 export class CreatePageData implements ICreatePageData {
   @ApiModelProperty()
   @IsString()
-  readonly name: string
+  readonly name!: string
 
   @ApiModelProperty()
   @IsUrl()
-  readonly url: string
-
-  constructor (name: string, url: string) {
-    this.name = name
-    this.url = url
-  }
+  readonly url!: string
 }
 
 export class UpdatePageData implements IUpdatePageData {

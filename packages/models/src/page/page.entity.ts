@@ -11,18 +11,21 @@ export class Page implements IPage {
 
   @Column()
   @ApiModelProperty()
-  name: string
+  name!: string
 
   @Column()
   @ApiModelProperty()
-  url: string
+  url!: string
 
   @Column()
   @ApiModelProperty()
   createdAt: string = now()
 
-  constructor (name: string, url: string) {
-    this.name = name
-    this.url = url
+  constructor (data?: { name: string; url: string }) {
+    if (data) {
+      const { name, url } = data
+      this.name = name
+      this.url = url
+    }
   }
 }
