@@ -19,12 +19,15 @@
   "dependencies": {
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
+    "@nestjs/jwt": "^0.3.0",
     "@nestjs/platform-express": "^6.0.0",
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/typeorm": "^6.0.0",
     "@webok/core": "^0.0.0",
+    "@webok/models": "^0.0.0",
     "@webok/services": "^0.0.0",
     "class-transformer": "^0.2.0",
+    "config": "^3.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0"
   },

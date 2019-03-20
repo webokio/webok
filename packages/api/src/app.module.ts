@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import TypeOrmConfig from '@webok/core/lib/typeorm/typeorm.config'
+import TypeOrmConfig from '@webok/models/lib/typeorm/typeorm.config'
 import { UserModule } from './user'
 import { PageModule } from './page'
 

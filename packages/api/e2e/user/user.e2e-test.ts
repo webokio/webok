@@ -1,4 +1,4 @@
-import { UserRepository } from '@webok/services/lib/user'
+import { User, UserRepository } from '@webok/models/lib/user'
 import { UserClient } from '@webok/client/lib/user'
 import { ApiTester } from '../common/api-tester'
 import { passwordHelperMock } from '../common/password-helper.mock'
@@ -31,7 +31,7 @@ describe('User', () => {
       expect(user.id).toBeDefined()
       expect(user.name).toBe('user1')
       expect(user.email).toBe('user1@mail.com')
-      expect(user.passwordHash).toBeUndefined()
+      expect((user as User).passwordHash).toBeUndefined()
     })
 
     it('should return bad request if invalid data', async () => {
