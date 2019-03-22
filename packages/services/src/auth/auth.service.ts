@@ -1,7 +1,8 @@
+import crypto from 'crypto'
 import { Injectable, Inject } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { JwtService } from '@nestjs/jwt'
-import uuid from 'uuid/v4'
+import { DurationObject } from 'luxon'
 import { Optional } from '@webok/core/lib/common/optional'
 import { IAuthService, IPasswordHelper } from '@webok/core/lib/auth'
 import {
@@ -25,6 +26,8 @@ export class AuthService implements IAuthService {
     private readonly loginRecordRepository: LoginRecordRepository,
     @Inject('IPasswordHelper')
     private readonly passwordHelper: IPasswordHelper,
+    @Inject('config.auth.refreshTokenTTL')
+    private readonly refreshTokenTTL: DurationObject,
   ) {}
 
   async create ({ email, password }: CreateAuthData): Promise<Auth> {
@@ -40,7 +43,7 @@ export class AuthService implements IAuthService {
     const refreshToken: string = this.generateRefreshToken()
     const refreshTokenHash = await this.passwordHelper.hashPassword(refreshToken)
     const loginRecord = await this.loginRecordRepository.save(
-      new LoginRecord({ user, refreshTokenHash, duration: { weeks: 2 } }),
+      new LoginRecord({ user, refreshTokenHash, duration: this.refreshTokenTTL }),
     )
     const payload: AuthPayload = { loginRecordId: loginRecord.id, userId: user.id }
     return {
@@ -64,7 +67,7 @@ export class AuthService implements IAuthService {
     if (!isValidRefreshToken) {
       throw new Error('Invalid refresh token')
     }
-    loginRecord.extendExpiration({ weeks: 2 })
+    loginRecord.extendExpiration(this.refreshTokenTTL)
     await this.loginRecordRepository.save(loginRecord)
     const payload: AuthPayload = { loginRecordId: loginRecord.id, userId: loginRecord.user.id }
     return {
@@ -95,6 +98,6 @@ export class AuthService implements IAuthService {
   }
 
   private generateRefreshToken (): string {
-    return uuid()
+    return crypto.randomBytes(32).toString('hex')
   }
 }
