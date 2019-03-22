@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Optional } from '@webok/core/lib/common/optional'
 import { IPageService } from '@webok/core/lib/page'
 import { Page, PageRepository, CreatePageData, UpdatePageData } from '@webok/models/lib/page'
 
@@ -15,34 +14,33 @@ export class PageService implements IPageService {
     return this.pageRepository.find()
   }
 
-  async get (id: number): Promise<Optional<Page>> {
+  async get (id: number): Promise<Page | undefined> {
     const page = await this.pageRepository.findOne({ id })
-    return Optional.ofNullable(page)
+    return page
   }
 
   async create ({ name, url }: CreatePageData): Promise<Page> {
     return this.pageRepository.save(new Page({ name, url }))
   }
 
-  async update (id: number, data: UpdatePageData): Promise<Optional<Page>> {
-    const optionalPage = await this.get(id)
-    if (optionalPage.isEmpty()) {
-      return optionalPage
+  async update (id: number, data: UpdatePageData): Promise<Page | undefined> {
+    const page = await this.get(id)
+    if (!page) {
+      return page
     }
-    const page = optionalPage.get()
     if (typeof data.name !== 'undefined') {
       page.name = data.name
     }
     if (typeof data.url !== 'undefined') {
       page.url = data.url
     }
-    return Optional.ofNonNull(await this.pageRepository.save(page))
+    return this.pageRepository.save(page)
   }
 
   async remove (id: number): Promise<void> {
-    const optionalPage = await this.get(id)
-    if (optionalPage.isPresent()) {
-      await this.pageRepository.remove(optionalPage.get())
+    const page = await this.get(id)
+    if (page) {
+      await this.pageRepository.remove(page)
     }
   }
 }

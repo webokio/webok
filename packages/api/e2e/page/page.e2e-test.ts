@@ -42,9 +42,8 @@ describe('Page', () => {
     })
 
     it('should return the page if found', async () => {
-      const optionalPage = await pageClient.get(page.id)
-      expect(optionalPage.isPresent()).toBe(true)
-      expect(optionalPage.get()).toEqual(page)
+      const foundPage = await pageClient.get(page.id)
+      expect(foundPage).toEqual(page)
     })
 
     it('should return empty if not found', async () => {
@@ -88,7 +87,11 @@ describe('Page', () => {
     })
 
     it('should update the page', async () => {
-      const updatedPage = (await pageClient.update(page.id, { name: 'site2', url: 'https://site2.com' })).get()
+      const updatedPage = await pageClient.update(page.id, { name: 'site2', url: 'https://site2.com' })
+      if (!updatedPage) {
+        fail()
+        return
+      }
       expect(updatedPage.name).toBe('site2')
       expect(updatedPage.url).toBe('https://site2.com')
     })

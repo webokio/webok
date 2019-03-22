@@ -13,9 +13,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "typescript-optional": "^2.0.1"
-  },
   "devDependencies": {
     "@webok/dev": "^0.0.0"
   }

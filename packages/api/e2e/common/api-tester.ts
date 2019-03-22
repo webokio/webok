@@ -1,7 +1,6 @@
 import { Server } from 'http'
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
-import { Optional } from '@webok/core/lib/common/optional'
 import { ApiClient } from '@webok/client'
 import { AppModule } from '../../src/app.module'
 import { configureFeatures } from '../../src/features'
@@ -37,9 +36,9 @@ export class ApiTester {
     await this.app.close()
   }
 
-  async expectEmpty<T> (fn: () => Promise<Optional<T>>): Promise<void> {
-    const optionalResult = await fn()
-    expect(optionalResult.isEmpty()).toBe(true)
+  async expectEmpty<T> (fn: () => Promise<T | undefined>): Promise<void> {
+    const result = await fn()
+    expect(result).toBeUndefined()
   }
 
   async expectBadRequest (fn: () => Promise<any>): Promise<void> {

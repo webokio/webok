@@ -1,11 +1,9 @@
-import { Optional } from './optional'
-
 export interface WithFind<T> {
   find (): Promise<T[]>
 }
 
 export interface WithGet<T> {
-  get (id: number): Promise<Optional<T>>
+  get (id: number): Promise<T | undefined>
 }
 
 export interface WithCreate<T, CD> {
@@ -13,7 +11,7 @@ export interface WithCreate<T, CD> {
 }
 
 export interface WithUpdate<T, UD> {
-  update (id: number, data: UD): Promise<Optional<T>>
+  update (id: number, data: UD): Promise<T | undefined>
 }
 
 export interface WithRemove {
