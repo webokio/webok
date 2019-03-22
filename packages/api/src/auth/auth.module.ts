@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import config from 'config'
+import { LoginRecord, LoginRecordRepository } from '@webok/models/lib/auth'
 import { User, UserRepository } from '@webok/models/lib/user'
 import { AuthService, PasswordHelper } from '@webok/services/lib/auth'
 import { AuthController } from './auth.controller'
@@ -21,6 +22,7 @@ const authConfig: AuthConfig = config.get<AuthConfig>('auth')
         expiresIn: authConfig.expiresIn,
       },
     }),
+    TypeOrmModule.forFeature([LoginRecord, LoginRecordRepository]),
     TypeOrmModule.forFeature([User, UserRepository]),
   ],
   providers: [

@@ -1,6 +1,7 @@
 import { WithCreate } from '../common/base.interface'
 
 export interface IAuth {
+  readonly loginRecordId: number
   readonly accessToken: string
   readonly refreshToken: string
 }
@@ -10,12 +11,13 @@ export interface ICreateAuthData {
   readonly password: string
 }
 
-export interface IRefreshAuthData {
+export interface IModifyAuthData {
   readonly refreshToken: string
 }
 
 export interface IAuthService extends WithCreate<IAuth, ICreateAuthData> {
-  refresh (data: IRefreshAuthData): Promise<IAuth>
+  refresh (id: number, data: IModifyAuthData): Promise<IAuth>
+  remove (id: number, data: IModifyAuthData): Promise<void>
 }
 
 export interface IPasswordHelper {

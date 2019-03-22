@@ -19,10 +19,12 @@
     "@nestjs/typeorm": "^6.0.0",
     "@webok/core": "^0.0.0",
     "@webok/models": "^0.0.0",
-    "bcrypt": "^3.0.5"
+    "bcrypt": "^3.0.5",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/uuid": "^3.4.4",
     "@webok/dev": "^0.0.0"
   }
 }
