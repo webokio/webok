@@ -17,11 +17,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/common": "^5.7.4",
-    "@nestjs/core": "^5.7.4",
-    "@nestjs/jwt": "^0.3.0",
-    "@nestjs/swagger": "^2.5.1",
-    "@nestjs/typeorm": "^5.3.0",
+    "@nestjs/common": "^6.0.1",
+    "@nestjs/core": "^6.0.1",
+    "@nestjs/jwt": "^6.0.0",
+    "@nestjs/platform-express": "^6.0.1",
+    "@nestjs/swagger": "^3.0.1",
+    "@nestjs/typeorm": "^6.0.0",
     "@webok/core": "^0.0.0",
     "@webok/models": "^0.0.0",
     "@webok/services": "^0.0.0",
@@ -31,7 +32,7 @@
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
-    "@nestjs/testing": "^5.7.4",
+    "@nestjs/testing": "^6.0.1",
     "@types/jest": "^24.0.11",
     "@webok/client": "^0.0.0",
     "@webok/dev": "^0.0.0",
