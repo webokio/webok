@@ -1,31 +1,31 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
-import { ApiModelProperty } from '@nestjs/swagger'
-import { IPage } from '@webok/core/lib/page'
-import { nowAsString } from '../common/datetime'
+
+export interface PageOptions {
+  readonly name: string
+  readonly url: string
+  readonly createdAt: string
+}
 
 @Entity()
-export class Page implements IPage {
+export class Page {
   @PrimaryGeneratedColumn()
-  @ApiModelProperty()
   id!: number
 
   @Column()
-  @ApiModelProperty()
   name!: string
 
   @Column()
-  @ApiModelProperty()
   url!: string
 
   @Column()
-  @ApiModelProperty()
-  createdAt: string = nowAsString()
+  createdAt!: string
 
-  constructor (data?: { name: string; url: string }) {
-    if (data) {
-      const { name, url } = data
+  constructor (pageOptions?: PageOptions) {
+    if (pageOptions) {
+      const { name, url, createdAt } = pageOptions
       this.name = name
       this.url = url
+      this.createdAt = createdAt
     }
   }
 }

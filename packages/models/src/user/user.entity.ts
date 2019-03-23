@@ -1,29 +1,28 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
-import { Exclude } from 'class-transformer'
-import { ApiModelProperty } from '@nestjs/swagger'
-import { IUser } from '@webok/core/lib/user'
+
+export interface UserOptions {
+  readonly name: string
+  readonly email: string
+  readonly passwordHash: string
+}
 
 @Entity({ name: 'app_user' })
-export class User implements IUser {
+export class User {
   @PrimaryGeneratedColumn()
-  @ApiModelProperty()
   id!: number
 
   @Column()
-  @ApiModelProperty()
   name!: string
 
   @Column({ unique: true })
-  @ApiModelProperty()
   email!: string
 
   @Column()
-  @Exclude() // exclude passwordHash in controller response
   passwordHash!: string
 
-  constructor (data?: { name: string; email: string; passwordHash: string }) {
-    if (data) {
-      const { name, email, passwordHash } = data
+  constructor (userOptions?: UserOptions) {
+    if (userOptions) {
+      const { name, email, passwordHash } = userOptions
       this.name = name
       this.email = email
       this.passwordHash = passwordHash
