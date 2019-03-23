@@ -1,1 +1,5 @@
-export * from './auth.interface'
+export * from './auth-service.interface'
+export * from './hashing-service.interface'
+export * from './auth.dto'
+export * from './create-auth.dto'
+export * from './modify-auth.dto'
