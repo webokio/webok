@@ -2,7 +2,6 @@ import {
   Controller,
   HttpCode,
   HttpStatus,
-  Inject,
   Get,
   Post,
   Patch,
@@ -19,57 +18,58 @@ import {
   ApiBadRequestResponse,
   ApiNoContentResponse,
 } from '@nestjs/swagger'
-import { IPageService } from '@webok/core/lib/page'
-import { Page, CreatePageData, UpdatePageData } from '@webok/models/lib/page'
-import { ParamsWithId } from '../common/params.data'
+import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
+import { PageService } from '@webok/services/lib/page'
 
 @Controller('pages')
 @ApiUseTags('Pages')
 export class PageController {
-  constructor (@Inject('IPageService') private readonly pageService: IPageService) {}
+  constructor (private readonly pageService: PageService) {}
 
   @Get()
-  @ApiOkResponse({ type: [Page] })
-  find (): Promise<Page[]> {
-    return this.pageService.find()
-  }
-
-  @Get(':id')
-  @ApiOkResponse({ type: Page })
-  @ApiNotFoundResponse({})
-  @ApiBadRequestResponse({})
-  async get (@Param() { id }: ParamsWithId): Promise<Page> {
-    const page = await this.pageService.get(id)
-    if (!page) {
-      throw new NotFoundException()
-    }
-    return page
+  @ApiOkResponse({ type: [PageDto] })
+  async find (): Promise<PageDto[]> {
+    const pageDtos = this.pageService.find()
+    return pageDtos
   }
 
   @Post()
-  @ApiCreatedResponse({ type: Page })
+  @ApiCreatedResponse({ type: PageDto })
   @ApiBadRequestResponse({})
-  create (@Body() data: CreatePageData): Promise<Page> {
-    return this.pageService.create(data)
+  async create (@Body() createPageDto: CreatePageDto): Promise<PageDto> {
+    const pageDto = await this.pageService.create(createPageDto)
+    return pageDto
   }
 
-  @Patch(':id')
-  @ApiOkResponse({ type: Page })
+  @Get(':pageId')
+  @ApiOkResponse({ type: PageDto })
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
-  async update (@Param() { id }: ParamsWithId, @Body() data: UpdatePageData): Promise<Page> {
-    const page = await this.pageService.update(id, data)
-    if (!page) {
+  async get (@Param() pageId: number): Promise<PageDto> {
+    const pageDto = await this.pageService.get(pageId)
+    if (!pageDto) {
       throw new NotFoundException()
     }
-    return page
+    return pageDto
   }
 
-  @Delete(':id')
+  @Patch(':pageId')
+  @ApiOkResponse({ type: PageDto })
+  @ApiNotFoundResponse({})
+  @ApiBadRequestResponse({})
+  async update (@Param() pageId: number, @Body() updatePageDto: UpdatePageDto): Promise<PageDto> {
+    const pageDto = await this.pageService.update(pageId, updatePageDto)
+    if (!pageDto) {
+      throw new NotFoundException()
+    }
+    return pageDto
+  }
+
+  @Delete(':pageId')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse({})
   @ApiBadRequestResponse({})
-  async remove (@Param() { id }: ParamsWithId): Promise<void> {
-    await this.pageService.remove(id)
+  async remove (@Param() pageId: number): Promise<void> {
+    await this.pageService.remove(pageId)
   }
 }

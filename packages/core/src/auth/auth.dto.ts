@@ -19,7 +19,7 @@ export class AuthDto {
   // A special field to force DTO usage
   private readonly isDto = true
 
-  constructor(authDtoOptions: AuthDtoOptions) {
+  constructor (authDtoOptions: AuthDtoOptions) {
     const { authId, accessToken, refreshToken } = authDtoOptions
     this.authId = authId
     this.accessToken = accessToken

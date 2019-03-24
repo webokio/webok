@@ -40,7 +40,7 @@ export class AuthService {
         user,
         refreshTokenHash,
         createdAt: nowAsString(),
-        expiredAt: this.createLoginRecordExpiredAt()
+        expiredAt: this.createLoginRecordExpiredAt(),
       }),
     )
     return this.authDtoMapper.fromLoginRecord(loginRecord, refreshToken)

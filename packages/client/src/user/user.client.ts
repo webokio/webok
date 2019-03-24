@@ -1,15 +1,12 @@
-import { AxiosInstance } from 'axios'
-import { IUserService, IUser, ICreateUserData } from '@webok/core/lib/user'
-import { create } from '../common/base.client'
+import { AxiosInstance, AxiosResponse } from 'axios'
+import { UserDto, CreateUserDto } from '@webok/core/lib/user'
 
-export class UserClient implements IUserService {
-  private readonly httpClient: AxiosInstance
+export class UserClient {
+  private readonly basePath = 'users'
 
-  constructor (createHttpClient: (path: string) => AxiosInstance) {
-    this.httpClient = createHttpClient('users')
-  }
+  constructor (private readonly baseClient: AxiosInstance) {}
 
-  create (data: ICreateUserData): Promise<IUser> {
-    return create(this.httpClient, data)
+  create (createUserDto: CreateUserDto): Promise<AxiosResponse<UserDto>> {
+    return this.baseClient.post<UserDto>(this.basePath, createUserDto)
   }
 }
