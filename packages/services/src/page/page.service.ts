@@ -25,7 +25,7 @@ export class PageService {
   }
 
   async get (pageId: number): Promise<PageDto | undefined> {
-    const page = await this.pageRepository.findOne({ id: pageId })
+    const page: Page | undefined = await this.pageRepository.findOne({ id: pageId })
     if (!page) {
       return
     }
@@ -33,7 +33,7 @@ export class PageService {
   }
 
   async update (pageId: number, updatePageDto: UpdatePageDto): Promise<PageDto | undefined> {
-    const pageToUpdate = await this.pageRepository.findOne({ id: pageId })
+    const pageToUpdate: Page | undefined = await this.pageRepository.findOne({ id: pageId })
     if (!pageToUpdate) {
       return
     }
@@ -44,7 +44,7 @@ export class PageService {
     if (typeof url !== 'undefined') {
       pageToUpdate.url = url
     }
-    const page = await this.pageRepository.save(pageToUpdate)
+    const page: Page = await this.pageRepository.save(pageToUpdate)
     if (!page) {
       return
     }
@@ -52,7 +52,7 @@ export class PageService {
   }
 
   async remove (pageId: number): Promise<PageDto | undefined> {
-    const pageToRemove = await this.pageRepository.findOne({ id: pageId })
+    const pageToRemove: Page | undefined = await this.pageRepository.findOne({ id: pageId })
     if (!pageToRemove) {
       return
     }

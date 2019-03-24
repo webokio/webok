@@ -17,7 +17,7 @@ export class UserService {
   async create (createUserDto: CreateUserDto): Promise<UserDto> {
     const { name, email, password } = createUserDto
     // TODO: check email uniqueness
-    const passwordHash = await this.hashingService.hash(password)
+    const passwordHash: string = await this.hashingService.hash(password)
     const user: User = await this.userRepository.save(new User({ name, email, passwordHash }))
     return this.userDtoMapper.fromUser(user)
   }

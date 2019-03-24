@@ -54,7 +54,7 @@ export class PageController {
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
   async get (@Param() { pageId }: PageIdParam): Promise<PageDto> {
-    const pageDto = await this.pageService.get(pageId)
+    const pageDto: PageDto | undefined = await this.pageService.get(pageId)
     if (!pageDto) {
       throw new NotFoundException()
     }
@@ -66,7 +66,7 @@ export class PageController {
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
   async update (@Param() { pageId }: PageIdParam, @Body() updatePageDto: UpdatePageDto): Promise<PageDto> {
-    const pageDto = await this.pageService.update(pageId, updatePageDto)
+    const pageDto: PageDto | undefined = await this.pageService.update(pageId, updatePageDto)
     if (!pageDto) {
       throw new NotFoundException()
     }

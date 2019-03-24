@@ -2,9 +2,9 @@ import crypto from 'crypto'
 import { Injectable, Inject } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { DateTime, DurationObject } from 'luxon'
-import { AuthDto, CreateAuthDto, ModifyAuthDto, AuthPayloadDto } from '@webok/core/lib/auth'
+import { AuthDto, CreateAuthDto, ModifyAuthDto } from '@webok/core/lib/auth'
 import { LoginRecord, LoginRecordRepository } from '@webok/models/lib/auth'
-import { UserRepository } from '@webok/models/lib/user'
+import { User, UserRepository } from '@webok/models/lib/user'
 import { nowAsString, dateTimeAsString } from '@webok/helpers/lib/datetime.helper'
 import { AuthDtoMapper } from './auth-dto.mapper'
 import { HashingService } from './hashing.service'
@@ -25,17 +25,17 @@ export class AuthService {
 
   async create (createAuthDto: CreateAuthDto): Promise<AuthDto> {
     const { email, password } = createAuthDto
-    const user = await this.userRepository.findOne({ email })
+    const user: User | undefined = await this.userRepository.findOne({ email })
     if (!user) {
       throw new Error('Invalid email')
     }
-    const isValidPassword = await this.hashingService.compare(password, user.passwordHash)
+    const isValidPassword: boolean = await this.hashingService.compare(password, user.passwordHash)
     if (!isValidPassword) {
       throw new Error('Invalid password')
     }
     const refreshToken = this.createRefreshToken()
-    const refreshTokenHash = await this.hashingService.hash(refreshToken)
-    const loginRecord = await this.loginRecordRepository.save(
+    const refreshTokenHash: string = await this.hashingService.hash(refreshToken)
+    const loginRecord: LoginRecord = await this.loginRecordRepository.save(
       new LoginRecord({
         user,
         refreshTokenHash,
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   async refresh (authId: number, modifyAuthDto: ModifyAuthDto): Promise<AuthDto> {
-    const loginRecordToRefresh = await this.loginRecordRepository.findOne({ id: authId })
+    const loginRecordToRefresh: LoginRecord | undefined = await this.loginRecordRepository.findOne({ id: authId })
     if (!loginRecordToRefresh) {
       throw new Error('Login record not found')
     }
@@ -56,17 +56,20 @@ export class AuthService {
       throw new Error('Expired refresh token')
     }
     const { refreshToken } = modifyAuthDto
-    const isValidRefreshToken = await this.hashingService.compare(refreshToken, loginRecordToRefresh.refreshTokenHash)
+    const isValidRefreshToken: boolean = await this.hashingService.compare(
+      refreshToken,
+      loginRecordToRefresh.refreshTokenHash,
+    )
     if (!isValidRefreshToken) {
       throw new Error('Invalid refresh token')
     }
     loginRecordToRefresh.expiredAt = this.createLoginRecordExpiredAt()
-    const loginRecord = await this.loginRecordRepository.save(loginRecordToRefresh)
+    const loginRecord: LoginRecord = await this.loginRecordRepository.save(loginRecordToRefresh)
     return this.authDtoMapper.fromLoginRecord(loginRecord, refreshToken)
   }
 
   async remove (authId: number, modifyAuthDto: ModifyAuthDto): Promise<void> {
-    const loginRecordToRemove = await this.loginRecordRepository.findOne({ id: authId })
+    const loginRecordToRemove: LoginRecord | undefined = await this.loginRecordRepository.findOne({ id: authId })
     if (!loginRecordToRemove) {
       // Do nothing if login record not found
       return
@@ -77,7 +80,10 @@ export class AuthService {
       return
     }
     const { refreshToken } = modifyAuthDto
-    const isValidRefreshToken = await this.hashingService.compare(refreshToken, loginRecordToRemove.refreshTokenHash)
+    const isValidRefreshToken: boolean = await this.hashingService.compare(
+      refreshToken,
+      loginRecordToRemove.refreshTokenHash,
+    )
     if (!isValidRefreshToken) {
       return
     }
