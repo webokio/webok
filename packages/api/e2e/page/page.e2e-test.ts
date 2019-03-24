@@ -47,7 +47,7 @@ describe('Page', () => {
       expect(foundPageDto).toEqual(pageDto)
     })
 
-    it('should return not found if no id', async () => {
+    it('should return not found if no matching id', async () => {
       await apiTester.expectNotFound(() => {
         return pageClient.get(-pageDto.id)
       })
@@ -88,12 +88,13 @@ describe('Page', () => {
     })
 
     it('should update the page', async () => {
-      const updatedPageDto: PageDto = (await pageClient.update(pageDto.id, { name: 'site2', url: 'https://site2.com' })).data
+      const updatedPageDto: PageDto = (await pageClient.update(pageDto.id, { name: 'site2', url: 'https://site2.com' }))
+        .data
       expect(updatedPageDto.name).toBe('site2')
       expect(updatedPageDto.url).toBe('https://site2.com')
     })
 
-    it('should return not found if no id', async () => {
+    it('should return not found if no matching id', async () => {
       await apiTester.expectNotFound(() => {
         return pageClient.update(-pageDto.id, { name: 'site2', url: 'https://site2.com' })
       })

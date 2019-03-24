@@ -25,8 +25,11 @@ describe('User', () => {
 
   describe('create()', () => {
     it('should return a new user', async () => {
-      const userDto: UserDto = (await userClient.create({ name: 'user1', email: 'user1@mail.com', password: 'password1' }))
-        .data
+      const userDto: UserDto = (await userClient.create({
+        name: 'user1',
+        email: 'user1@mail.com',
+        password: 'password1',
+      })).data
       expect(userDto.id).toBeDefined()
       expect(userDto.name).toBe('user1')
       expect(userDto.email).toBe('user1@mail.com')
