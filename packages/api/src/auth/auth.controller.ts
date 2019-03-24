@@ -5,9 +5,17 @@ import {
   ApiNoContentResponse,
   ApiBadRequestResponse,
   ApiUnauthorizedResponse,
+  ApiModelProperty,
 } from '@nestjs/swagger'
+import { IsNumberString } from 'class-validator'
 import { AuthDto, CreateAuthDto, ModifyAuthDto } from '@webok/core/lib/auth'
 import { AuthService } from '@webok/services/lib/auth'
+
+class AuthIdParam {
+  @ApiModelProperty()
+  @IsNumberString()
+  readonly authId!: number
+}
 
 @Controller('auth')
 @ApiUseTags('Authentication')
@@ -31,7 +39,7 @@ export class AuthController {
   @ApiCreatedResponse({ type: AuthDto })
   @ApiBadRequestResponse({})
   @ApiUnauthorizedResponse({})
-  async refresh (@Param() authId: number, @Body() modifyAuthDto: ModifyAuthDto): Promise<AuthDto> {
+  async refresh (@Param() { authId }: AuthIdParam, @Body() modifyAuthDto: ModifyAuthDto): Promise<AuthDto> {
     try {
       const authDto = await this.authService.refresh(authId, modifyAuthDto)
       return authDto
@@ -44,7 +52,7 @@ export class AuthController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse({})
   @ApiBadRequestResponse({})
-  async remove (@Param() authId: number, @Body() modifyAuthDto: ModifyAuthDto): Promise<void> {
+  async remove (@Param() { authId }: AuthIdParam, @Body() modifyAuthDto: ModifyAuthDto): Promise<void> {
     await this.authService.remove(authId, modifyAuthDto)
   }
 }

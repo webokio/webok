@@ -20,14 +20,16 @@ export class PageDto {
   @ApiModelProperty()
   readonly createdAt: string
 
-  // A special field to force DTO usage
-  private readonly isDto = true
-
   constructor (pageDtoOptions: PageDtoOptions) {
     const { id, name, url, createdAt } = pageDtoOptions
     this.id = id
     this.name = name
     this.url = url
     this.createdAt = createdAt
+  }
+
+  // Special method to force DTO usage
+  __isDto () {
+    return true
   }
 }

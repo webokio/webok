@@ -16,13 +16,15 @@ export class AuthDto {
   @ApiModelProperty()
   readonly refreshToken: string
 
-  // A special field to force DTO usage
-  private readonly isDto = true
-
   constructor (authDtoOptions: AuthDtoOptions) {
     const { authId, accessToken, refreshToken } = authDtoOptions
     this.authId = authId
     this.accessToken = accessToken
     this.refreshToken = refreshToken
+  }
+
+  // Special method to force DTO usage
+  __isDto () {
+    return true
   }
 }

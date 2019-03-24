@@ -7,12 +7,14 @@ export class AuthPayloadDto {
   readonly authId: number
   readonly userId: number
 
-  // A special field to force DTO usage
-  private readonly isDto = true
-
   constructor (authPayloadOptions: AuthPayloadDtoOptions) {
     const { authId, userId } = authPayloadOptions
     this.authId = authId
     this.userId = userId
+  }
+
+  // Special method to force DTO usage
+  __isDto () {
+    return true
   }
 }

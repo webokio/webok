@@ -16,13 +16,15 @@ export class UserDto {
   @ApiModelProperty()
   readonly email: string
 
-  // A special field to force DTO usage
-  private readonly isDto = true
-
   constructor (userDtoOptions: UserDtoOptions) {
     const { id, name, email } = userDtoOptions
     this.id = id
     this.name = name
     this.email = email
+  }
+
+  // Special method to force DTO usage
+  __isDto () {
+    return true
   }
 }

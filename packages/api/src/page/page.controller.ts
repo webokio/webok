@@ -17,9 +17,17 @@ import {
   ApiNotFoundResponse,
   ApiBadRequestResponse,
   ApiNoContentResponse,
+  ApiModelProperty,
 } from '@nestjs/swagger'
+import { IsNumberString } from 'class-validator'
 import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { PageService } from '@webok/services/lib/page'
+
+class PageIdParam {
+  @ApiModelProperty()
+  @IsNumberString()
+  readonly pageId!: number
+}
 
 @Controller('pages')
 @ApiUseTags('Pages')
@@ -45,7 +53,7 @@ export class PageController {
   @ApiOkResponse({ type: PageDto })
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
-  async get (@Param() pageId: number): Promise<PageDto> {
+  async get (@Param() { pageId }: PageIdParam): Promise<PageDto> {
     const pageDto = await this.pageService.get(pageId)
     if (!pageDto) {
       throw new NotFoundException()
@@ -57,7 +65,7 @@ export class PageController {
   @ApiOkResponse({ type: PageDto })
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
-  async update (@Param() pageId: number, @Body() updatePageDto: UpdatePageDto): Promise<PageDto> {
+  async update (@Param() { pageId }: PageIdParam, @Body() updatePageDto: UpdatePageDto): Promise<PageDto> {
     const pageDto = await this.pageService.update(pageId, updatePageDto)
     if (!pageDto) {
       throw new NotFoundException()
@@ -69,7 +77,7 @@ export class PageController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse({})
   @ApiBadRequestResponse({})
-  async remove (@Param() pageId: number): Promise<void> {
+  async remove (@Param() { pageId }: PageIdParam): Promise<void> {
     await this.pageService.remove(pageId)
   }
 }
