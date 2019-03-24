@@ -1,6 +1,7 @@
-import { Page, PageRepository } from '@webok/models/lib/page'
+import { PageDto } from '@webok/core/lib/page'
+import { PageRepository } from '@webok/models/lib/page'
 import { PageClient } from '@webok/client/lib/page'
-import { ApiTester } from '../common/api-tester'
+import { ApiTester } from '../api-tester'
 
 describe('Page', () => {
   let apiTester: ApiTester
@@ -24,10 +25,10 @@ describe('Page', () => {
 
   describe('find()', () => {
     it('should return all pages', async () => {
-      expect(await pageClient.find()).toEqual([])
+      expect((await pageClient.find()).data).toEqual([])
       await pageClient.create({ name: 'site1', url: 'https://site1.com' })
       await pageClient.create({ name: 'site2', url: 'https://site2.com' })
-      const pages = await pageClient.find()
+      const pages: PageDto[] = (await pageClient.find()).data
       expect(pages.length).toBe(2)
       expect(pages.some((page) => page.name === 'site1' && page.url === 'https://site1.com')).toBe(true)
       expect(pages.some((page) => page.name === 'site2' && page.url === 'https://site2.com')).toBe(true)
@@ -35,19 +36,19 @@ describe('Page', () => {
   })
 
   describe('get()', () => {
-    let page: Page
+    let page: PageDto
 
     beforeEach(async () => {
-      page = await pageClient.create({ name: 'site1', url: 'https://site1.com' })
+      page = (await pageClient.create({ name: 'site1', url: 'https://site1.com' })).data
     })
 
     it('should return the page if found', async () => {
-      const foundPage = await pageClient.get(page.id)
+      const foundPage: PageDto = (await pageClient.get(page.id)).data
       expect(foundPage).toEqual(page)
     })
 
-    it('should return empty if not found', async () => {
-      await apiTester.expectEmpty(() => {
+    it('should return not found if no id', async () => {
+      await apiTester.expectNotFound(() => {
         return pageClient.get(-page.id)
       })
     })
@@ -61,7 +62,7 @@ describe('Page', () => {
 
   describe('create()', () => {
     it('should return a new page', async () => {
-      const page = await pageClient.create({ name: 'site1', url: 'https://site1.com' })
+      const page: PageDto = (await pageClient.create({ name: 'site1', url: 'https://site1.com' })).data
       expect(page).toBeDefined()
       expect(page.id).toBeDefined()
       expect(page.name).toBe('site1')
@@ -80,24 +81,20 @@ describe('Page', () => {
   })
 
   describe('update()', () => {
-    let page: Page
+    let page: PageDto
 
     beforeEach(async () => {
-      page = await pageClient.create({ name: 'site1', url: 'https://site1.com' })
+      page = (await pageClient.create({ name: 'site1', url: 'https://site1.com' })).data
     })
 
     it('should update the page', async () => {
-      const updatedPage = await pageClient.update(page.id, { name: 'site2', url: 'https://site2.com' })
-      if (!updatedPage) {
-        fail()
-        return
-      }
+      const updatedPage: PageDto = (await pageClient.update(page.id, { name: 'site2', url: 'https://site2.com' })).data
       expect(updatedPage.name).toBe('site2')
       expect(updatedPage.url).toBe('https://site2.com')
     })
 
-    it('should return empty if not found', async () => {
-      await apiTester.expectEmpty(() => {
+    it('should return not found if no id', async () => {
+      await apiTester.expectNotFound(() => {
         return pageClient.update(-page.id, { name: 'site2', url: 'https://site2.com' })
       })
     })
@@ -119,15 +116,15 @@ describe('Page', () => {
   })
 
   describe('remove()', () => {
-    let page: Page
+    let page: PageDto
 
     beforeEach(async () => {
-      page = await pageClient.create({ name: 'site1', url: 'https://site1.com' })
+      page = (await pageClient.create({ name: 'site1', url: 'https://site1.com' })).data
     })
 
     it('should remove the page', async () => {
       await pageClient.remove(page.id)
-      await apiTester.expectEmpty(() => {
+      await apiTester.expectNotFound(() => {
         return pageClient.get(page.id)
       })
     })

@@ -1,7 +1,7 @@
-import { User, UserRepository } from '@webok/models/lib/user'
+import { UserDto } from '@webok/core/lib/user'
+import { UserRepository } from '@webok/models/lib/user'
 import { UserClient } from '@webok/client/lib/user'
-import { ApiTester } from '../common/api-tester'
-import { passwordHelperMock } from '../common/password-helper.mock'
+import { ApiTester } from '../api-tester'
 
 describe('User', () => {
   let apiTester: ApiTester
@@ -25,13 +25,12 @@ describe('User', () => {
 
   describe('create()', () => {
     it('should return a new user', async () => {
-      const user = await userClient.create({ name: 'user1', email: 'user1@mail.com', password: 'password1' })
-      expect(passwordHelperMock.hashPassword.mock.calls).toEqual([['password1']])
-      expect(user).toBeDefined()
+      const user: UserDto = (await userClient.create({ name: 'user1', email: 'user1@mail.com', password: 'password1' }))
+        .data
       expect(user.id).toBeDefined()
       expect(user.name).toBe('user1')
       expect(user.email).toBe('user1@mail.com')
-      expect((user as User).passwordHash).toBeUndefined()
+      expect((user as any).passwordHash).toBeUndefined()
     })
 
     it('should return bad request if invalid data', async () => {
