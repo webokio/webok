@@ -1,46 +1,62 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { IPageService } from '@webok/core/lib/page'
-import { Page, PageRepository, CreatePageData, UpdatePageData } from '@webok/models/lib/page'
+import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
+import { Page, PageRepository } from '@webok/models/lib/page'
+import { nowAsString } from '@webok/helpers/lib/datetime.helper'
+import { PageDtoMapper } from './page-dto.mapper'
 
 @Injectable()
-export class PageService implements IPageService {
+export class PageService {
   constructor (
     @InjectRepository(PageRepository)
     private readonly pageRepository: PageRepository,
+    private readonly pageDtoMapper: PageDtoMapper,
   ) {}
 
-  async find (): Promise<Page[]> {
-    return this.pageRepository.find()
+  async find (): Promise<PageDto[]> {
+    const pages: Page[] = await this.pageRepository.find()
+    return pages.map(this.pageDtoMapper.fromPage)
   }
 
-  async get (id: number): Promise<Page | undefined> {
-    const page = await this.pageRepository.findOne({ id })
-    return page
+  async create (createPageDto: CreatePageDto): Promise<PageDto> {
+    const { name, url } = createPageDto
+    const page: Page = await this.pageRepository.save(new Page({ name, url, createdAt: nowAsString() }))
+    return this.pageDtoMapper.fromPage(page)
   }
 
-  async create ({ name, url }: CreatePageData): Promise<Page> {
-    return this.pageRepository.save(new Page({ name, url }))
-  }
-
-  async update (id: number, data: UpdatePageData): Promise<Page | undefined> {
-    const page = await this.get(id)
+  async get (pageId: number): Promise<PageDto | undefined> {
+    const page = await this.pageRepository.findOne({ id: pageId })
     if (!page) {
-      return page
+      return
     }
-    if (typeof data.name !== 'undefined') {
-      page.name = data.name
-    }
-    if (typeof data.url !== 'undefined') {
-      page.url = data.url
-    }
-    return this.pageRepository.save(page)
+    return this.pageDtoMapper.fromPage(page)
   }
 
-  async remove (id: number): Promise<void> {
-    const page = await this.get(id)
-    if (page) {
-      await this.pageRepository.remove(page)
+  async update (pageId: number, updatePageDto: UpdatePageDto): Promise<PageDto | undefined> {
+    const pageToUpdate = await this.pageRepository.findOne({ id: pageId })
+    if (!pageToUpdate) {
+      return
     }
+    const { name, url } = updatePageDto
+    if (typeof name !== 'undefined') {
+      pageToUpdate.name = name
+    }
+    if (typeof url !== 'undefined') {
+      pageToUpdate.url = url
+    }
+    const page = await this.pageRepository.save(pageToUpdate)
+    if (!page) {
+      return
+    }
+    return this.pageDtoMapper.fromPage(page)
+  }
+
+  async remove (pageId: number): Promise<PageDto | undefined> {
+    const pageToRemove = await this.pageRepository.findOne({ id: pageId })
+    if (!pageToRemove) {
+      return
+    }
+    await this.pageRepository.remove(pageToRemove)
+    return this.pageDtoMapper.fromPage(pageToRemove)
   }
 }
