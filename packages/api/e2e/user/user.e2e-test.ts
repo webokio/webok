@@ -25,12 +25,12 @@ describe('User', () => {
 
   describe('create()', () => {
     it('should return a new user', async () => {
-      const user: UserDto = (await userClient.create({ name: 'user1', email: 'user1@mail.com', password: 'password1' }))
+      const userDto: UserDto = (await userClient.create({ name: 'user1', email: 'user1@mail.com', password: 'password1' }))
         .data
-      expect(user.id).toBeDefined()
-      expect(user.name).toBe('user1')
-      expect(user.email).toBe('user1@mail.com')
-      expect((user as any).passwordHash).toBeUndefined()
+      expect(userDto.id).toBeDefined()
+      expect(userDto.name).toBe('user1')
+      expect(userDto.email).toBe('user1@mail.com')
+      expect((userDto as any).passwordHash).toBeUndefined()
     })
 
     it('should return bad request if invalid data', async () => {

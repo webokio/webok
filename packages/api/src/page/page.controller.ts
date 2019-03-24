@@ -37,7 +37,7 @@ export class PageController {
   @Get()
   @ApiOkResponse({ type: [PageDto] })
   async find (): Promise<PageDto[]> {
-    const pageDtos = this.pageService.find()
+    const pageDtos: PageDto[] = await this.pageService.find()
     return pageDtos
   }
 
@@ -45,7 +45,7 @@ export class PageController {
   @ApiCreatedResponse({ type: PageDto })
   @ApiBadRequestResponse({})
   async create (@Body() createPageDto: CreatePageDto): Promise<PageDto> {
-    const pageDto = await this.pageService.create(createPageDto)
+    const pageDto: PageDto = await this.pageService.create(createPageDto)
     return pageDto
   }
 

@@ -12,7 +12,7 @@ export class UserController {
   @ApiCreatedResponse({ type: UserDto })
   @ApiBadRequestResponse({})
   async create (@Body() createUserDto: CreateUserDto): Promise<UserDto> {
-    const userDto = await this.userService.create(createUserDto)
+    const userDto: UserDto = await this.userService.create(createUserDto)
     return userDto
   }
 }

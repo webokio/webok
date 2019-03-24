@@ -28,7 +28,7 @@ export class AuthController {
   @ApiUnauthorizedResponse({})
   async create (@Body() createAuthDto: CreateAuthDto): Promise<AuthDto> {
     try {
-      const authDto = await this.authService.create(createAuthDto)
+      const authDto: AuthDto = await this.authService.create(createAuthDto)
       return authDto
     } catch (err) {
       throw new UnauthorizedException('Invalid email or password')
@@ -41,7 +41,7 @@ export class AuthController {
   @ApiUnauthorizedResponse({})
   async refresh (@Param() { authId }: AuthIdParam, @Body() modifyAuthDto: ModifyAuthDto): Promise<AuthDto> {
     try {
-      const authDto = await this.authService.refresh(authId, modifyAuthDto)
+      const authDto: AuthDto = await this.authService.refresh(authId, modifyAuthDto)
       return authDto
     } catch (err) {
       throw new UnauthorizedException('Invalid refresh data')
