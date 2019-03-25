@@ -1,2 +1,3 @@
+export * from './auth-dto.mapper'
 export * from './auth.service'
-export * from './password.helper'
+export * from './hashing.service'

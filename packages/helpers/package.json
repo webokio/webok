@@ -1,7 +1,7 @@
 {
-  "name": "@webok/core",
+  "name": "@webok/helpers",
   "version": "0.0.0",
-  "repository": "https://github.com/webokio/webok/tree/master/packages/core",
+  "repository": "https://github.com/webokio/webok/tree/master/packages/helpers",
   "scripts": {
     "clean": "webok-dev clean",
     "build": "webok-dev build",
@@ -14,10 +14,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/swagger": "^3.0.2",
-    "class-validator": "^0.9.1"
+    "luxon": "^1.12.0"
   },
   "devDependencies": {
+    "@types/luxon": "^1.11.1",
     "@webok/dev": "^0.0.0"
   }
 }

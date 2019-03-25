@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { User, UserRepository } from '@webok/models/lib/user'
-import { UserService } from '@webok/services/lib/user'
+import { UserDtoMapper, UserService } from '@webok/services/lib/user'
 import { AuthModule } from '../auth'
 import { UserController } from './user.controller'
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, UserRepository]),
-    // Import AuthModule to use PasswordHelper
+    // Import AuthModule to use HashingService
     AuthModule,
   ],
-  providers: [{ provide: 'IUserService', useClass: UserService }],
+  providers: [UserDtoMapper, UserService],
   controllers: [UserController],
 })
 export class UserModule {}

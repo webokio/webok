@@ -8,5 +8,6 @@ exports.database = {
 
 exports.auth = {
   secretKey: 'webok_auth_secret',
-  expiresIn: '2w',
+  accessTokenTTL: { hour: 1 },
+  refreshTokenTTL: { weeks: 2 },
 }
