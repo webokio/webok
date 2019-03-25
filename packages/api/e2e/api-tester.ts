@@ -1,22 +1,18 @@
 import { Server } from 'http'
 import { Test, TestingModule } from '@nestjs/testing'
-import { INestApplication } from '@nestjs/common'
+import { INestApplication, HttpStatus } from '@nestjs/common'
 import { ApiClient } from '@webok/client'
-import { AppModule } from '../../src/app.module'
-import { configureFeatures } from '../../src/features'
-import { passwordHelperToInject } from './password-helper.mock'
+import { AppModule } from '../src/app.module'
+import { configureFeatures } from '../src/features'
 
 export class ApiTester {
   constructor (readonly module: TestingModule, readonly apiClient: ApiClient, private readonly app: INestApplication) {}
 
   static async create (): Promise<ApiTester> {
-    const module: TestingModule = await Test.createTestingModule({
+    const moduleBuilder = Test.createTestingModule({
       imports: [AppModule],
     })
-      // Mock PasswordHelper to reduce time to hash/verify password
-      .overrideProvider('IPasswordHelper')
-      .useValue(passwordHelperToInject)
-      .compile()
+    const module: TestingModule = await moduleBuilder.compile()
     const app: INestApplication = module.createNestApplication()
     await configureFeatures(app)
     await app.init()
@@ -36,13 +32,12 @@ export class ApiTester {
     await this.app.close()
   }
 
-  async expectEmpty<T> (fn: () => Promise<T | undefined>): Promise<void> {
-    const result = await fn()
-    expect(result).toBeUndefined()
+  async expectBadRequest (fn: () => Promise<any>): Promise<void> {
+    return this.expectStatusCode(fn, HttpStatus.BAD_REQUEST)
   }
 
-  async expectBadRequest (fn: () => Promise<any>): Promise<void> {
-    return this.expectStatusCode(fn, 400)
+  async expectNotFound (fn: () => Promise<any>): Promise<void> {
+    return this.expectStatusCode(fn, HttpStatus.NOT_FOUND)
   }
 
   private async expectStatusCode (fn: () => Promise<any>, statusCode: number): Promise<void> {

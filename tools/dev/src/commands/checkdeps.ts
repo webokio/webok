@@ -67,8 +67,8 @@ const checkOutdated = async (dependencyInfos: DependencyInfo[]): Promise<void> =
   for (const dependencyInfo of dependencyInfos) {
     progress.tick(0, { dependency: dependencyInfo.name })
     for (const versionInfo of dependencyInfo.versionInfos) {
-      const latestVersion = await getLatestVersion(dependencyInfo.name)
-      const inRangeVersion = await getLatestVersion(dependencyInfo.name, { version: versionInfo.version })
+      const latestVersion: string = await getLatestVersion(dependencyInfo.name)
+      const inRangeVersion: string = await getLatestVersion(dependencyInfo.name, { version: versionInfo.version })
       const canUpdateInRange = versionInfo.version.indexOf(inRangeVersion) === -1
       const canUpdateLatest = inRangeVersion !== latestVersion
       const shouldReport = canUpdateInRange || canUpdateLatest
