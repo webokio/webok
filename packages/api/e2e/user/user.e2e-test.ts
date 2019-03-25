@@ -15,12 +15,12 @@ describe('User', () => {
   })
 
   afterAll(async () => {
-    await userRepository.clear()
+    await userRepository.delete({})
     await apiTester.close()
   })
 
   beforeEach(async () => {
-    await userRepository.clear()
+    await userRepository.delete({})
   })
 
   describe('create()', () => {

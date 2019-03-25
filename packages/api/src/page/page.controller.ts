@@ -1,10 +1,23 @@
-import { Controller, Inject, Get, Post, Patch, Delete, Param, Body, NotFoundException } from '@nestjs/common'
+import {
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Param,
+  Body,
+  NotFoundException,
+} from '@nestjs/common'
 import {
   ApiUseTags,
   ApiOkResponse,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiBadRequestResponse,
+  ApiNoContentResponse,
 } from '@nestjs/swagger'
 import { IPageService } from '@webok/core/lib/page'
 import { Page, CreatePageData, UpdatePageData } from '@webok/models/lib/page'
@@ -47,7 +60,8 @@ export class PageController {
   }
 
   @Delete(':id')
-  @ApiOkResponse({})
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiNoContentResponse({})
   @ApiBadRequestResponse({})
   async remove (@Param() { id }: ParamsWithId): Promise<void> {
     await this.pageService.remove(id)

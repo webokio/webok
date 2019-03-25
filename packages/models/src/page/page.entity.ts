@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 import { ApiModelProperty } from '@nestjs/swagger'
 import { IPage } from '@webok/core/lib/page'
-import { now } from '../common/datetime'
+import { nowAsString } from '../common/datetime'
 
 @Entity()
 export class Page implements IPage {
@@ -19,7 +19,7 @@ export class Page implements IPage {
 
   @Column()
   @ApiModelProperty()
-  createdAt: string = now()
+  createdAt: string = nowAsString()
 
   constructor (data?: { name: string; url: string }) {
     if (data) {

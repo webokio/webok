@@ -14,12 +14,12 @@ describe('Page', () => {
   })
 
   afterAll(async () => {
-    await pageRepository.clear()
+    await pageRepository.delete({})
     await apiTester.close()
   })
 
   beforeEach(async () => {
-    await pageRepository.clear()
+    await pageRepository.delete({})
   })
 
   describe('find()', () => {
