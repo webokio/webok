@@ -1,15 +1,34 @@
 {
-  "extends": "./node_modules/@webok/dev/tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib",
-    "target": "es5",
-    "module": "es2015",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "preserve"
-  },
-  "include": [
-    "src/**/*",
-    "nuxt.config.ts"
-  ],
-  "exclude": []
+    "jsx": "preserve",
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom"
+    ],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "types": [
+      "@types/node",
+      "@nuxt/vue-app"
+    ]
+  }
 }

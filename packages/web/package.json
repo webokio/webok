@@ -4,25 +4,26 @@
   "repository": "https://github.com/webokio/webok/tree/master/packages/web",
   "scripts": {
     "clean": "webok-dev clean",
-    "build:production": "nuxt-ts build",
+    "build:production": "nuxt build",
     "format": "webok-dev format nuxt.config.ts",
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",
     "publish:prepare": "npm run clean",
-    "dev": "nuxt-ts"
+    "dev": "nuxt"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "nuxt-property-decorator": "^2.1.3",
-    "vue-property-decorator": "^8.0.0",
+    "vue-property-decorator": "^8.1.0",
     "vuetify": "^1.5.7"
   },
   "devDependencies": {
+    "@nuxt/typescript": "^2.5.1",
     "@types/sass": "^1.16.0",
     "@webok/dev": "^0.0.0",
-    "nuxt-ts": "^2.4.5",
+    "nuxt": "^2.5.1",
     "sass": "^1.17.3",
     "sass-loader": "^7.1.0"
   }

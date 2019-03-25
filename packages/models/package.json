@@ -17,13 +17,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/swagger": "^3.0.1",
+    "@nestjs/swagger": "^3.0.2",
     "@nestjs/typeorm": "^6.0.0",
     "@webok/core": "^0.0.0",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "config": "^3.0.1",
-    "luxon": "^1.11.4",
+    "luxon": "^1.12.0",
     "pg": "^7.9.0",
     "typeorm": "^0.2.15"
   },
