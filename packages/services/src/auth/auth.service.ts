@@ -3,7 +3,6 @@ import { Injectable, Inject } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { JwtService } from '@nestjs/jwt'
 import { DurationObject } from 'luxon'
-import { Optional } from '@webok/core/lib/common/optional'
 import { IAuthService, IPasswordHelper } from '@webok/core/lib/auth'
 import {
   LoginRecordRepository,
@@ -31,11 +30,10 @@ export class AuthService implements IAuthService {
   ) {}
 
   async create ({ email, password }: CreateAuthData): Promise<Auth> {
-    const optionalUser = Optional.ofNullable(await this.userRepository.findOne({ email }))
-    if (optionalUser.isEmpty()) {
+    const user = await this.userRepository.findOne({ email })
+    if (!user) {
       throw new Error('Invalid email')
     }
-    const user: User = optionalUser.get()
     const isValidPassword = await this.passwordHelper.verifyPassword(password, user.passwordHash)
     if (!isValidPassword) {
       throw new Error('Invalid password')
@@ -54,11 +52,10 @@ export class AuthService implements IAuthService {
   }
 
   async refresh (id: number, { refreshToken }: ModifyAuthData): Promise<Auth> {
-    const optionalLoginRecord = Optional.ofNullable(await this.loginRecordRepository.findOne({ id }))
-    if (optionalLoginRecord.isEmpty()) {
+    const loginRecord = await this.loginRecordRepository.findOne({ id })
+    if (!loginRecord) {
       throw new Error('Login record not found')
     }
-    const loginRecord: LoginRecord = optionalLoginRecord.get()
     if (loginRecord.isExpired()) {
       await this.loginRecordRepository.remove(loginRecord)
       throw new Error('Expired refresh token')
@@ -78,12 +75,11 @@ export class AuthService implements IAuthService {
   }
 
   async remove (id: number, { refreshToken }: ModifyAuthData): Promise<void> {
-    const optionalLoginRecord = Optional.ofNullable(await this.loginRecordRepository.findOne({ id }))
-    if (optionalLoginRecord.isEmpty()) {
+    const loginRecord = await this.loginRecordRepository.findOne({ id })
+    if (!loginRecord) {
       // Do nothing if login record not found
       return
     }
-    const loginRecord: LoginRecord = optionalLoginRecord.get()
     if (loginRecord.isExpired()) {
       // Remove anyway if expired
       await this.loginRecordRepository.remove(loginRecord)

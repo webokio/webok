@@ -40,7 +40,10 @@ export class PageController {
   @ApiBadRequestResponse({})
   async get (@Param() { id }: ParamsWithId): Promise<Page> {
     const page = await this.pageService.get(id)
-    return page.orElseThrow(() => new NotFoundException())
+    if (!page) {
+      throw new NotFoundException()
+    }
+    return page
   }
 
   @Post()
@@ -56,7 +59,10 @@ export class PageController {
   @ApiBadRequestResponse({})
   async update (@Param() { id }: ParamsWithId, @Body() data: UpdatePageData): Promise<Page> {
     const page = await this.pageService.update(id, data)
-    return page.orElseThrow(() => new NotFoundException())
+    if (!page) {
+      throw new NotFoundException()
+    }
+    return page
   }
 
   @Delete(':id')
