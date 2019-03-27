@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { PassportModule } from '@nestjs/passport'
 import { Duration, DurationObject } from 'luxon'
 import config from 'config'
 import { LoginRecord, LoginRecordRepository } from '@webok/models/lib/auth'
 import { User, UserRepository } from '@webok/models/lib/user'
 import { AuthDtoMapper, AuthService, HashingService } from '@webok/services/lib/auth'
 import { AuthController } from './auth.controller'
+import { AuthStrategy } from './auth.strategy'
 
 interface AuthConfig {
   secretKey: string
@@ -18,6 +20,7 @@ const authConfig: AuthConfig = config.get<AuthConfig>('auth')
 
 @Module({
   imports: [
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secretOrPrivateKey: authConfig.secretKey,
       signOptions: {
@@ -32,6 +35,8 @@ const authConfig: AuthConfig = config.get<AuthConfig>('auth')
     AuthService,
     HashingService,
     { provide: 'config.auth.refreshTokenTTL', useValue: authConfig.refreshTokenTTL },
+    { provide: 'config.auth.secretKey', useValue: authConfig.secretKey },
+    AuthStrategy,
   ],
   exports: [HashingService],
   controllers: [AuthController],
