@@ -35,6 +35,7 @@ const authConfig: AuthConfig = config.get<AuthConfig>('auth')
     AuthService,
     HashingService,
     { provide: 'config.auth.refreshTokenTTL', useValue: authConfig.refreshTokenTTL },
+    { provide: 'config.auth.secretKey', useValue: authConfig.secretKey },
     AuthStrategy,
   ],
   exports: [HashingService],

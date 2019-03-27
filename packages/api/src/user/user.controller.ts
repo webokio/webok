@@ -3,6 +3,7 @@ import { ApiUseTags, ApiCreatedResponse, ApiBadRequestResponse, ApiOkResponse } 
 import { AuthGuard } from '@nestjs/passport'
 import { UserDto, CreateUserDto } from '@webok/core/lib/user'
 import { UserService } from '@webok/services/lib/user'
+import { AuthPayloadInterface } from '@webok/core/lib/auth'
 
 @Controller('users')
 @ApiUseTags('Users')
@@ -21,7 +22,8 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiOkResponse({ type: [UserDto] })
   async find (@Req() req: any): Promise<UserDto[]> {
-    const userDto: UserDto | undefined = await this.userService.get(req.user)
+    const authPayload = req.user as AuthPayloadInterface
+    const userDto: UserDto | undefined = await this.userService.get(authPayload.userId)
     if (!userDto) {
       return []
     }
