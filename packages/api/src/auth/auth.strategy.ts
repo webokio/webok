@@ -7,7 +7,7 @@ import { AuthPayloadInterface } from '@webok/core/lib/auth'
 export class AuthStrategy extends PassportStrategy(Strategy) {
   constructor (
     @Inject('config.auth.secretKey')
-    private readonly secretKey: string,
+    secretKey: string,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
