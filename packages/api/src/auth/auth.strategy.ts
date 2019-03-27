@@ -2,7 +2,7 @@ import { PassportStrategy } from '@nestjs/passport'
 import { Injectable } from '@nestjs/common'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import config from 'config'
-import { AuthPayloadDto } from '@webok/core/lib/auth'
+import { AuthPayloadInterface } from '@webok/core/lib/auth'
 
 interface AuthConfig {
   secretKey: string
@@ -19,10 +19,7 @@ export class AuthStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  validate (payload: AuthPayloadDto) {
-    if (!payload.userId) {
-      throw new Error('Invalid payload')
-    }
+  validate (payload: AuthPayloadInterface) {
     return payload.userId
   }
 }

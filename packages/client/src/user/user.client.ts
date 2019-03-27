@@ -9,4 +9,8 @@ export class UserClient {
   create (createUserDto: CreateUserDto): Promise<AxiosResponse<UserDto>> {
     return this.baseClient.post<UserDto>(this.basePath, createUserDto)
   }
+
+  find (): Promise<AxiosResponse<UserDto[]>> {
+    return this.baseClient.get<UserDto[]>(this.basePath)
+  }
 }
