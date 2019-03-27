@@ -2,7 +2,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { CreateElement } from 'vue'
 import { MetaInfo } from 'vue-meta'
-import { IPage } from '@webok/core/lib/page'
+import { PageDto } from '@webok/core/es6/page'
 import PageDetails from '../../components/page/page-details.vue'
 import PageEditForm from '../../components/page/page-edit-form.vue'
 
@@ -13,7 +13,7 @@ import PageEditForm from '../../components/page/page-edit-form.vue'
   },
 })
 export default class PagesDemoRoute extends Vue {
-  private readonly page: IPage = { id: 1, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-18T12:03:15.013Z' }
+  private readonly page = new PageDto({ id: 1, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-18T12:03:15.013Z' })
 
   head (): MetaInfo {
     return {

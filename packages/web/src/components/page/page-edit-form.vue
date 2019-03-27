@@ -1,13 +1,13 @@
 <script lang='tsx'>
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { CreateElement } from 'vue'
-import { IPage } from '@webok/core/lib/page'
+import { PageDto } from '@webok/core/es6/page'
 
 @Component({
   components: {},
 })
 export default class PageEditForm extends Vue {
-  @Prop(Object) readonly pageToEdit?: IPage
+  @Prop(Object) readonly pageToEdit?: PageDto
 
   submit () {
     console.log(this.pageToEdit)

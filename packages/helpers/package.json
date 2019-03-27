@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "repository": "https://github.com/webokio/webok/tree/master/packages/helpers",
   "scripts": {
-    "clean": "webok-dev clean",
-    "build": "webok-dev build",
+    "clean": "webok-dev clean es6",
+    "build:commonjs": "webok-dev build",
+    "build:es6": "webok-dev build --project tsconfig.es6.json",
+    "build": "npm run build:commonjs && npm run build:es6",
     "format": "webok-dev format",
     "postformat": "npm run tslint",
     "tslint": "webok-dev tslint",

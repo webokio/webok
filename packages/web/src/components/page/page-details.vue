@@ -1,7 +1,7 @@
 <script lang='tsx'>
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { CreateElement } from 'vue'
-import { IPage } from '@webok/core/lib/page'
+import { PageDto } from '@webok/core/es6/page'
 import FieldSection from '../common/field-section.vue'
 import FieldLabel from '../common/field-label.vue'
 import ExternalLink from '../common/external-link.vue'
@@ -16,7 +16,7 @@ import Datetime from '../common/datetime.vue'
   },
 })
 export default class PageDetails extends Vue {
-  @Prop({ type: Object, required: true }) readonly page!: IPage
+  @Prop({ type: Object, required: true }) readonly page!: PageDto
 
   render (h: CreateElement) {
     return (
