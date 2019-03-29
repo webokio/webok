@@ -31,6 +31,7 @@ export class AuthController {
       const authDto: AuthDto = await this.authService.create(createAuthDto)
       return authDto
     } catch (err) {
+      console.log(err)
       throw new UnauthorizedException('Invalid email or password')
     }
   }
@@ -44,6 +45,7 @@ export class AuthController {
       const authDto: AuthDto = await this.authService.refresh(authId, modifyAuthDto)
       return authDto
     } catch (err) {
+      console.log(err)
       throw new UnauthorizedException('Invalid refresh data')
     }
   }

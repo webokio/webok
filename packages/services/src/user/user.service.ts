@@ -21,4 +21,12 @@ export class UserService {
     const user: User = await this.userRepository.save(new User({ name, email, passwordHash }))
     return this.userDtoMapper.fromUser(user)
   }
+
+  async get (userId: number): Promise<UserDto | undefined> {
+    const user: User | undefined = await this.userRepository.findOne({ id: userId })
+    if (!user) {
+      return
+    }
+    return this.userDtoMapper.fromUser(user)
+  }
 }
