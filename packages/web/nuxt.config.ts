@@ -44,6 +44,7 @@ export const build = {
     },
   },
   extend (config: any) {
-    config.resolve.modules.unshift(path.join(__dirname, 'src/mocks'))
-  }
+    // Allow to mock dependencies
+    config.resolve.modules.unshift(path.join(__dirname, 'mock_dependencies'))
+  },
 }

@@ -1,7 +1,7 @@
 export function ApiModelProperty () {
-  return function (target) {}
+  return function () {}
 }
 
 export function ApiModelPropertyOptional () {
-  return function (target) {}
+  return function () {}
 }

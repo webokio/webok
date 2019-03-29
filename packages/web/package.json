@@ -7,7 +7,7 @@
     "build:production": "nuxt build",
     "format": "webok-dev format nuxt.config.ts",
     "postformat": "npm run tslint",
-    "tslint": "webok-dev tslint",
+    "tslint": "webok-dev tslint --project tsconfig.lint.json",
     "publish:prepare": "npm run clean",
     "dev": "nuxt"
   },
@@ -15,6 +15,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@webok/client": "^0.0.0",
     "@webok/core": "^0.0.0",
     "@webok/helpers": "^0.0.0",
     "luxon": "^1.12.0",

@@ -5,8 +5,11 @@ import { DateTime } from 'luxon'
 
 @Component({})
 export default class Datetime extends Vue {
-  @Prop({ type: String, required: true }) readonly value!: string
-  @Prop({ type: Boolean, default: false }) readonly dateOnly!: string
+  @Prop({ type: String, required: true })
+  private readonly value!: string
+
+  @Prop({ type: Boolean, default: false })
+  private readonly dateOnly!: string
 
   get formattedValue () {
     const format = this.dateOnly ? DateTime.DATE_MED : DateTime.DATETIME_MED

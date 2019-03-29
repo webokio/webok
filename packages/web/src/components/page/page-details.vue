@@ -16,22 +16,23 @@ import Datetime from '../common/datetime.vue'
   },
 })
 export default class PageDetails extends Vue {
-  @Prop({ type: Object, required: true }) readonly page!: PageDto
+  @Prop({ type: Object, required: true })
+  private readonly pageDto!: PageDto
 
   render (h: CreateElement) {
     return (
       <div>
         <field-section>
           <field-label>Name</field-label>
-          <div>{this.page.name}</div>
+          <div>{this.pageDto.name}</div>
         </field-section>
         <field-section>
           <field-label>Url</field-label>
-          <div><external-link to={this.page.url}/></div>
+          <div><external-link to={this.pageDto.url}/></div>
         </field-section>
         <field-section>
           <field-label>Created at</field-label>
-          <div><datetime value={this.page.createdAt}/></div>
+          <div><datetime value={this.pageDto.createdAt}/></div>
         </field-section>
       </div>
     )

@@ -5,9 +5,9 @@ export class CreatePageDto {
   @ApiModelProperty()
   @IsString()
   @MinLength(3)
-  readonly name!: string
+  name: string = ''
 
   @ApiModelProperty()
   @IsUrl()
-  readonly url!: string
+  url: string = ''
 }
