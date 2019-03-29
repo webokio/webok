@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { Page, PageRepository } from '@webok/models/lib/page'
+import { User, UserRepository } from '@webok/models/lib/user'
 import { nowAsString } from '@webok/helpers/lib/datetime.helper'
 import { PageDtoMapper } from './page-dto.mapper'
 
@@ -10,6 +11,8 @@ export class PageService {
   constructor (
     @InjectRepository(PageRepository)
     private readonly pageRepository: PageRepository,
+    @InjectRepository(UserRepository)
+    private readonly userRepository: UserRepository,
     private readonly pageDtoMapper: PageDtoMapper,
   ) {}
 
@@ -18,9 +21,13 @@ export class PageService {
     return pages.map(this.pageDtoMapper.fromPage)
   }
 
-  async create (createPageDto: CreatePageDto): Promise<PageDto> {
+  async create (createPageDto: CreatePageDto, userId: number): Promise<PageDto | undefined> {
+    const owner: User | undefined = await this.userRepository.findOne(userId)
+    if (!owner) {
+      return
+    }
     const { name, url } = createPageDto
-    const page: Page = await this.pageRepository.save(new Page({ name, url, createdAt: nowAsString() }))
+    const page: Page = await this.pageRepository.save(new Page({ name, url, createdAt: nowAsString(), owner }))
     return this.pageDtoMapper.fromPage(page)
   }
 

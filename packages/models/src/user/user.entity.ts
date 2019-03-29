@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import { Page } from '../page/page.entity'
 
 export interface UserOptions {
   readonly name: string
@@ -19,6 +20,9 @@ export class User {
 
   @Column()
   passwordHash!: string
+
+  @OneToMany((type) => Page, (page) => page.owner)
+  pages!: Page[]
 
   constructor (userOptions?: UserOptions) {
     if (userOptions) {

@@ -9,6 +9,8 @@ import {
   Param,
   Body,
   NotFoundException,
+  UseGuards,
+  Req,
 } from '@nestjs/common'
 import {
   ApiUseTags,
@@ -18,10 +20,13 @@ import {
   ApiBadRequestResponse,
   ApiNoContentResponse,
   ApiModelProperty,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 import { IsNumberString } from 'class-validator'
 import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { PageService } from '@webok/services/lib/page'
+import { AuthGuard } from '@nestjs/passport'
+import { AuthPayloadInterface } from '@webok/core/lib/auth'
 
 class PageIdParam {
   @ApiModelProperty()
@@ -42,10 +47,16 @@ export class PageController {
   }
 
   @Post()
+  @UseGuards(AuthGuard())
   @ApiCreatedResponse({ type: PageDto })
   @ApiBadRequestResponse({})
-  async create (@Body() createPageDto: CreatePageDto): Promise<PageDto> {
-    const pageDto: PageDto = await this.pageService.create(createPageDto)
+  @ApiUnauthorizedResponse({})
+  async create (@Body() createPageDto: CreatePageDto, @Req() req: any): Promise<PageDto> {
+    const authPayload = req.user as AuthPayloadInterface
+    const pageDto: PageDto | undefined = await this.pageService.create(createPageDto, authPayload.userId)
+    if (!pageDto) {
+      throw new NotFoundException()
+    }
     return pageDto
   }
 
