@@ -20,7 +20,7 @@
     "@nestjs/typeorm": "^6.0.0",
     "config": "^3.0.1",
     "pg": "^7.9.0",
-    "typeorm": "^0.2.15"
+    "typeorm": "^0.2.16"
   },
   "devDependencies": {
     "@types/config": "^0.0.34",

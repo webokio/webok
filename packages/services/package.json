@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/common": "^6.0.2",
+    "@nestjs/common": "^6.0.4",
     "@nestjs/jwt": "^6.0.0",
     "@nestjs/typeorm": "^6.0.0",
     "@webok/core": "^0.0.0",
