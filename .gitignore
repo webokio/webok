@@ -167,6 +167,7 @@ $RECYCLE.BIN/
 
 packages/**/package-lock.json
 packages/**/lib
+packages/**/es6
 
 tools/**/package-lock.json
 tools/**/lib
