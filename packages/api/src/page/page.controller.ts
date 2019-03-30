@@ -11,6 +11,7 @@ import {
   NotFoundException,
   UseGuards,
   Req,
+  BadRequestException,
 } from '@nestjs/common'
 import {
   ApiUseTags,
@@ -26,7 +27,7 @@ import { IsNumberString } from 'class-validator'
 import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { PageService } from '@webok/services/lib/page'
 import { AuthGuard } from '@nestjs/passport'
-import { AuthPayloadInterface } from '@webok/core/lib/auth'
+import { RequestInterface } from '../auth/auth-request.interface'
 
 class PageIdParam {
   @ApiModelProperty()
@@ -51,13 +52,14 @@ export class PageController {
   @ApiCreatedResponse({ type: PageDto })
   @ApiBadRequestResponse({})
   @ApiUnauthorizedResponse({})
-  async create (@Body() createPageDto: CreatePageDto, @Req() req: any): Promise<PageDto> {
-    const authPayload = req.user as AuthPayloadInterface
-    const pageDto: PageDto | undefined = await this.pageService.create(createPageDto, authPayload.userId)
-    if (!pageDto) {
-      throw new NotFoundException()
+  async create (@Req() req: RequestInterface, @Body() createPageDto: CreatePageDto): Promise<PageDto> {
+    try {
+      const pageDto: PageDto = await this.pageService.create(req.user.userId, createPageDto)
+      return pageDto
+    } catch (err) {
+      console.log(err)
+      throw new BadRequestException('Invalid page')
     }
-    return pageDto
   }
 
   @Get(':pageId')

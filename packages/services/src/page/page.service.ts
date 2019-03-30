@@ -21,13 +21,13 @@ export class PageService {
     return pages.map(this.pageDtoMapper.fromPage)
   }
 
-  async create (createPageDto: CreatePageDto, userId: number): Promise<PageDto | undefined> {
-    const owner: User | undefined = await this.userRepository.findOne(userId)
+  async create (ownerId: number, createPageDto: CreatePageDto): Promise<PageDto> {
+    const owner: User | undefined = await this.userRepository.findOne({ id: ownerId })
     if (!owner) {
-      return
+      throw new Error('User not found')
     }
     const { name, url } = createPageDto
-    const page: Page = await this.pageRepository.save(new Page({ name, url, createdAt: nowAsString(), owner }))
+    const page: Page = await this.pageRepository.save(new Page({ name, url, owner, createdAt: nowAsString() }))
     return this.pageDtoMapper.fromPage(page)
   }
 
