@@ -17,21 +17,24 @@ import FormCard from '../common/form-card.vue'
   }
 })
 export default class PageEditForm extends Vue {
-  private readonly updatePageDto!: UpdatePageDto
-
   @Prop({ type: Object, required: true })
   private readonly pageDto!: PageDto
 
+  private readonly updatePageDto!: UpdatePageDto
+
   @Emit('submit')
-  submit () {
+  private submit () {
     return this.updatePageDto
   }
 
-  submitIfEnter (event: KeyboardEvent) {
+  private submitIfEnter (event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.submit()
     }
   }
+
+  @Emit('cancel')
+  private cancel () {}
 
   render (h: CreateElement) {
     return (
@@ -54,6 +57,10 @@ export default class PageEditForm extends Vue {
           />
         </v-form>
         <template slot='actions'>
+          <v-btn
+            flat
+            on={{ click: this.cancel }}
+          >Cancel</v-btn>
           <v-btn
             color='primary'
             on={{ click: this.submit }}

@@ -13,15 +13,18 @@ export default class PageNewForm extends Vue {
   private readonly createPageDto = new CreatePageDto()
 
   @Emit('submit')
-  submit () {
+  private submit () {
     return this.createPageDto
   }
 
-  submitIfEnter (event: KeyboardEvent) {
+  private submitIfEnter (event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.submit()
     }
   }
+
+  @Emit('cancel')
+  private cancel () {}
 
   render (h: CreateElement) {
     return (
@@ -44,6 +47,10 @@ export default class PageNewForm extends Vue {
           />
         </v-form>
         <template slot='actions'>
+          <v-btn
+            flat
+            on={{ click: this.cancel }}
+          >Cancel</v-btn>
           <v-btn
             color='primary'
             on={{ click: this.submit }}
