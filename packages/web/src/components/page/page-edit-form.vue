@@ -1,19 +1,30 @@
 <script lang='tsx'>
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { CreateElement } from 'vue'
-import { CreatePageDto } from '@webok/core/es6/page'
+import { PageDto, UpdatePageDto } from '@webok/core/es6/page'
 import FormCard from '../common/form-card.vue'
 
-@Component({
+@Component<PageEditForm>({
   components: {
     FormCard,
   },
+  data () {
+    const { url, name } = this.pageDto
+    const updatePageDto: UpdatePageDto = { url, name }
+    return {
+      updatePageDto,
+    }
+  }
 })
-export default class CreatePageForm extends Vue {
-  private readonly createPageDto = new CreatePageDto()
+export default class PageEditForm extends Vue {
+  private readonly updatePageDto!: UpdatePageDto
 
+  @Prop({ type: Object, required: true })
+  private readonly pageDto!: PageDto
+
+  @Emit('submit')
   submit () {
-    console.log(this.createPageDto)
+    return this.updatePageDto
   }
 
   submitIfEnter (event: KeyboardEvent) {
@@ -28,17 +39,17 @@ export default class CreatePageForm extends Vue {
         <div
           slot='title'
           class='headline'
-        >Create Page</div>
+        >Edit Page</div>
         <v-form
           class='pt-3'
           nativeOn={{ keyup: this.submitIfEnter }}
         >
           <v-text-field
-            v-model={this.createPageDto.name}
+            v-model={this.updatePageDto.name}
             label='Name'
           />
           <v-text-field
-            v-model={this.createPageDto.url}
+            v-model={this.updatePageDto.url}
             label='Url'
           />
         </v-form>

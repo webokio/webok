@@ -2,15 +2,13 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { CreateElement } from 'vue'
 import { PageDto } from '@webok/core/es6/page'
-import FieldSection from '../common/field-section.vue'
-import FieldLabel from '../common/field-label.vue'
+import SectionBlock from '../common/section-block.vue'
 import ExternalLink from '../common/external-link.vue'
 import Datetime from '../common/datetime.vue'
 
 @Component({
   components: {
-    FieldSection,
-    FieldLabel,
+    SectionBlock,
     ExternalLink,
     Datetime,
   },
@@ -22,18 +20,15 @@ export default class PageDetails extends Vue {
   render (h: CreateElement) {
     return (
       <div>
-        <field-section>
-          <field-label>Name</field-label>
+        <section-block title='Name'>
           <div>{this.pageDto.name}</div>
-        </field-section>
-        <field-section>
-          <field-label>Url</field-label>
+        </section-block>
+        <section-block title='Url'>
           <div><external-link to={this.pageDto.url}/></div>
-        </field-section>
-        <field-section>
-          <field-label>Created at</field-label>
+        </section-block>
+        <section-block title='Created At'>
           <div><datetime value={this.pageDto.createdAt}/></div>
-        </field-section>
+        </section-block>
       </div>
     )
   }

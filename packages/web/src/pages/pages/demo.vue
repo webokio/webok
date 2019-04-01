@@ -2,14 +2,16 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { CreateElement } from 'vue'
 import { MetaInfo } from 'vue-meta'
-import { PageDto } from '@webok/core/es6/page'
+import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/es6/page'
 import PageDetails from '../../components/page/page-details.vue'
-import CreatePageForm from '../../components/page/create-page-form.vue'
+import PageNewForm from '../../components/page/page-new-form.vue'
+import PageEditForm from '../../components/page/page-edit-form.vue'
 
 @Component({
   components: {
     PageDetails,
-    CreatePageForm,
+    PageNewForm,
+    PageEditForm,
   },
 })
 export default class PagesDemoRoute extends Vue {
@@ -21,22 +23,30 @@ export default class PagesDemoRoute extends Vue {
     }
   }
 
+  createPage (createPageDto: CreatePageDto) {
+    console.log('createPage', { ...createPageDto })
+  }
+
+  updatePage (updatePageDto: UpdatePageDto) {
+    console.log('updatePage', { ...updatePageDto })
+  }
+
   render (h: CreateElement) {
     return (
       <div class='ma-3'>
         <div class='display-3'>Pages Demo</div>
         <div class='mb-4'>
-          <div class='display-1'>/create</div>
-          <create-page-form/>
-        </div>
-        <div class='mb-4'>
-          <div class='display-1'>/show/:pageId</div>
+          <div class='display-1'>/:pageId</div>
           <page-details page-dto={this.pageDto}/>
         </div>
-        {/*<div class='mb-4'>
-          <div class='display-1'>/edit/:pageId</div>
-          <page-edit-form pageToEdit={this.page}/>
-        </div>*/}
+        <div class='mb-4'>
+          <div class='display-1'>/new</div>
+          <page-new-form on={{ submit: this.createPage }}/>
+        </div>
+        <div class='mb-4'>
+          <div class='display-1'>/:pageId/edit</div>
+          <page-edit-form page-dto={this.pageDto} on={{ submit: this.updatePage }}/>
+        </div>
       </div>
     )
   }
