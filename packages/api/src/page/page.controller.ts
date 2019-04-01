@@ -28,6 +28,7 @@ import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { PageService } from '@webok/services/lib/page'
 import { AuthGuard } from '@nestjs/passport'
 import { RequestInterface } from '../auth/auth-request.interface'
+import { OwnerGuard } from './page.guard'
 
 class PageIdParam {
   @ApiModelProperty()
@@ -41,9 +42,10 @@ export class PageController {
   constructor (private readonly pageService: PageService) {}
 
   @Get()
+  @UseGuards(AuthGuard())
   @ApiOkResponse({ type: [PageDto] })
-  async find (): Promise<PageDto[]> {
-    const pageDtos: PageDto[] = await this.pageService.find()
+  async find (@Req() req: RequestInterface): Promise<PageDto[]> {
+    const pageDtos: PageDto[] = await this.pageService.find(req.user.userId)
     return pageDtos
   }
 
@@ -63,11 +65,12 @@ export class PageController {
   }
 
   @Get(':pageId')
+  @UseGuards(AuthGuard())
   @ApiOkResponse({ type: PageDto })
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
-  async get (@Param() { pageId }: PageIdParam): Promise<PageDto> {
-    const pageDto: PageDto | undefined = await this.pageService.get(pageId)
+  async get (@Req() req: RequestInterface, @Param() { pageId }: PageIdParam): Promise<PageDto> {
+    const pageDto: PageDto | undefined = await this.pageService.get(req.user.userId, pageId)
     if (!pageDto) {
       throw new NotFoundException()
     }
@@ -75,6 +78,7 @@ export class PageController {
   }
 
   @Patch(':pageId')
+  @UseGuards(AuthGuard(), OwnerGuard)
   @ApiOkResponse({ type: PageDto })
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
@@ -87,6 +91,7 @@ export class PageController {
   }
 
   @Delete(':pageId')
+  @UseGuards(AuthGuard(), OwnerGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiNoContentResponse({})
   @ApiBadRequestResponse({})

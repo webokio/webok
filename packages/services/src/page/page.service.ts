@@ -16,8 +16,12 @@ export class PageService {
     private readonly pageDtoMapper: PageDtoMapper,
   ) {}
 
-  async find (): Promise<PageDto[]> {
-    const pages: Page[] = await this.pageRepository.find()
+  async find (ownerId: number): Promise<PageDto[]> {
+    const owner: User | undefined = await this.userRepository.findOne({ id: ownerId })
+    if (!owner) {
+      return []
+    }
+    const pages: Page[] = await this.pageRepository.find({ where: { owner } })
     return pages.map(this.pageDtoMapper.fromPage)
   }
 
@@ -31,8 +35,12 @@ export class PageService {
     return this.pageDtoMapper.fromPage(page)
   }
 
-  async get (pageId: number): Promise<PageDto | undefined> {
-    const page: Page | undefined = await this.pageRepository.findOne({ id: pageId })
+  async get (ownerId: number, pageId: number): Promise<PageDto | undefined> {
+    const owner: User | undefined = await this.userRepository.findOne({ id: ownerId })
+    if (!owner) {
+      return
+    }
+    const page: Page | undefined = await this.pageRepository.findOne({ where: { id: pageId, owner } })
     if (!page) {
       return
     }
