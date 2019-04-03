@@ -6,9 +6,12 @@ import { CreateElement } from 'vue'
 export default class FormCard extends Vue {
   render (h: CreateElement) {
     return (
-      <v-card raised>
+      <v-card
+        class="mt-2"
+        raised
+      >
         <v-card-title
-          class='my-2 pb-0'
+          class='pb-0'
           primary-title
         >
           {this.$slots.title}
