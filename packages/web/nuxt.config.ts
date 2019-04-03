@@ -1,5 +1,4 @@
 import path from 'path'
-import sass from 'sass'
 
 export const rootDir = __dirname
 
@@ -38,11 +37,6 @@ export const head = {
 }
 
 export const build = {
-  loaders: {
-    scss: {
-      implementation: sass,
-    },
-  },
   extend (config: any) {
     // Allow to mock dependencies
     config.resolve.modules.unshift(path.join(__dirname, 'mock_dependencies'))
