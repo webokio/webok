@@ -1,6 +1,6 @@
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { PageDto, UpdatePageDto } from '@webok/core/es6/page'
-import { FormCard } from '../common/form-card'
+import { FormCard } from '../common'
 
 @Component<PageEditForm>({
   components: {
