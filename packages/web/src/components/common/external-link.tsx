@@ -1,20 +1,25 @@
-<script lang='tsx'>
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { CreateElement } from 'vue'
+import { style } from 'typestyle'
+
+const Styles = {
+  link: style({
+    textDecoration: 'none',
+  }),
+}
 
 @Component({})
-export default class ExternalLink extends Vue {
+export class ExternalLink extends Vue {
   @Prop({ type: String, required: true })
   private readonly to!: string
 
   @Prop(String)
   private readonly label!: string
 
-  render (h: CreateElement) {
+  render () {
     return (
       <a
         href={this.to}
-        class='link'
+        class={Styles.link}
         target='_blank'
       >
         <v-icon
@@ -25,10 +30,3 @@ export default class ExternalLink extends Vue {
     )
   }
 }
-</script>
-
-<style lang="scss" scoped>
-.link {
-  text-decoration: none;
-}
-</style>
