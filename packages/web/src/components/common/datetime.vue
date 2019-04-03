@@ -11,7 +11,7 @@ export default class Datetime extends Vue {
   @Prop({ type: Boolean, default: false })
   private readonly dateOnly!: string
 
-  get formattedValue () {
+  private get formattedValue () {
     const format = this.dateOnly ? DateTime.DATE_MED : DateTime.DATETIME_MED
     return DateTime.fromISO(this.value).setLocale('en-US').toLocaleString(format)
   }
