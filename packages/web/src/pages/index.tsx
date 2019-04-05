@@ -1,6 +1,4 @@
-<script lang="tsx">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { CreateElement } from 'vue'
 import { MetaInfo } from 'vue-meta'
 
 @Component({})
@@ -13,7 +11,7 @@ export default class HomeRoute extends Vue {
     }
   }
 
-  render (h: CreateElement) {
+  render () {
     return (
       <div class='ma-3'>
         <h1 class='display-3'>Welcome to {this.appName}!</h1>
@@ -24,4 +22,3 @@ export default class HomeRoute extends Vue {
     )
   }
 }
-</script>

@@ -1,12 +1,7 @@
-<script lang='tsx'>
 import { Component, Vue } from 'nuxt-property-decorator'
-import { CreateElement } from 'vue'
 import { MetaInfo } from 'vue-meta'
 import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/es6/page'
-import PageDetails from '../../components/page/page-details.vue'
-import PageNewForm from '../../components/page/page-new-form.vue'
-import PageEditForm from '../../components/page/page-edit-form.vue'
-import PageDeleteButton from '../../components/page/page-delete-button.vue'
+import { PageDetails, PageNewForm, PageEditForm, PageDeleteButton } from '../../components/page'
 
 @Component({
   components: {
@@ -41,7 +36,7 @@ export default class PagesDemoRoute extends Vue {
     console.log('cancel')
   }
 
-  render (h: CreateElement) {
+  render () {
     return (
       <div class='ma-3'>
         <div class='display-3 mb-4'>Pages Demo</div>
@@ -59,6 +54,7 @@ export default class PagesDemoRoute extends Vue {
         <div class='mb-4'>
           <div class='display-1'>/new</div>
           <page-new-form
+            class='mt-2'
             on={{
               submit: this.createPage,
               cancel: this.cancel,
@@ -68,6 +64,7 @@ export default class PagesDemoRoute extends Vue {
           <div class='display-1'>/:pageId/edit</div>
           <page-edit-form
             page-dto={this.pageDto}
+            class='mt-2'
             on={{
               submit: this.updatePage,
               cancel: this.cancel,
@@ -78,4 +75,3 @@ export default class PagesDemoRoute extends Vue {
     )
   }
 }
-</script>

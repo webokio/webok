@@ -1,15 +1,10 @@
-<script lang='tsx'>
 import { Component, Vue } from 'vue-property-decorator'
-import { CreateElement } from 'vue'
 
 @Component({})
-export default class FormCard extends Vue {
-  render (h: CreateElement) {
+export class FormCard extends Vue {
+  render () {
     return (
-      <v-card
-        class="mt-2"
-        raised
-      >
+      <v-card raised>
         <v-card-title
           class='pb-0'
           primary-title
@@ -27,4 +22,3 @@ export default class FormCard extends Vue {
     )
   }
 }
-</script>
