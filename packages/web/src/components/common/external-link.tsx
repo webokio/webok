@@ -1,11 +1,4 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { style } from 'typestyle'
-
-const Styles = {
-  link: style({
-    textDecoration: 'none',
-  }),
-}
 
 @Component({})
 export class ExternalLink extends Vue {
@@ -19,7 +12,7 @@ export class ExternalLink extends Vue {
     return (
       <a
         href={this.to}
-        class={Styles.link}
+        class='no-underline'
         target='_blank'
       >
         <v-icon
