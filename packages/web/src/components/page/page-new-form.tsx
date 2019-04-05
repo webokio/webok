@@ -1,15 +1,13 @@
-<script lang='tsx'>
-import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-import { CreateElement } from 'vue'
+import { Component, Vue, Emit } from 'vue-property-decorator'
 import { CreatePageDto } from '@webok/core/es6/page'
-import FormCard from '../common/form-card.vue'
+import { FormCard } from '../common'
 
 @Component({
   components: {
     FormCard,
   },
 })
-export default class PageNewForm extends Vue {
+export class PageNewForm extends Vue {
   private readonly createPageDto = new CreatePageDto()
 
   @Emit('submit')
@@ -26,7 +24,7 @@ export default class PageNewForm extends Vue {
   @Emit('cancel')
   private cancel () {}
 
-  render (h: CreateElement) {
+  render () {
     return (
       <form-card>
         <div
@@ -60,4 +58,3 @@ export default class PageNewForm extends Vue {
     )
   }
 }
-</script>

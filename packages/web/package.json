@@ -26,10 +26,7 @@
   "devDependencies": {
     "@nuxt/typescript": "^2.5.1",
     "@types/luxon": "^1.11.1",
-    "@types/sass": "^1.16.0",
     "@webok/dev": "^0.0.0",
-    "nuxt": "^2.5.1",
-    "sass": "^1.17.3",
-    "sass-loader": "^7.1.0"
+    "nuxt": "^2.5.1"
   }
 }

@@ -1,10 +1,6 @@
-<script lang='tsx'>
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { CreateElement } from 'vue'
 import { PageDto } from '@webok/core/es6/page'
-import SectionBlock from '../common/section-block.vue'
-import ExternalLink from '../common/external-link.vue'
-import Datetime from '../common/datetime.vue'
+import { SectionBlock, ExternalLink, Datetime } from '../common'
 
 @Component({
   components: {
@@ -13,11 +9,11 @@ import Datetime from '../common/datetime.vue'
     Datetime,
   },
 })
-export default class PageDetails extends Vue {
+export class PageDetails extends Vue {
   @Prop({ type: Object, required: true })
   private readonly pageDto!: PageDto
 
-  render (h: CreateElement) {
+  render () {
     return (
       <div>
         <section-block title='Name'>
@@ -33,4 +29,3 @@ export default class PageDetails extends Vue {
     )
   }
 }
-</script>

@@ -1,8 +1,6 @@
-<script lang='tsx'>
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-import { CreateElement } from 'vue'
 import { PageDto, UpdatePageDto } from '@webok/core/es6/page'
-import FormCard from '../common/form-card.vue'
+import { FormCard } from '../common'
 
 @Component<PageEditForm>({
   components: {
@@ -14,9 +12,9 @@ import FormCard from '../common/form-card.vue'
     return {
       updatePageDto,
     }
-  }
+  },
 })
-export default class PageEditForm extends Vue {
+export class PageEditForm extends Vue {
   @Prop({ type: Object, required: true })
   private readonly pageDto!: PageDto
 
@@ -36,7 +34,7 @@ export default class PageEditForm extends Vue {
   @Emit('cancel')
   private cancel () {}
 
-  render (h: CreateElement) {
+  render () {
     return (
       <form-card>
         <div
@@ -70,4 +68,3 @@ export default class PageEditForm extends Vue {
     )
   }
 }
-</script>

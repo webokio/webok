@@ -1,5 +1,4 @@
 import path from 'path'
-import sass from 'sass'
 
 export const rootDir = __dirname
 
@@ -11,7 +10,7 @@ export const server = {
 
 export const plugins = [path.join(__dirname, 'src/plugins/vuetify.ts')]
 
-export const css = ['vuetify/dist/vuetify.css']
+export const css = ['vuetify/dist/vuetify.css', path.join(__dirname, 'src/assets/common.css')]
 
 export const head = {
   titleTemplate: (title: string): string => {
@@ -38,11 +37,7 @@ export const head = {
 }
 
 export const build = {
-  loaders: {
-    scss: {
-      implementation: sass,
-    },
-  },
+  extractCSS: true,
   extend (config: any) {
     // Allow to mock dependencies
     config.resolve.modules.unshift(path.join(__dirname, 'mock_dependencies'))
