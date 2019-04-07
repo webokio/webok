@@ -7,7 +7,7 @@ import { FormCard } from '../common'
     FormCard,
   },
   data () {
-    const { url, name } = this.pageDto
+    const { url, name } = this.page
     const updatePageDto: UpdatePageDto = { url, name }
     return {
       updatePageDto,
@@ -16,7 +16,7 @@ import { FormCard } from '../common'
 })
 export class PageEditForm extends Vue {
   @Prop({ type: Object, required: true })
-  private readonly pageDto!: PageDto
+  private readonly page!: PageDto
 
   private readonly updatePageDto!: UpdatePageDto
 
@@ -40,7 +40,9 @@ export class PageEditForm extends Vue {
         <div
           slot='title'
           class='headline'
-        >Edit Page</div>
+        >
+          Edit Page
+        </div>
         <v-form
           class='pt-3'
           nativeOn={{ keyup: this.submitIfEnter }}
@@ -58,11 +60,15 @@ export class PageEditForm extends Vue {
           <v-btn
             flat
             on={{ click: this.cancel }}
-          >Cancel</v-btn>
+          >
+            Cancel
+          </v-btn>
           <v-btn
             color='primary'
             on={{ click: this.submit }}
-          >Save</v-btn>
+          >
+            Save
+          </v-btn>
         </template>
       </form-card>
     )

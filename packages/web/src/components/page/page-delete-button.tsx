@@ -9,7 +9,7 @@ import { FormCard } from '../common'
 })
 export class PageDeleteButton extends Vue {
   @Prop({ type: Object, required: true })
-  private readonly pageDto!: PageDto
+  private readonly page!: PageDto
 
   private deletingPage: boolean = false
 
@@ -20,7 +20,7 @@ export class PageDeleteButton extends Vue {
   @Emit('submit')
   private submit () {
     this.deletingPage = false
-    return this.pageDto
+    return this.page
   }
 
   @Emit('cancel')
@@ -39,24 +39,32 @@ export class PageDeleteButton extends Vue {
           slot='activator'
           color='error'
           flat
-        >Delete</v-btn>
+        >
+          Delete
+        </v-btn>
         <form-card>
           <div
             slot='title'
             class='headline'
-          >Delete Page</div>
+          >
+            Delete Page
+          </div>
           <p class='subheading mt-3'>
-            Are you sure you want to delete the page '{this.pageDto.name}'?
+            Are you sure you want to delete the page '{this.page.name}'?
           </p>
           <template slot='actions'>
             <v-btn
               flat
               on={{ click: this.cancel }}
-            >Cancel</v-btn>
+            >
+              Cancel
+            </v-btn>
             <v-btn
               color='error'
               on={{ click: this.submit }}
-            >Delete</v-btn>
+            >
+              Delete
+            </v-btn>
           </template>
         </form-card>
       </v-dialog>

@@ -30,7 +30,9 @@ export class PageNewForm extends Vue {
         <div
           slot='title'
           class='headline'
-        >New Page</div>
+        >
+          New Page
+        </div>
         <v-form
           class='pt-3'
           nativeOn={{ keyup: this.submitIfEnter }}
@@ -48,11 +50,15 @@ export class PageNewForm extends Vue {
           <v-btn
             flat
             on={{ click: this.cancel }}
-          >Cancel</v-btn>
+          >
+            Cancel
+          </v-btn>
           <v-btn
             color='primary'
             on={{ click: this.submit }}
-          >Save</v-btn>
+          >
+            Save
+          </v-btn>
         </template>
       </form-card>
     )
