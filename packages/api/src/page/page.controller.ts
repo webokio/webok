@@ -48,7 +48,7 @@ class PageOwnerGuard implements CanActivate {
     const { pageId } = request.params as PageIdParam
     const pageDto: PageDto | undefined = await this.pageService.get(pageId)
     if (!pageDto) {
-      return false
+      throw new NotFoundException()
     }
     return pageDto.owner.id === request.user.userId
   }

@@ -25,8 +25,8 @@ export class PageService {
         query.owner = await this.userRepository.findOne({ id: findPagesDto.ownerId })
       }
     }
-    const pages: Page[] = await this.pageRepository.find({ where: query })
-    return pages.map(this.pageDtoMapper.fromPage)
+    const pages: Page[] = await this.findAll(query)
+    return pages.map((page) => this.pageDtoMapper.fromPage(page))
   }
 
   async create (createPageDto: CreatePageDto, ownerId: number): Promise<PageDto> {
@@ -40,7 +40,7 @@ export class PageService {
   }
 
   async get (pageId: number): Promise<PageDto | undefined> {
-    const page: Page | undefined = await this.pageRepository.findOne({ where: { id: pageId } })
+    const page: Page | undefined = await this.findOne({ id: pageId })
     if (!page) {
       return
     }
@@ -48,7 +48,7 @@ export class PageService {
   }
 
   async update (pageId: number, updatePageDto: UpdatePageDto): Promise<PageDto | undefined> {
-    const pageToUpdate: Page | undefined = await this.pageRepository.findOne({ id: pageId })
+    const pageToUpdate: Page | undefined = await this.findOne({ id: pageId })
     if (!pageToUpdate) {
       return
     }
@@ -67,11 +67,19 @@ export class PageService {
   }
 
   async remove (pageId: number): Promise<PageDto | undefined> {
-    const pageToRemove: Page | undefined = await this.pageRepository.findOne({ id: pageId })
+    const pageToRemove: Page | undefined = await this.findOne({ id: pageId })
     if (!pageToRemove) {
       return
     }
     await this.pageRepository.remove(pageToRemove)
     return this.pageDtoMapper.fromPage(pageToRemove)
+  }
+
+  private findAll (query: FindConditions<Page>): Promise<Page[]> {
+    return this.pageRepository.find({ where: query, relations: ['owner'] })
+  }
+
+  private findOne (query: FindConditions<Page>): Promise<Page | undefined> {
+    return this.pageRepository.findOne({ where: query, relations: ['owner'] })
   }
 }
