@@ -39,12 +39,16 @@ export class PageDeleteButton extends Vue {
           slot='activator'
           color='error'
           flat
-        >Delete</v-btn>
+        >
+          Delete
+        </v-btn>
         <form-card>
           <div
             slot='title'
             class='headline'
-          >Delete Page</div>
+          >
+            Delete Page
+          </div>
           <p class='subheading mt-3'>
             Are you sure you want to delete the page '{this.pageDto.name}'?
           </p>
@@ -52,11 +56,15 @@ export class PageDeleteButton extends Vue {
             <v-btn
               flat
               on={{ click: this.cancel }}
-            >Cancel</v-btn>
+            >
+              Cancel
+            </v-btn>
             <v-btn
               color='error'
               on={{ click: this.submit }}
-            >Delete</v-btn>
+            >
+              Delete
+            </v-btn>
           </template>
         </form-card>
       </v-dialog>

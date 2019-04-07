@@ -58,7 +58,8 @@ export default class PagesDemoRoute extends Vue {
             on={{
               submit: this.createPage,
               cancel: this.cancel,
-            }}/>
+            }}
+          />
         </div>
         <div class='mb-4'>
           <div class='display-1'>/:pageId/edit</div>

@@ -40,7 +40,9 @@ export class PageEditForm extends Vue {
         <div
           slot='title'
           class='headline'
-        >Edit Page</div>
+        >
+          Edit Page
+        </div>
         <v-form
           class='pt-3'
           nativeOn={{ keyup: this.submitIfEnter }}
@@ -58,11 +60,15 @@ export class PageEditForm extends Vue {
           <v-btn
             flat
             on={{ click: this.cancel }}
-          >Cancel</v-btn>
+          >
+            Cancel
+          </v-btn>
           <v-btn
             color='primary'
             on={{ click: this.submit }}
-          >Save</v-btn>
+          >
+            Save
+          </v-btn>
         </template>
       </form-card>
     )

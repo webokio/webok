@@ -18,7 +18,9 @@ export class ExternalLink extends Vue {
         <v-icon
           color='primary'
           small
-        >fas fa-external-link-alt fa-fw</v-icon> {this.label || this.to}
+        >
+          fas fa-external-link-alt fa-fw
+        </v-icon> {this.label || this.to}
       </a>
     )
   }
