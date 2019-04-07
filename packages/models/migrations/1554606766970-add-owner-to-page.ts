@@ -1,7 +1,8 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 
-export class alterPageAddOwner1553866832794 implements MigrationInterface {
+export class addOwnerToPage1554606766970 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
+    // Delete all pages because page must have owner
     await queryRunner.query(`DELETE FROM "page"`)
     await queryRunner.query(`ALTER TABLE "page" ADD "owner_id" integer NOT NULL`)
     await queryRunner.query(

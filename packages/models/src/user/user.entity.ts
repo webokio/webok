@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 import { Page } from '../page/page.entity'
 
 export interface UserOptions {
@@ -20,9 +20,6 @@ export class User {
 
   @Column()
   passwordHash!: string
-
-  @OneToMany((type) => Page, (page) => page.owner)
-  pages!: Page[]
 
   constructor (userOptions?: UserOptions) {
     if (userOptions) {

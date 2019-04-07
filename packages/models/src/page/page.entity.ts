@@ -1,10 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
 import { User } from '../user/user.entity'
 
 export interface PageOptions {
+  readonly owner: User
   readonly name: string
   readonly url: string
-  readonly owner: User
   readonly createdAt: string
 }
 
@@ -13,24 +13,24 @@ export class Page {
   @PrimaryGeneratedColumn()
   id!: number
 
+  @ManyToOne((type) => User, { nullable: false })
+  owner!: User
+
   @Column()
   name!: string
 
   @Column()
   url!: string
 
-  @ManyToOne((type) => User, (user) => user.pages, { nullable: false })
-  owner!: User
-
   @Column()
   createdAt!: string
 
   constructor (pageOptions?: PageOptions) {
     if (pageOptions) {
-      const { name, url, owner, createdAt } = pageOptions
+      const { owner, name, url, createdAt } = pageOptions
+      this.owner = owner
       this.name = name
       this.url = url
-      this.owner = owner
       this.createdAt = createdAt
     }
   }
