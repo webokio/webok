@@ -11,7 +11,7 @@ const configureDocs = async (app: INestApplication): Promise<void> => {
   const options = new DocumentBuilder()
     .setTitle('WebOK')
     .setVersion(version)
-    .addBearerAuth('Authorization', 'header') 
+    .addBearerAuth('Authorization', 'header')
     .build()
   const document = SwaggerModule.createDocument(app, options)
   SwaggerModule.setup('explorer', app, document)
