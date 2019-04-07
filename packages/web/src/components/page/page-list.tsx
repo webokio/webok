@@ -4,16 +4,16 @@ import { PageDto } from '@webok/core/es6/page'
 @Component({})
 export class PageList extends Vue {
   @Prop({ type: Array, required: true })
-  private readonly pageDtos!: PageDto[]
+  private readonly pages!: PageDto[]
 
   render () {
     return (
       <div>
         <ul>
-          {this.pageDtos.map((pageDto) => {
+          {this.pages.map((page) => {
             return (
-              <li key={pageDto.id}>
-                <nuxt-link to={`/pages/${pageDto.id}`}>{pageDto.name}</nuxt-link>
+              <li key={page.id}>
+                <nuxt-link to={`/pages/${page.id}`}>{page.name}</nuxt-link>
               </li>
             )
           })}

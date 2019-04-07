@@ -7,7 +7,7 @@ import { FormCard } from '../common'
     FormCard,
   },
   data () {
-    const { url, name } = this.pageDto
+    const { url, name } = this.page
     const updatePageDto: UpdatePageDto = { url, name }
     return {
       updatePageDto,
@@ -16,7 +16,7 @@ import { FormCard } from '../common'
 })
 export class PageEditForm extends Vue {
   @Prop({ type: Object, required: true })
-  private readonly pageDto!: PageDto
+  private readonly page!: PageDto
 
   private readonly updatePageDto!: UpdatePageDto
 

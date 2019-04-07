@@ -13,8 +13,8 @@ import { PageList, PageDetails, PageNewForm, PageEditForm, PageDeleteButton } fr
   },
 })
 export default class PagesDemoRoute extends Vue {
-  private readonly pageDto1 = new PageDto({ id: 1, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-18T12:03:15.013Z' })
-  private readonly pageDto2 = new PageDto({ id: 2, name: 'Site2', url: 'https://site2.com', createdAt: '2019-03-19T12:03:15.013Z' })
+  private readonly page1 = new PageDto({ id: 1, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-18T12:03:15.013Z' })
+  private readonly page2 = new PageDto({ id: 2, name: 'Site2', url: 'https://site2.com', createdAt: '2019-03-19T12:03:15.013Z' })
 
   head (): MetaInfo {
     return {
@@ -30,8 +30,8 @@ export default class PagesDemoRoute extends Vue {
     console.log('update', { ...updatePageDto })
   }
 
-  private deletePage (pageDto: PageDto) {
-    console.log('delete', { ...pageDto })
+  private deletePage (page: PageDto) {
+    console.log('delete', { ...page })
   }
 
   private cancel () {
@@ -44,13 +44,13 @@ export default class PagesDemoRoute extends Vue {
         <div class='display-3 mb-4'>Pages Demo</div>
         <div class='mb-4'>
           <div class='display-1'>/</div>
-          <page-list page-dtos={[this.pageDto1, this.pageDto2]}/>
+          <page-list pages={[this.page1, this.page2]}/>
         </div>
         <div class='mb-4'>
           <div class='display-1'>/:pageId</div>
-          <page-details page-dto={this.pageDto1}/>
+          <page-details page={this.page1}/>
           <page-delete-button
-            page-dto={this.pageDto1}
+            page={this.page1}
             on={{
               submit: this.deletePage,
               cancel: this.cancel,
@@ -70,7 +70,7 @@ export default class PagesDemoRoute extends Vue {
         <div class='mb-4'>
           <div class='display-1'>/:pageId/edit</div>
           <page-edit-form
-            page-dto={this.pageDto1}
+            page={this.page1}
             class='mt-2'
             on={{
               submit: this.updatePage,
