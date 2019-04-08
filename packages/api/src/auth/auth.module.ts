@@ -27,8 +27,7 @@ const authConfig: AuthConfig = config.get<AuthConfig>('auth')
         expiresIn: Duration.fromObject(authConfig.accessTokenTTL).as('seconds'),
       },
     }),
-    TypeOrmModule.forFeature([LoginRecord, LoginRecordRepository]),
-    TypeOrmModule.forFeature([User, UserRepository]),
+    TypeOrmModule.forFeature([LoginRecord, LoginRecordRepository, User, UserRepository]),
   ],
   providers: [
     AuthDtoMapper,

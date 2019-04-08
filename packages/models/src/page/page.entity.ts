@@ -1,6 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
+import { User } from '../user/user.entity'
 
 export interface PageOptions {
+  readonly owner: User
   readonly name: string
   readonly url: string
   readonly createdAt: string
@@ -10,6 +12,9 @@ export interface PageOptions {
 export class Page {
   @PrimaryGeneratedColumn()
   id!: number
+
+  @ManyToOne((type) => User, { nullable: false })
+  owner!: User
 
   @Column()
   name!: string
@@ -22,7 +27,8 @@ export class Page {
 
   constructor (pageOptions?: PageOptions) {
     if (pageOptions) {
-      const { name, url, createdAt } = pageOptions
+      const { owner, name, url, createdAt } = pageOptions
+      this.owner = owner
       this.name = name
       this.url = url
       this.createdAt = createdAt

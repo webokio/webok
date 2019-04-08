@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Page } from '../page/page.entity'
 
 export interface UserOptions {
   readonly name: string

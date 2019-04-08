@@ -13,5 +13,6 @@ import { UserController } from './user.controller'
   ],
   providers: [UserDtoMapper, UserService],
   controllers: [UserController],
+  exports: [UserDtoMapper],
 })
 export class UserModule {}
