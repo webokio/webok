@@ -1,5 +1,5 @@
-import { Component, Vue, Emit } from 'vue-property-decorator'
 import { CreatePageDto } from '@webok/core/es6/page'
+import { Component, Emit, Vue } from 'vue-property-decorator'
 import { FormCard } from '../common'
 
 @Component({

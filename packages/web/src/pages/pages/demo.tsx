@@ -1,7 +1,7 @@
+import { CreatePageDto, PageDto, UpdatePageDto } from '@webok/core/es6/page'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { MetaInfo } from 'vue-meta'
-import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/es6/page'
-import { PageList, PageDetails, PageNewForm, PageEditForm, PageDeleteButton } from '../../components/page'
+import { PageDeleteButton, PageDetails, PageEditForm, PageList, PageNewForm } from '../../components/page'
 
 @Component({
   components: {

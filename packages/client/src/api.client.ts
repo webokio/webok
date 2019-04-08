@@ -1,6 +1,6 @@
-import { UserClient } from './user'
-import { PageClient } from './page'
 import axios from 'axios'
+import { PageClient } from './page'
+import { UserClient } from './user'
 
 export class ApiClient {
   readonly users: UserClient

@@ -1,5 +1,5 @@
 import { ApiModelPropertyOptional } from '@nestjs/swagger'
-import { IsString, MinLength, IsOptional, IsUrl } from 'class-validator'
+import { IsOptional, IsString, IsUrl, MinLength } from 'class-validator'
 
 export class UpdatePageDto {
   @ApiModelPropertyOptional()

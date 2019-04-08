@@ -1,6 +1,6 @@
+import { UserClient } from '@webok/client/lib/user'
 import { UserDto } from '@webok/core/lib/user'
 import { UserRepository } from '@webok/models/lib/user'
-import { UserClient } from '@webok/client/lib/user'
 import { ApiTester } from '../api-tester'
 
 describe('User', () => {

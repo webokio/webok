@@ -1,7 +1,7 @@
-import path from 'path'
 import { TypeOrmModuleOptions } from '@nestjs/typeorm'
 // TODO find a better way to load config in production, currently use root config by NODE_CONFIG_DIR
 import config from 'config'
+import path from 'path'
 import { SnakeNamingStrategy } from './snake-naming'
 
 interface DatabaseConfig {

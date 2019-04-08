@@ -1,7 +1,7 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common'
-import { ApiUseTags, ApiCreatedResponse, ApiBadRequestResponse, ApiOkResponse, ApiBearerAuth } from '@nestjs/swagger'
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { UserDto, CreateUserDto } from '@webok/core/lib/user'
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiUseTags } from '@nestjs/swagger'
+import { CreateUserDto, UserDto } from '@webok/core/lib/user'
 import { UserService } from '@webok/services/lib/user'
 import { UserId } from '../auth'
 

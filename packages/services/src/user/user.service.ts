@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { UserDto, CreateUserDto } from '@webok/core/lib/user'
+import { CreateUserDto, UserDto } from '@webok/core/lib/user'
 import { User, UserRepository } from '@webok/models/lib/user'
 import { HashingService } from '../auth/hashing.service'
 import { UserDtoMapper } from './user-dto.mapper'

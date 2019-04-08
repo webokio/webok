@@ -1,7 +1,7 @@
+import { Inject, Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
-import { Injectable, Inject } from '@nestjs/common'
-import { ExtractJwt, Strategy } from 'passport-jwt'
 import { AuthPayloadInterface } from '@webok/core/lib/auth'
+import { ExtractJwt, Strategy } from 'passport-jwt'
 
 @Injectable()
 export class AuthStrategy extends PassportStrategy(Strategy) {

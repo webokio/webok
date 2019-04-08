@@ -1,7 +1,7 @@
-import { Server } from 'http'
+import { HttpStatus, INestApplication } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
-import { INestApplication, HttpStatus } from '@nestjs/common'
 import { ApiClient } from '@webok/client'
+import { Server } from 'http'
 import { AppModule } from '../src/app.module'
 import { configureFeatures } from '../src/features'
 

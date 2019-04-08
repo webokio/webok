@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger'
-import { IsString, MinLength, IsUrl } from 'class-validator'
+import { IsString, IsUrl, MinLength } from 'class-validator'
 
 export class CreatePageDto {
   @ApiModelProperty()
