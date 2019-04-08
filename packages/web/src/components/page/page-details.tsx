@@ -11,19 +11,19 @@ import { SectionBlock, ExternalLink, Datetime } from '../common'
 })
 export class PageDetails extends Vue {
   @Prop({ type: Object, required: true })
-  private readonly pageDto!: PageDto
+  private readonly page!: PageDto
 
   render () {
     return (
       <div>
         <section-block title='Name'>
-          <div>{this.pageDto.name}</div>
+          <div>{this.page.name}</div>
         </section-block>
         <section-block title='Url'>
-          <div><external-link to={this.pageDto.url}/></div>
+          <div><external-link to={this.page.url}/></div>
         </section-block>
         <section-block title='Created At'>
-          <div><datetime value={this.pageDto.createdAt}/></div>
+          <div><datetime value={this.page.createdAt}/></div>
         </section-block>
       </div>
     )

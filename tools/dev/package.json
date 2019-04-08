@@ -35,6 +35,7 @@
     "table": "^5.2.3",
     "tslint": "^5.14.0",
     "tslint-config-standard": "^8.0.1",
+    "tslint-react": "^4.0.0",
     "typescript": "^3.3.4000"
   },
   "devDependencies": {
