@@ -1,9 +1,9 @@
-import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common'
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common'
 import { ApiUseTags, ApiCreatedResponse, ApiBadRequestResponse, ApiOkResponse, ApiBearerAuth } from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport'
-import { AuthRequestInterface } from '@webok/core/lib/auth'
 import { UserDto, CreateUserDto } from '@webok/core/lib/user'
 import { UserService } from '@webok/services/lib/user'
+import { UserId } from '../auth'
 
 @Controller('users')
 @ApiUseTags('Users')
@@ -22,8 +22,8 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOkResponse({ type: [UserDto] })
-  async find (@Req() request: AuthRequestInterface): Promise<UserDto[]> {
-    const userDto: UserDto | undefined = await this.userService.get(request.user.userId)
+  async find (@UserId() userId: number): Promise<UserDto[]> {
+    const userDto: UserDto | undefined = await this.userService.get(userId)
     if (!userDto) {
       return []
     }

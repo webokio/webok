@@ -13,7 +13,6 @@ import {
   Body,
   NotFoundException,
   UseGuards,
-  Req,
   BadRequestException,
 } from '@nestjs/common'
 import {
@@ -32,6 +31,7 @@ import { IsNumberString } from 'class-validator'
 import { AuthRequestInterface } from '@webok/core/lib/auth'
 import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { PageService } from '@webok/services/lib/page'
+import { UserId } from '../auth'
 
 class PageIdParam {
   @ApiModelProperty()
@@ -44,13 +44,9 @@ class PageOwnerGuard implements CanActivate {
   constructor (private readonly pageService: PageService) {}
 
   async canActivate (context: ExecutionContext): Promise<boolean> {
-    const request: AuthRequestInterface = context.switchToHttp().getRequest()
-    const { pageId } = request.params as PageIdParam
-    const pageDto: PageDto | undefined = await this.pageService.get(pageId)
-    if (!pageDto) {
-      throw new NotFoundException()
-    }
-    return pageDto.owner.id === request.user.userId
+    const request: AuthRequestInterface<PageIdParam> = context.switchToHttp().getRequest()
+    const pageDto: PageDto | undefined = await this.pageService.get(request.params.pageId)
+    return !pageDto || pageDto.owner.id === request.user.userId
   }
 }
 
@@ -63,8 +59,8 @@ export class PageController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOkResponse({ type: [PageDto] })
-  async find (@Req() request: AuthRequestInterface): Promise<PageDto[]> {
-    const pageDtos: PageDto[] = await this.pageService.find({ ownerId: request.user.userId })
+  async find (@UserId() userId: number): Promise<PageDto[]> {
+    const pageDtos: PageDto[] = await this.pageService.find({ ownerId: userId })
     return pageDtos
   }
 
@@ -74,9 +70,9 @@ export class PageController {
   @ApiCreatedResponse({ type: PageDto })
   @ApiBadRequestResponse({})
   @ApiUnauthorizedResponse({})
-  async create (@Body() createPageDto: CreatePageDto, @Req() request: AuthRequestInterface): Promise<PageDto> {
+  async create (@Body() createPageDto: CreatePageDto, @UserId() userId: number): Promise<PageDto> {
     try {
-      const pageDto: PageDto = await this.pageService.create(createPageDto, request.user.userId)
+      const pageDto: PageDto = await this.pageService.create(createPageDto, userId)
       return pageDto
     } catch (err) {
       console.log(err)
