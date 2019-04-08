@@ -1,8 +1,8 @@
-import path from 'path'
-import fs from 'fs'
 import chokidar from 'chokidar'
-import { findPackages } from '../find-packages'
+import fs from 'fs'
+import path from 'path'
 import { createBinaryWithOptions } from '../binaries'
+import { findPackages } from '../find-packages'
 
 const npm = createBinaryWithOptions('npm')
 

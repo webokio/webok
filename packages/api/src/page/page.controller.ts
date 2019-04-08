@@ -1,36 +1,36 @@
 import {
-  Injectable,
+  BadRequestException,
+  Body,
   CanActivate,
-  ExecutionContext,
   Controller,
+  Delete,
+  ExecutionContext,
+  Get,
   HttpCode,
   HttpStatus,
-  Get,
-  Post,
-  Patch,
-  Delete,
-  Param,
-  Body,
+  Injectable,
   NotFoundException,
+  Param,
+  Patch,
+  Post,
   UseGuards,
-  BadRequestException,
 } from '@nestjs/common'
-import {
-  ApiUseTags,
-  ApiOkResponse,
-  ApiCreatedResponse,
-  ApiNotFoundResponse,
-  ApiBadRequestResponse,
-  ApiNoContentResponse,
-  ApiModelProperty,
-  ApiUnauthorizedResponse,
-  ApiBearerAuth,
-} from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport'
-import { IsNumberString } from 'class-validator'
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiModelProperty,
+  ApiNoContentResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiUnauthorizedResponse,
+  ApiUseTags,
+} from '@nestjs/swagger'
 import { AuthRequestInterface } from '@webok/core/lib/auth'
-import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
+import { CreatePageDto, PageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { PageService } from '@webok/services/lib/page'
+import { IsNumberString } from 'class-validator'
 import { UserId } from '../auth'
 
 class PageIdParam {

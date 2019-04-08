@@ -1,6 +1,6 @@
 import { IConfig } from 'config'
-import { runCLI } from './run-cli'
 import { createBinaryWithOptions } from './binaries/create-binary'
+import { runCLI } from './run-cli'
 
 const appId = 'webok'
 const env = process.env.NODE_ENV || 'development'

@@ -1,6 +1,6 @@
-import whichFactory from 'npm-which'
-import spawn from 'cross-spawn'
 import { SpawnOptions } from 'child_process'
+import spawn from 'cross-spawn'
+import whichFactory from 'npm-which'
 
 const which = whichFactory(process.cwd())
 

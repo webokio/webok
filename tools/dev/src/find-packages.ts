@@ -1,5 +1,5 @@
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 
 export const isPackage = (dirPath: string): boolean => {
   return fs.existsSync(path.join(dirPath, 'package.json'))

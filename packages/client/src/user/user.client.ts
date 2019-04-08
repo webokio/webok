@@ -1,5 +1,5 @@
+import { CreateUserDto, UserDto } from '@webok/core/lib/user'
 import { AxiosInstance, AxiosResponse } from 'axios'
-import { UserDto, CreateUserDto } from '@webok/core/lib/user'
 
 export class UserClient {
   private readonly basePath = 'users'

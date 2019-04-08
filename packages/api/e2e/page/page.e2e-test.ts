@@ -1,6 +1,6 @@
+import { PageClient } from '@webok/client/lib/page'
 import { PageDto } from '@webok/core/lib/page'
 import { PageRepository } from '@webok/models/lib/page'
-import { PageClient } from '@webok/client/lib/page'
 import { ApiTester } from '../api-tester'
 
 describe('Page', () => {

@@ -1,5 +1,5 @@
+import { CreatePageDto, PageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { AxiosInstance, AxiosResponse } from 'axios'
-import { PageDto, CreatePageDto, UpdatePageDto } from '@webok/core/lib/page'
 
 export class PageClient {
   private readonly basePath = 'pages'

@@ -1,6 +1,6 @@
-import { Component, Vue, Prop } from 'vue-property-decorator'
 import { PageDto } from '@webok/core/es6/page'
-import { SectionBlock, ExternalLink, Datetime } from '../common'
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Datetime, ExternalLink, SectionBlock } from '../common'
 
 @Component({
   components: {

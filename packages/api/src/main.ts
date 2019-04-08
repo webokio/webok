@@ -1,8 +1,8 @@
+import { INestApplication } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import fs from 'fs'
 import path from 'path'
-import { NestFactory } from '@nestjs/core'
-import { INestApplication } from '@nestjs/common'
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { AppModule } from './app.module'
 import { configureFeatures } from './features'
 

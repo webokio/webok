@@ -1,8 +1,8 @@
-import path from 'path'
 import getLatestVersion from 'latest-version'
+import path from 'path'
+import Progress from 'progress'
 import { table } from 'table'
 import { findPackages, isPackage } from '../find-packages'
-import Progress from 'progress'
 
 // `lerna outdated` may be available later, see https://github.com/lerna/lerna/issues/1334, so this is just a temporary solution.
 

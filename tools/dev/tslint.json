@@ -8,7 +8,7 @@
     "space-before-function-paren": true,
     "arrow-parens": true,
     "interface-name": false,
-    "ordered-imports": false,
+    "ordered-imports": true,
     "object-literal-sort-keys": false,
     "member-access": false,
     "trailing-comma": [true, { "multiline": "always", "singleline": "never" }],
@@ -35,6 +35,7 @@
     "prefer-readonly": true,
     "no-null-keyword": true,
     "no-console": false,
+    "no-unused-variable": true,
     "jsx-boolean-value": [true, "never"],
     "jsx-no-multiline-js": false
   }
