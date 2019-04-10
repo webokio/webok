@@ -1,10 +1,11 @@
 import { CreatePageDto, PageDto, UpdatePageDto } from '@webok/core/lib/page'
-import { AxiosInstance, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
+import { BaseClient } from '../common'
 
 export class PageClient {
   private readonly basePath = 'pages'
 
-  constructor (private readonly baseClient: AxiosInstance) {}
+  constructor (private readonly baseClient: BaseClient) {}
 
   find (): Promise<AxiosResponse<PageDto[]>> {
     return this.baseClient.get<PageDto[]>(this.basePath)
