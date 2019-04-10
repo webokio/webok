@@ -21,7 +21,7 @@
     "axios": "^0.18.0"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
+    "@types/axios": "0.14.0",
     "@webok/dev": "^0.0.0"
   }
 }
