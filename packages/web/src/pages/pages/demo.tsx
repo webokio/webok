@@ -1,7 +1,14 @@
 import { CreatePageDto, PageDto, UpdatePageDto } from '@webok/core/es6/page'
+import { UserDto } from '@webok/core/es6/user'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { MetaInfo } from 'vue-meta'
 import { PageDeleteButton, PageDetails, PageEditForm, PageList, PageNewForm } from '../../components/page'
+
+const owner = new UserDto({
+  id: 1,
+  name: 'User 1',
+  email: 'user1@gmail.com'
+})
 
 @Component({
   components: {
@@ -13,8 +20,8 @@ import { PageDeleteButton, PageDetails, PageEditForm, PageList, PageNewForm } fr
   },
 })
 export default class PagesDemoRoute extends Vue {
-  private readonly page1 = new PageDto({ id: 1, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-18T12:03:15.013Z' })
-  private readonly page2 = new PageDto({ id: 2, name: 'Site2', url: 'https://site2.com', createdAt: '2019-03-19T12:03:15.013Z' })
+  private readonly page1 = new PageDto({ id: 1, owner, name: 'Site1', url: 'https://site1.com', createdAt: '2019-03-18T12:03:15.013Z' })
+  private readonly page2 = new PageDto({ id: 2, owner, name: 'Site2', url: 'https://site2.com', createdAt: '2019-03-19T12:03:15.013Z' })
 
   head (): MetaInfo {
     return {

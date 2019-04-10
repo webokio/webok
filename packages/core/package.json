@@ -20,6 +20,6 @@
     "class-validator": "0.9.1"
   },
   "devDependencies": {
-    "@webok/dev": "^0.0.0"
+    "@webok/dev": "0.0.0"
   }
 }
