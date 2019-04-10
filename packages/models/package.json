@@ -17,14 +17,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/typeorm": "^6.0.0",
-    "config": "^3.0.1",
-    "pg": "^7.9.0",
-    "typeorm": "^0.2.16"
+    "@nestjs/typeorm": "6.0.0",
+    "config": "3.0.1",
+    "pg": "7.9.0",
+    "typeorm": "0.2.16"
   },
   "devDependencies": {
-    "@types/config": "^0.0.34",
+    "@types/config": "0.0.34",
     "@webok/dev": "^0.0.0",
-    "ts-node": "^8.0.3"
+    "ts-node": "8.0.3"
   }
 }
