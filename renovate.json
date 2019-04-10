@@ -3,5 +3,6 @@
     "config:base",
     "group:all"
   ],
-  "schedule": "on wednesday and saturday"
+  "rangeStrategy": "pin",
+  "schedule": "on tuesday and saturday"
 }

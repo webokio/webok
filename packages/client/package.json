@@ -17,11 +17,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@webok/core": "^0.0.0",
-    "axios": "^0.18.0"
+    "@webok/core": "0.0.0",
+    "axios": "0.18.0"
   },
   "devDependencies": {
     "@types/axios": "0.14.0",
-    "@webok/dev": "^0.0.0"
+    "@webok/dev": "0.0.0"
   }
 }
