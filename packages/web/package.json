@@ -15,18 +15,18 @@
     "access": "public"
   },
   "dependencies": {
-    "@webok/client": "^0.0.0",
-    "@webok/core": "^0.0.0",
-    "@webok/helpers": "^0.0.0",
-    "luxon": "^1.12.0",
-    "nuxt-property-decorator": "^2.1.3",
-    "vue-property-decorator": "^8.1.0",
-    "vuetify": "^1.5.7"
+    "@webok/client": "0.0.0",
+    "@webok/core": "0.0.0",
+    "@webok/helpers": "0.0.0",
+    "luxon": "1.12.1",
+    "nuxt-property-decorator": "2.1.3",
+    "vue-property-decorator": "8.1.0",
+    "vuetify": "1.5.11"
   },
   "devDependencies": {
-    "@nuxt/typescript": "^2.5.1",
-    "@types/luxon": "^1.11.1",
-    "@webok/dev": "^0.0.0",
-    "nuxt": "^2.5.1"
+    "@nuxt/typescript": "2.6.1",
+    "@types/luxon": "1.12.0",
+    "@webok/dev": "0.0.0",
+    "nuxt": "2.6.1"
   }
 }

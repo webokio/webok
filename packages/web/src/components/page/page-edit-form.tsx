@@ -16,7 +16,7 @@ import { FormCard } from '../common'
 })
 export class PageEditForm extends Vue {
   @Prop({ type: Object, required: true })
-  private readonly page!: PageDto
+  readonly page!: PageDto
 
   private readonly updatePageDto!: UpdatePageDto
 

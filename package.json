@@ -21,7 +21,7 @@
     "publish:now": "node ./scripts/dev run publish:prepare && lerna publish"
   },
   "devDependencies": {
-    "config": "^3.0.1",
-    "lerna": "^3.13.1"
+    "config": "3.1.0",
+    "lerna": "3.13.2"
   }
 }
