@@ -2,7 +2,7 @@ import { CreateAuthDto } from '@webok/core/es6/auth'
 import { CreateUserDto } from '@webok/core/es6/user'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { MetaInfo } from 'vue-meta'
-import { LoginForm, SignupForm } from '../../components/user'
+import { LoginForm, SignupForm } from '../../components/auth'
 
 @Component({
   components: {
@@ -10,10 +10,10 @@ import { LoginForm, SignupForm } from '../../components/user'
     SignupForm,
   },
 })
-export default class UsersDemoRoute extends Vue {
+export default class AuthDemoRoute extends Vue {
   head (): MetaInfo {
     return {
-      title: 'Users Demo',
+      title: 'Auth Demo',
     }
   }
 
@@ -32,7 +32,7 @@ export default class UsersDemoRoute extends Vue {
   render () {
     return (
       <div class='ma-3'>
-        <div class='display-3 mb-4'>Users Demo</div>
+        <div class='display-3 mb-4'>Auth Demo</div>
         <div class='mb-4'>
           <div class='display-1'>/login</div>
           <login-form
