@@ -18,10 +18,12 @@
   },
   "dependencies": {
     "@webok/core": "^0.0.0",
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "jwt-decode": "2.2.0"
   },
   "devDependencies": {
     "@types/axios": "0.14.0",
+    "@types/jwt-decode": "2.2.1",
     "@webok/dev": "^0.0.0"
   }
 }
