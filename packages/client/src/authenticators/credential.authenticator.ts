@@ -15,7 +15,7 @@ export class CredentialAuthenticator implements AuthenticatorInterface {
     } else if (this.helper.shouldRefreshAuth(this.auth)) {
       const { authId, refreshToken } = this.auth
       try {
-        this.auth = (await axios.post<AuthDto>(`/auth/${authId}`, { refreshToken })).data
+        this.auth = (await axios.post<AuthDto>(`/auth/${authId}/refresh`, { refreshToken })).data
       } catch (err) {
         this.auth = (await axios.post<AuthDto>('/auth', this.createAuthDto)).data
       }

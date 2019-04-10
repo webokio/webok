@@ -11,7 +11,7 @@ export class TokenAuthenticator implements AuthenticatorInterface {
   async getAuth (axios: AxiosInstance): Promise<AuthDto> {
     if (this.helper.shouldRefreshAuth(this.auth)) {
       const { authId, refreshToken } = this.auth
-      this.auth = (await axios.post<AuthDto>(`/auth/${authId}`, { refreshToken })).data
+      this.auth = (await axios.post<AuthDto>(`/auth/${authId}/refresh`, { refreshToken })).data
     }
     return this.auth
   }
