@@ -4,16 +4,17 @@ branches:
 language: node_js
 node_js:
   - lts/*
-cache: npm
+# cache: npm
 install:
-  - npm install
-  - npm run boot -- --no-ci
-  - npm run build:dev
-  - npm run boot -- --no-ci
+  # - npm install
+  # - npm run boot -- --no-ci
+  # - npm run build:dev
+  # - npm run boot -- --no-ci
 script:
-  - npm run format
+  # - npm run format
+  - echo 'test' > test.js
 after_success:
-  - git checkout package-lock.json
+  # - git checkout package-lock.json
   - if [ $(git diff --name-only | wc -l) -eq 0 ]; then exit 0; fi
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
@@ -21,5 +22,5 @@ after_success:
   - "git commit -m '[skip travis] dev: format code'"
   - git remote rm origin
   - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git
-  - git push origin $TRAVIS_BRANCH
-  - git rev-parse --abbrev-ref HEAD
+  - git checkout $TRAVIS_BRANCH
+  - git push origin
