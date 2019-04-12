@@ -4,24 +4,23 @@ branches:
 language: node_js
 node_js:
   - lts/*
-# cache: npm
-install:
-  # - npm install
-  # - npm run boot -- --no-ci
-  # - npm run build:dev
-  # - npm run boot -- --no-ci
-before_script:
+cache: npm
+before_install:
   - git remote rm origin
-  - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git
+  - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git > /dev/null 2>&1
   - git checkout $TRAVIS_BRANCH
+install:
+  - npm install
+  - npm run boot -- --no-ci
+  - npm run build:dev
+  - npm run boot -- --no-ci
 script:
-  # - npm run format
-  - echo 'test' > test.js
+  - npm run format
 after_success:
-  # - git checkout package-lock.json
-  # - if [ $(git diff --name-only | wc -l) -eq 0 ]; then exit 0; fi
+  - git checkout package-lock.json
+  - if [ $(git diff --name-only | wc -l) -eq 0 ]; then exit 0; fi
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
   - git add -A
   - "git commit -m '[skip travis] dev: format code'"
-  - git push --set-upstream origin $TRAVIS_BRANCH
+  - git push --quiet --set-upstream origin $TRAVIS_BRANCH > /dev/null 2>&1
