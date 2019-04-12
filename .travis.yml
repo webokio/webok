@@ -16,5 +16,6 @@ after_success:
   - git config --global user.email "travis@travis-ci.org"
   - git remote set-url origin https://${GH_TOKEN}@github.com/webokio/webok.git
   - git add -A
-  - "git commit -m 'dev: format code'"
+  - "git commit -m '[skip travis] dev: format code'"
+  - git log
   - git push origin $TRAVIS_BRANCH
