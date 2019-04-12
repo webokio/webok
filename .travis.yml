@@ -20,6 +20,6 @@ after_success:
   - git add -A
   - "git commit -m '[skip travis] dev: format code'"
   - git remote rm origin
-  - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git > /dev/null 2>&1
-  - git push origin $TRAVIS_BRANCH --quiet
-  - echo $TRAVIS_BRANCH
+  - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git
+  - git push origin $TRAVIS_BRANCH
+  - git rev-parse --abbrev-ref HEAD
