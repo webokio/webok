@@ -8,11 +8,10 @@ export class TokenAuthenticator implements AuthenticatorInterface {
 
   constructor (private auth: AuthDto) {}
 
-  async getAuth (axios: AxiosInstance): Promise<AuthDto> {
+  async getAccessToken (axios: AxiosInstance): Promise<string> {
     if (this.helper.shouldRefreshAuth(this.auth)) {
-      const { authId, refreshToken } = this.auth
-      this.auth = (await axios.post<AuthDto>(`/auth/${authId}/refresh`, { refreshToken })).data
+      this.auth = await this.helper.refreshAuth(axios, this.auth)
     }
-    return this.auth
+    return this.auth.accessToken
   }
 }

@@ -7,11 +7,11 @@ export class UserClient {
 
   constructor (private readonly baseClient: BaseClient) {}
 
-  create (createUserDto: CreateUserDto): Promise<AxiosResponse<UserDto>> {
-    return this.baseClient.post<UserDto>(this.basePath, createUserDto)
+  getCurrentUser (): Promise<AxiosResponse<UserDto>> {
+    return this.baseClient.get<UserDto>(`${this.basePath}/me`)
   }
 
-  find (): Promise<AxiosResponse<UserDto[]>> {
-    return this.baseClient.get<UserDto[]>(this.basePath)
+  create (createUserDto: CreateUserDto): Promise<AxiosResponse<UserDto>> {
+    return this.baseClient.post<UserDto>(this.basePath, createUserDto)
   }
 }
