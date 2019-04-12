@@ -1,4 +1,3 @@
-import { AuthDto } from '@webok/core/lib/auth'
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { AuthenticatorInterface } from '../authenticators'
 
@@ -25,12 +24,12 @@ export class BaseClient {
     if (!this.authenticator) {
       return config
     }
-    const auth: AuthDto = await this.authenticator.getAuth(this.axios)
+    const accessToken: string = await this.authenticator.getAccessToken(this.axios)
     return {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${auth.accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     }
   }

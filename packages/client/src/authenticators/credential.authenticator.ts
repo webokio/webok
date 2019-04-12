@@ -9,17 +9,16 @@ export class CredentialAuthenticator implements AuthenticatorInterface {
 
   constructor (private readonly createAuthDto: CreateAuthDto) {}
 
-  async getAuth (axios: AxiosInstance): Promise<AuthDto> {
+  async getAccessToken (axios: AxiosInstance): Promise<string> {
     if (!this.auth) {
       this.auth = (await axios.post<AuthDto>('/auth', this.createAuthDto)).data
     } else if (this.helper.shouldRefreshAuth(this.auth)) {
-      const { authId, refreshToken } = this.auth
       try {
-        this.auth = (await axios.post<AuthDto>(`/auth/${authId}/refresh`, { refreshToken })).data
+        this.auth = await this.helper.refreshAuth(axios, this.auth)
       } catch (err) {
         this.auth = (await axios.post<AuthDto>('/auth', this.createAuthDto)).data
       }
     }
-    return this.auth
+    return this.auth.accessToken
   }
 }

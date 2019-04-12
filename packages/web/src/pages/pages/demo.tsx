@@ -7,7 +7,7 @@ import { PageDeleteButton, PageDetails, PageEditForm, PageList, PageNewForm } fr
 const owner = new UserDto({
   id: 1,
   name: 'User 1',
-  email: 'user1@gmail.com'
+  email: 'user1@gmail.com',
 })
 
 @Component({
