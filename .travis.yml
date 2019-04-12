@@ -1,3 +1,6 @@
+branches:
+  except:
+  - master
 language: node_js
 node_js:
   - lts/*
@@ -14,8 +17,9 @@ after_success:
   - if [ $(git diff --name-only | wc -l) -eq 0 ]; then exit 0; fi
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
-  - git remote set-url origin https://${GH_TOKEN}@github.com/webokio/webok.git
   - git add -A
   - "git commit -m '[skip travis] dev: format code'"
-  - git log
-  - git push origin $TRAVIS_BRANCH
+  - git remote rm origin
+  - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git > /dev/null 2>&1
+  - git push origin $TRAVIS_BRANCH --quiet
+  - echo $TRAVIS_BRANCH
