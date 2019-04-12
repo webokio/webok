@@ -4,6 +4,7 @@ node_js:
 cache: npm
 install:
   - npm install
+  - npm run boot -- --no-ci
   - npm run build:dev
   - npm run boot -- --no-ci
 script:
