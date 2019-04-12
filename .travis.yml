@@ -1,9 +1,10 @@
 language: node_js
 node_js:
   - lts/*
+cache: npm
 install:
   - npm install
-  - npm run boot
+  - npm run boot -- --no-ci
   - npm run build:dev
 script:
   - npm run format
