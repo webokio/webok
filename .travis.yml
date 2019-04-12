@@ -15,4 +15,4 @@ after_success:
   - git config --global user.email "travis@travis-ci.org"
   - git add -A
   - "git commit -m 'dev: format code'"
-  - git push "https://${GH_TOKEN}@github.com/webokio/webok.git" $TRAVIS_BRANCH > /dev/null 2>&1
+  - git push "https://${GH_TOKEN}@github.com/webokio/webok.git" $TRAVIS_BRANCH
