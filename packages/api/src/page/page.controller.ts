@@ -20,6 +20,7 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiModelProperty,
   ApiNoContentResponse,
   ApiNotFoundResponse,
@@ -59,6 +60,7 @@ export class PageController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOkResponse({ type: [PageDto] })
+  @ApiUnauthorizedResponse({})
   async find (@UserId() userId: number): Promise<PageDto[]> {
     const pageDtos: PageDto[] = await this.pageService.find({ ownerId: userId })
     return pageDtos
@@ -68,8 +70,8 @@ export class PageController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: PageDto })
-  @ApiBadRequestResponse({})
   @ApiUnauthorizedResponse({})
+  @ApiBadRequestResponse({})
   async create (@Body() createPageDto: CreatePageDto, @UserId() userId: number): Promise<PageDto> {
     try {
       const pageDto: PageDto = await this.pageService.create(createPageDto, userId)
@@ -84,6 +86,7 @@ export class PageController {
   @UseGuards(AuthGuard(), PageOwnerGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: PageDto })
+  @ApiForbiddenResponse({})
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
   async get (@Param() { pageId }: PageIdParam): Promise<PageDto> {
@@ -98,6 +101,7 @@ export class PageController {
   @UseGuards(AuthGuard(), PageOwnerGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: PageDto })
+  @ApiForbiddenResponse({})
   @ApiNotFoundResponse({})
   @ApiBadRequestResponse({})
   async update (@Param() { pageId }: PageIdParam, @Body() updatePageDto: UpdatePageDto): Promise<PageDto> {
@@ -112,6 +116,7 @@ export class PageController {
   @UseGuards(AuthGuard(), PageOwnerGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiBearerAuth()
+  @ApiForbiddenResponse({})
   @ApiNoContentResponse({})
   @ApiBadRequestResponse({})
   async remove (@Param() { pageId }: PageIdParam): Promise<void> {

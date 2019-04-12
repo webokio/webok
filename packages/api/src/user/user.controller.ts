@@ -1,6 +1,14 @@
 import { Body, Controller, Get, NotFoundException, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiUseTags } from '@nestjs/swagger'
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiUnauthorizedResponse,
+  ApiUseTags,
+} from '@nestjs/swagger'
 import { CreateUserDto, UserDto } from '@webok/core/lib/user'
 import { UserService } from '@webok/services/lib/user'
 import { UserId } from '../auth'
@@ -14,6 +22,8 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserDto })
+  @ApiUnauthorizedResponse({})
+  @ApiNotFoundResponse({})
   async getCurrentUser (@UserId() userId: number): Promise<UserDto> {
     const userDto: UserDto | undefined = await this.userService.get(userId)
     if (!userDto) {
