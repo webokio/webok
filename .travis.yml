@@ -6,6 +6,7 @@ before_install:
   - git remote rm origin
   - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git > /dev/null 2>&1
   - git checkout $TRAVIS_BRANCH
+  - git pull
 install:
   - npm install
   - npm run boot -- --no-ci
