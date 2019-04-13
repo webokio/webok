@@ -5,6 +5,7 @@ cache: npm
 before_install:
   - git remote rm origin
   - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git > /dev/null 2>&1
+  - git fetch
   - git checkout $TRAVIS_PULL_REQUEST_BRANCH
 install:
   - npm install
