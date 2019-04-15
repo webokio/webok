@@ -7,6 +7,7 @@ before_install:
   - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git > /dev/null 2>&1
   - git fetch
   - git checkout $TRAVIS_PULL_REQUEST_BRANCH
+  - if [ $(git show -s --format='%ae') = 'travis@travis-ci.org' ]; then exit 0; fi 
   - package_lock_changed=$(git diff master package-lock.json | wc -l)
 install:
   - npm install
