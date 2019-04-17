@@ -13,6 +13,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
@@ -29,7 +30,7 @@ import {
   ApiUseTags,
 } from '@nestjs/swagger'
 import { AuthRequestInterface } from '@webok/core/lib/auth'
-import { CreatePageDto, PageDto, UpdatePageDto } from '@webok/core/lib/page'
+import { CreatePageDto, FindPagesDto, PageDto, UpdatePageDto } from '@webok/core/lib/page'
 import { PageService } from '@webok/services/lib/page'
 import { IsNumberString } from 'class-validator'
 import { UserId } from '../auth'
@@ -61,8 +62,8 @@ export class PageController {
   @ApiBearerAuth()
   @ApiOkResponse({ type: [PageDto] })
   @ApiUnauthorizedResponse({})
-  async find (@UserId() userId: number): Promise<PageDto[]> {
-    const pageDtos: PageDto[] = await this.pageService.find({ ownerId: userId })
+  async find (@Query() findPageDto: FindPagesDto, @UserId() userId: number): Promise<PageDto[]> {
+    const pageDtos: PageDto[] = await this.pageService.find(findPageDto, userId)
     return pageDtos
   }
 
