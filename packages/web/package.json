@@ -24,9 +24,9 @@
     "vuetify": "1.5.11"
   },
   "devDependencies": {
-    "@nuxt/typescript": "2.6.1",
+    "@nuxt/typescript": "2.6.2",
     "@types/luxon": "1.12.0",
     "@webok/dev": "0.0.0",
-    "nuxt": "2.6.1"
+    "nuxt": "2.6.2"
   }
 }

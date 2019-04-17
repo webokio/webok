@@ -14,13 +14,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@nestjs/common": "6.1.0",
+    "@nestjs/common": "6.1.1",
     "@nestjs/jwt": "6.0.0",
     "@nestjs/typeorm": "6.0.0",
     "@webok/core": "0.0.0",
     "@webok/helpers": "0.0.0",
     "@webok/models": "0.0.0",
-    "bcrypt": "3.0.5",
+    "bcrypt": "3.0.6",
     "luxon": "1.12.1"
   },
   "devDependencies": {
