@@ -2,12 +2,9 @@ import { IConfig } from 'config'
 import { createBinaryWithOptions } from './binaries/create-binary'
 import { runCLI } from './run-cli'
 
-const appId = 'webok'
-const env = process.env.NODE_ENV || 'development'
-const dockerProjectId = `${appId}${env}`
 const dockerCompose = createBinaryWithOptions('docker-compose')
 
-const createCommands = (config: IConfig) => {
+const createCommands = (dockerProjectId: string, config: IConfig) => {
   const start = (argv: string[]): Promise<number> => {
     return dockerCompose(['-p', dockerProjectId, 'up', '-d', ...argv], {
       env: {
@@ -22,8 +19,10 @@ const createCommands = (config: IConfig) => {
 }
 
 // Create a CLI to start and stop development services
-export const createServices = (config: IConfig) => {
-  const commands = createCommands(config)
+export const createServices = (appId: string, config: IConfig) => {
+  const env = process.env.NODE_ENV || 'development'
+  const dockerProjectId = `${appId}${env}`
+  const commands = createCommands(dockerProjectId, config)
   return (argv: string[]) => {
     runCLI(argv, commands)
   }
