@@ -4,7 +4,7 @@ import { CreatePageDto, FindPagesDto, PageDto, UpdatePageDto } from '@webok/core
 import { nowAsString } from '@webok/helpers/lib/datetime.helper'
 import { Page, PageRepository } from '@webok/models/lib/page'
 import { User, UserRepository } from '@webok/models/lib/user'
-import { FindConditions } from 'typeorm'
+import { FindConditions, FindManyOptions, OrderByCondition } from 'typeorm'
 import { PageDtoMapper } from './page-dto.mapper'
 
 @Injectable()
@@ -17,15 +17,26 @@ export class PageService {
     private readonly pageDtoMapper: PageDtoMapper,
   ) {}
 
-  async find (findPagesDto: FindPagesDto): Promise<PageDto[]> {
-    // TODO add pagination to FindPagesDto
+  async find (findPagesDto: FindPagesDto, ownerId: number): Promise<PageDto[]> {
     const query: FindConditions<Page> = {}
+    const pagination: FindManyOptions<Page> = { skip: 0, take: 10 }
+    const sort: OrderByCondition = {}
+    if (ownerId) {
+      query.owner = await this.userRepository.findOne({ id: ownerId })
+    }
     if (findPagesDto) {
-      if (findPagesDto.ownerId) {
-        query.owner = await this.userRepository.findOne({ id: findPagesDto.ownerId })
+      if (findPagesDto.skip) {
+        pagination.skip = findPagesDto.skip
+      }
+      if (findPagesDto.take) {
+        pagination.take = findPagesDto.take
+      }
+      if (findPagesDto.sort) {
+        sort[findPagesDto.sort] = findPagesDto.dir || 'ASC'
       }
     }
-    const pages: Page[] = await this.findAll(query)
+    sort.id = 'DESC'
+    const pages: Page[] = await this.findAll(query, pagination, sort)
     return pages.map((page) => this.pageDtoMapper.fromPage(page))
   }
 
@@ -75,8 +86,18 @@ export class PageService {
     return this.pageDtoMapper.fromPage(pageToRemove)
   }
 
-  private findAll (query: FindConditions<Page>): Promise<Page[]> {
-    return this.pageRepository.find({ where: query, relations: ['owner'] })
+  private findAll (
+    query: FindConditions<Page>,
+    pagination: FindManyOptions<Page>,
+    order: OrderByCondition,
+  ): Promise<Page[]> {
+    return this.pageRepository.find({
+      where: query,
+      skip: pagination.skip,
+      take: pagination.take,
+      order,
+      relations: ['owner'],
+    })
   }
 
   private findOne (query: FindConditions<Page>): Promise<Page | undefined> {
