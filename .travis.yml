@@ -8,7 +8,7 @@ before_install:
   - git remote add origin https://${GH_TOKEN}@github.com/webokio/webok.git > /dev/null 2>&1
   - git fetch
   - git checkout $TRAVIS_PULL_REQUEST_BRANCH
-  - if [ $(git show -s --format='%ae') = 'travis@travis-ci.org' ]; then exit 0; fi 
+  - if [ $(git show -s --format='%ae') = 'github-org@webok.io' ]; then exit 0; fi 
   - package_lock_changed=$(git diff master package-lock.json | wc -l)
   - echo $package_lock_changed
 install:
@@ -21,8 +21,8 @@ script:
 after_success:
   - if [ $package_lock_changed -eq 0 ]; then git checkout package-lock.json; fi
   - if [ $(git diff --name-only | wc -l) -eq 0 ]; then exit 0; fi
-  - git config --global user.name "Travis CI"
-  - git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "webok-org"
+  - git config --global user.email "github-org@webok.io"
   - git add -A
   - "git commit -m 'dev: format code'"
   - git push --set-upstream origin $TRAVIS_PULL_REQUEST_BRANCH
